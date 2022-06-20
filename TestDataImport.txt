@@ -1,0 +1,17 @@
+customer,C1,030320030493,Amirul Asri
+item,I1,Chocolate,15,C1,20-6-2022
+item,I2,Cake,30,C1,20-6-2022
+item,I3,Book,5,C1,20-6-2022
+customer,C2,030526030496,Ainul
+item,I1,Chocolate,10,C2,10-6-2022
+item,I2,Cake,60,C2,10-6-2022
+item,I3,Book,3,C2,10-6-2022
+item,I4,Medicine,70,C2,10-6-2022
+customer,C3,030526030496,Ain
+item,I1,Chocolate,14,C3,10-6-2022
+item,I2,Cake,10,C3,10-6-2022
+item,I3,Book,32,C3,10-6-2022
+item,I4,Medicine,50,C3,10-6-2022
+item,I5,Phone,700,C3,10-6-2022
+item,I6,Medicine,40,C3,10-6-2022
+item,I7,Battery,10,C3,10-6-2022
