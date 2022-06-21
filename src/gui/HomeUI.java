@@ -288,10 +288,10 @@ public class HomeUI extends javax.swing.JFrame {
 
                 line = br.readLine();
             }
+            br.close();
             System.out.println("DONE TEMP");
 
             //2. READ TEMP ARRAY AND ADD TO EVERY QUEUE COUNTER
-            //System.out.println(tempCustomerList.get(0).getClass() == CustomerInformation.class);
             int counterswitching = 1;
             for (int i = 0; i < tempCustomerList.size(); i++) {
                 //GET LIST ITEMS FROM TEMP ARRAY ITEM FILTER BY CUSTOMER ID
@@ -321,36 +321,34 @@ public class HomeUI extends javax.swing.JFrame {
                         counter3.addLast(itemdata);
                     }
                 }
-
-                //for (int j = 0; j < filtereditemcustomer.size(); j++) {
-                //    ItemInformation itemdata = (ItemInformation) filtereditemcustomer.get(j);
-                //    System.out.println(itemdata.getItemID() + " - " + itemdata.getItemName());
-                //}
             }
-            
             System.out.println("DONE ADD TO COUNTER");
             
             //TEST DISPLAY DATA FROM QUEUE
             String custID = "C1";
-            System.out.println("COUNTER 1:");
             
             //TO CONVERT, NEED TO FILTER CUSTOMER ONLY AND ADD TO NEW LIST
             List<CustomerInformation> convertedCustList = (List<CustomerInformation>)counter1.stream().filter(counterdatas -> counterdatas.getClass() == CustomerInformation.class).collect(Collectors.toList());
             
-            //SELECT ONLY CUSTOMER BY VALUE FROM custID
+            //SELECT ONLY ONE CUSTOMER BY VALUE FROM custID
             List<CustomerInformation> findCustomer = convertedCustList.stream().filter(customer -> customer.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
             
             //TRY TO DISPLAY
+            System.out.println("COUNTER 1:");
             for (int i = 0; i < convertedCustList.size(); i++) {
                 System.out.println(convertedCustList.get(i).getCustID());
             }
+            
+            //TRY TO DISPLAY FILTERED
             System.out.println("COUNTER 1: FILTERED ID");
-            //TRY TO DISPLAY
             for (int i = 0; i < findCustomer.size(); i++) {
                 System.out.println(findCustomer.get(i));
             }
-
-            br.close();
+            
+            //OPEN COUNTER SELECTOR UI
+            new CounterSelectorUI(counter1, counter2, counter3);
+            
+            
         } catch (EOFException ex) {
             System.out.println("End of file error");
         } catch (FileNotFoundException ex) {
