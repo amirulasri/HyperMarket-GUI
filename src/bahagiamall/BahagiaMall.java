@@ -19,7 +19,7 @@ public class BahagiaMall {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new HomeUI().setVisible(true);
+        new HomeUI();
     }
     
     public void outputtoexcel() throws FileNotFoundException, Exception{
