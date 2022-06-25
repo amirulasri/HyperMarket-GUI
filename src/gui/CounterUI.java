@@ -7,11 +7,14 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class CounterUI extends javax.swing.JFrame {
+    
+    private String counterNameTitle = "Counter";
 
     /**
      * Creates new form CounterUI
@@ -33,9 +36,13 @@ public class CounterUI extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CounterUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        counterNameTitle = "Counter " + counterNumber;
         initComponents();
+        pack();
+        setLocationRelativeTo(null);
         counterlabel.setText("Counter " + counterNumber);
         displayCustomerToTable(counter1);
+        
 
         jTable1.addMouseListener(new MouseAdapter() {
             @Override
@@ -48,6 +55,8 @@ public class CounterUI extends javax.swing.JFrame {
             }
         });
     }
+    
+    ImageIcon logo = new ImageIcon("src/images/mainicon.png");
 
     private void displayCustomerToTable(LinkedList counter) {
         DefaultTableModel customerTableModel = (DefaultTableModel) jTable1.getModel();
@@ -76,7 +85,9 @@ public class CounterUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle(counterNameTitle);
+        setIconImage(logo.getImage());
 
         jPanel2.setBackground(new java.awt.Color(153, 255, 153));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));

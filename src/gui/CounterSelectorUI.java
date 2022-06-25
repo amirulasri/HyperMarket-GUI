@@ -1,6 +1,9 @@
 package gui;
 
 import classes.CustomerInformation;
+import classes.ItemInformation;
+import java.text.DecimalFormat;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,6 +19,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
     LinkedList counter3;
 
     ImageIcon logo = new ImageIcon("src/images/mainicon.png");
+    private DecimalFormat priceformatter = new DecimalFormat("0.00");
 
     public CounterSelectorUI(LinkedList counter1, LinkedList counter2, LinkedList counter3) {
         this.counter1 = counter1;
@@ -40,6 +44,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         }
         initComponents();
         countCustomer();
+        totalNet();
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
@@ -55,7 +60,40 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         countlabel1.setText(convertedCustListcounter1.size() + " Customers");
         countlabel2.setText(convertedCustListcounter2.size() + " Customers");
         countlabel3.setText(convertedCustListcounter3.size() + " Customers");
-
+        
+        int totalAllCustomer = convertedCustListcounter1.size() + convertedCustListcounter2.size() + convertedCustListcounter3.size();
+        totalAllCustLabel.setText("Total customer: " + totalAllCustomer);
+    }
+    
+    private void totalNet(){
+        List<ItemInformation> convertedItemListcounter1 = (List<ItemInformation>) counter1.stream().filter(counterdatas -> counterdatas.getClass() == ItemInformation.class).collect(Collectors.toList());
+        List<ItemInformation> convertedItemListcounter2 = (List<ItemInformation>) counter2.stream().filter(counterdatas -> counterdatas.getClass() == ItemInformation.class).collect(Collectors.toList());
+        List<ItemInformation> convertedItemListcounter3 = (List<ItemInformation>) counter3.stream().filter(counterdatas -> counterdatas.getClass() == ItemInformation.class).collect(Collectors.toList());
+        
+        //CALCULATE AND ADD TO TOTAL
+        double totalcounter1 = 0;
+        double totalcounter2 = 0;
+        double totalcounter3 = 0;
+        
+        for (Iterator<ItemInformation> iterator = convertedItemListcounter1.iterator(); iterator.hasNext();) {
+            ItemInformation nextItem = iterator.next();
+            totalcounter1 = totalcounter1 + nextItem.getitemPrice();
+        }
+        
+        for (Iterator<ItemInformation> iterator = convertedItemListcounter2.iterator(); iterator.hasNext();) {
+            ItemInformation nextItem = iterator.next();
+            totalcounter2 = totalcounter2 + nextItem.getitemPrice();
+        }
+        
+        for (Iterator<ItemInformation> iterator = convertedItemListcounter3.iterator(); iterator.hasNext();) {
+            ItemInformation nextItem = iterator.next();
+            totalcounter3 = totalcounter3 + nextItem.getitemPrice();
+        }
+        
+        double totalNet = totalcounter1 + totalcounter2 + totalcounter3;
+        String totalNetFormat = priceformatter.format(totalNet);
+        
+        netTotalLabel.setText("Net total: RM " + totalNetFormat);
     }
 
     /**
@@ -84,8 +122,8 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         countlabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        totalAllCustLabel = new javax.swing.JLabel();
+        netTotalLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Counter Selector");
@@ -265,11 +303,11 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(191, 238, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel7.setText("<html>Total customer: 0</html>");
+        totalAllCustLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        totalAllCustLabel.setText("<html>Total customer: 0</html>");
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel8.setText("Net total: RM 0");
+        netTotalLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        netTotalLabel.setText("Net total: RM 0");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -278,17 +316,17 @@ public class CounterSelectorUI extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
+                    .addComponent(totalAllCustLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(netTotalLabel))
                 .addContainerGap(143, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(totalAllCustLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8)
+                .addComponent(netTotalLabel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -373,13 +411,13 @@ public class CounterSelectorUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JLabel netTotalLabel;
+    private javax.swing.JLabel totalAllCustLabel;
     // End of variables declaration//GEN-END:variables
 
 }
