@@ -47,7 +47,6 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         totalNet();
         pack();
         setLocationRelativeTo(null);
-        setVisible(true);
     }
 
     private void countCustomer() {

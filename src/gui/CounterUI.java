@@ -1,25 +1,30 @@
 package gui;
 
 import classes.CustomerInformation;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class CounterUI extends javax.swing.JFrame {
-    
+
     private String counterNameTitle = "Counter";
+    private String custIDPopupMenu = "";
 
     /**
      * Creates new form CounterUI
      */
-    public CounterUI(LinkedList counter1, int counterNumber) {
+    public CounterUI(LinkedList counter, int counterNumber) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -36,34 +41,80 @@ public class CounterUI extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(CounterUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+
         counterNameTitle = "Counter " + counterNumber;
         initComponents();
         pack();
         setLocationRelativeTo(null);
         counterlabel.setText("Counter " + counterNumber);
-        displayCustomerToTable(counter1);
-        
+        displayCustomerToTable(counter);
 
-        jTable1.addMouseListener(new MouseAdapter() {
+        //CREATE POPUP MENU AND ACTION CLICK
+        ImageIcon editicon = new ImageIcon("src/images/edit.png");
+        ImageIcon deleteicon = new ImageIcon("src/images/delete.png");
+        JPopupMenu popupCustomer;
+        popupCustomer = new JPopupMenu();
+        JMenuItem editCustMenuItem = new JMenuItem("Edit", editicon);
+        JMenuItem deleteCustMenuItem = new JMenuItem("Delete", deleteicon);
+        popupCustomer.add("custPopupEdit", editCustMenuItem);
+        popupCustomer.add("custPopupDelete", deleteCustMenuItem);
+
+        editCustMenuItem.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                System.out.println("MENU EDIT CLICKED: " + custIDPopupMenu);
+            }
+        });
+        
+        deleteCustMenuItem.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                System.out.println("MENU DELETE CLICKED: " + custIDPopupMenu);
+            }
+        });
+
+        Map<String, ItemUI> itemInstance = new TreeMap<String, ItemUI>();
+        customerTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
                 if (me.getClickCount() == 2) {     // to detect double click events
                     JTable target = (JTable) me.getSource();
                     int row = target.getSelectedRow(); // select a row
-                    JOptionPane.showMessageDialog(null, jTable1.getValueAt(row, 0)); // get the value of a row and column 0.
+                    String getCustIDFromTable = (String)customerTable.getValueAt(row, 0);
+                    ItemUI getItemUI = itemInstance.get("item" + getCustIDFromTable);
+                    if (getItemUI == null) {
+                        ItemUI newItemUI = new ItemUI(counter, getCustIDFromTable, counterNumber);
+                        itemInstance.put("item" + getCustIDFromTable, newItemUI);
+                        newItemUI.setVisible(true);
+                    } else {
+                        getItemUI.setVisible(true);
+                    }
+                }
+                if (me.getButton() == MouseEvent.BUTTON3) {
+                    int tablepoint = customerTable.rowAtPoint(me.getPoint());
+                    if (tablepoint >= 0 && tablepoint < customerTable.getRowCount()) {
+                        customerTable.setRowSelectionInterval(tablepoint, tablepoint);
+                    } else {
+                        customerTable.clearSelection();
+                    }
+                    JTable target = (JTable) me.getSource();
+                    int row = target.getSelectedRow(); // select a row
+                    String getCustIDFromTable = (String)customerTable.getValueAt(row, 0);
+                    custIDPopupMenu = getCustIDFromTable;
+                    popupCustomer.show(me.getComponent(), me.getX(), me.getY());
                 }
             }
         });
     }
-    
+
     ImageIcon logo = new ImageIcon("src/images/mainicon.png");
 
     private void displayCustomerToTable(LinkedList counter) {
-        DefaultTableModel customerTableModel = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel customerTableModel = (DefaultTableModel) customerTable.getModel();
         //TO CONVERT, NEED TO FILTER CUSTOMER ONLY AND ADD TO NEW LIST
         List<CustomerInformation> convertedCustList = (List<CustomerInformation>) counter.stream().filter(counterdatas -> counterdatas.getClass() == CustomerInformation.class).collect(Collectors.toList());
         countlabelcust.setText(convertedCustList.size() + " Customers");
-        
+
         for (Iterator iterator = convertedCustList.iterator(); iterator.hasNext();) {
             CustomerInformation nextCustomerData = (CustomerInformation) iterator.next();
             customerTableModel.addRow(new Object[]{nextCustomerData.getCustID(), nextCustomerData.getCustIC(), nextCustomerData.getCustName()});
@@ -83,7 +134,7 @@ public class CounterUI extends javax.swing.JFrame {
         counterlabel = new javax.swing.JLabel();
         countlabelcust = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        customerTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(counterNameTitle);
@@ -119,7 +170,7 @@ public class CounterUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        customerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -135,7 +186,7 @@ public class CounterUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(customerTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,9 +210,9 @@ public class CounterUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel counterlabel;
     private javax.swing.JLabel countlabelcust;
+    private javax.swing.JTable customerTable;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
 }

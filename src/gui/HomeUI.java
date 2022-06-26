@@ -346,7 +346,7 @@ public class HomeUI extends javax.swing.JFrame {
             }
             
             //OPEN COUNTER SELECTOR UI
-            new CounterSelectorUI(counter1, counter2, counter3);
+            new CounterSelectorUI(counter1, counter2, counter3).setVisible(true);
             
             
         } catch (EOFException ex) {
