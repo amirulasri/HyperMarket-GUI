@@ -52,17 +52,20 @@ public class CounterUI extends javax.swing.JFrame {
         //CREATE POPUP MENU AND ACTION CLICK
         ImageIcon editicon = new ImageIcon("src/images/edit.png");
         ImageIcon deleteicon = new ImageIcon("src/images/delete.png");
+        ImageIcon cancelicon = new ImageIcon("src/images/cancel.png");
         JPopupMenu popupCustomer;
         popupCustomer = new JPopupMenu();
         JMenuItem editCustMenuItem = new JMenuItem("Edit", editicon);
         JMenuItem deleteCustMenuItem = new JMenuItem("Delete", deleteicon);
         popupCustomer.add("custPopupEdit", editCustMenuItem);
         popupCustomer.add("custPopupDelete", deleteCustMenuItem);
+        popupCustomer.add(new JMenuItem("Cancel", cancelicon));
 
         editCustMenuItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
                 System.out.println("MENU EDIT CLICKED: " + custIDPopupMenu);
+                
             }
         });
         
@@ -77,7 +80,7 @@ public class CounterUI extends javax.swing.JFrame {
         customerTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
-                if (me.getClickCount() == 2) {     // to detect double click events
+                if (me.getClickCount() == 2 && me.getButton() == MouseEvent.BUTTON1) {     // to detect double click events
                     JTable target = (JTable) me.getSource();
                     int row = target.getSelectedRow(); // select a row
                     String getCustIDFromTable = (String)customerTable.getValueAt(row, 0);

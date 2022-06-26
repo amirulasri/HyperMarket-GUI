@@ -1,12 +1,23 @@
 package gui;
 
+import classes.ItemInformation;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class ItemUI extends javax.swing.JFrame {
-
+    private String frameItemTitle = "";
+    private String itemIDPopup = "";
     /** Creates new form ItemUI */
-    public ItemUI(LinkedList counter1, String custID, int counterNumber) {
+    public ItemUI(LinkedList counter, String custID, int counterNumber) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -23,12 +34,75 @@ public class ItemUI extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ItemUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        frameItemTitle = "Items for customer " + custID;
         initComponents();
+        itemtitlelabel.setText("List Item for customer " + custID);
         pack();
         setLocationRelativeTo(null);
+        displayItemToTable(counter, custID);
+        
+        //CREATE POPUP MENU AND ACTION CLICK
+        ImageIcon editicon = new ImageIcon("src/images/edit.png");
+        ImageIcon deleteicon = new ImageIcon("src/images/delete.png");
+        ImageIcon cancelicon = new ImageIcon("src/images/cancel.png");
+        JPopupMenu popupItem;
+        popupItem = new JPopupMenu();
+        JMenuItem editItemsMenuItem = new JMenuItem("Edit", editicon);
+        JMenuItem deleteItemsMenuItem = new JMenuItem("Delete", deleteicon);
+        popupItem.add("custPopupEdit", editItemsMenuItem);
+        popupItem.add("custPopupDelete", deleteItemsMenuItem);
+        popupItem.add(new JMenuItem("Cancel", cancelicon));
+        
+        editItemsMenuItem.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                System.out.println("MENU EDIT CLICKED: " );
+                
+            }
+        });
+        
+        deleteItemsMenuItem.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent me) {
+                System.out.println("MENU DELETE CLICKED: " );
+            }
+        });
+        
+        itemTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent me) {
+                if (me.getButton() == MouseEvent.BUTTON3) {
+                    int tablepoint = itemTable.rowAtPoint(me.getPoint());
+                    if (tablepoint >= 0 && tablepoint < itemTable.getRowCount()) {
+                        itemTable.setRowSelectionInterval(tablepoint, tablepoint);
+                    } else {
+                        itemTable.clearSelection();
+                    }
+                    JTable target = (JTable) me.getSource();
+                    int row = target.getSelectedRow(); // select a row
+                    String getCustIDFromTable = (String)itemTable.getValueAt(row, 0);
+                    itemIDPopup = getCustIDFromTable;
+                    popupItem.show(me.getComponent(), me.getX(), me.getY());
+                }
+            }
+        });
     }
     
     ImageIcon logo = new ImageIcon("src/images/mainicon.png");
+    
+    private void displayItemToTable(LinkedList counter, String custID) {
+        DefaultTableModel itemTableModel = (DefaultTableModel) itemTable.getModel();
+        //TO CONVERT, NEED TO FILTER ITEM ONLY AND ADD TO NEW LIST
+        List<ItemInformation> convertedItemList = (List<ItemInformation>) counter.stream().filter(counterdatas -> counterdatas.getClass() == ItemInformation.class).collect(Collectors.toList());
+        List<ItemInformation> filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
+        
+        countlabelitem.setText(filteredItemListCust.size() + " Items");
+
+        for (Iterator iterator = filteredItemListCust.iterator(); iterator.hasNext();) {
+            ItemInformation nextItemData = (ItemInformation) iterator.next();
+            itemTableModel.addRow(new Object[]{nextItemData.getItemID(), nextItemData.getItemName(), nextItemData.getitemPrice(), nextItemData.getDatePurchase()});
+        }
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -43,10 +117,10 @@ public class ItemUI extends javax.swing.JFrame {
         itemtitlelabel = new javax.swing.JLabel();
         countlabelitem = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        itemTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Items for customer -");
+        setTitle(frameItemTitle);
         setIconImage(logo.getImage());
 
         jPanel2.setBackground(new java.awt.Color(255, 196, 153));
@@ -79,12 +153,9 @@ public class ItemUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        itemTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Item ID", "Item Name", "Price", "Date Purchased"
@@ -98,7 +169,7 @@ public class ItemUI extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(itemTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -121,10 +192,10 @@ public class ItemUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel countlabelitem;
+    private javax.swing.JTable itemTable;
     private javax.swing.JLabel itemtitlelabel;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
 }
