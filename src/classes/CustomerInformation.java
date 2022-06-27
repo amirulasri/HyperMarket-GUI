@@ -5,14 +5,18 @@ public class CustomerInformation {
     private String custName;
     private String counterPaid;
     
-    public CustomerInformation(String custID, String custIC, String custName, String counterPaid){
+    private ItemInformation itemInformation;
+    
+    public CustomerInformation(String custID, String custIC, String custName, String counterPaid, String itemID, String itemName, double itemPrice, String datePurchase){
+        this.itemInformation = new ItemInformation(itemID, itemName, itemPrice, datePurchase, custID);
         this.custID = custID;
         this.custIC = custIC;
         this.custName = custName;
         this.counterPaid = counterPaid;
     }
     
-    public CustomerInformation(String custID, String custIC, String custName){
+    public CustomerInformation(String custID, String custIC, String custName, String itemID, String itemName, double itemPrice, String datePurchase){
+        this.itemInformation = new ItemInformation(itemID, itemName, itemPrice, datePurchase, custID);
         this.custID = custID;
         this.custIC = custIC;
         this.custName = custName;
@@ -33,5 +37,23 @@ public class CustomerInformation {
     
     public String getCounterPaid(){
         return counterPaid;
+    }
+    
+    //ITEM PART
+    public String getItemID(){
+        return itemInformation.getItemID();
+    }
+    
+    public String getItemName(){
+        return itemInformation.getItemName();
+    }
+    
+    public double getitemPrice(){
+        return itemInformation.getitemPrice();
+    }
+    
+    public String getDatePurchase(){
+        return itemInformation.getDatePurchase();
+        
     }
 }

@@ -65,10 +65,10 @@ public class CounterUI extends javax.swing.JFrame {
             @Override
             public void mousePressed(MouseEvent me) {
                 System.out.println("MENU EDIT CLICKED: " + custIDPopupMenu);
-                
+
             }
         });
-        
+
         deleteCustMenuItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
@@ -83,7 +83,7 @@ public class CounterUI extends javax.swing.JFrame {
                 if (me.getClickCount() == 2 && me.getButton() == MouseEvent.BUTTON1) {     // to detect double click events
                     JTable target = (JTable) me.getSource();
                     int row = target.getSelectedRow(); // select a row
-                    String getCustIDFromTable = (String)customerTable.getValueAt(row, 0);
+                    String getCustIDFromTable = (String) customerTable.getValueAt(row, 0);
                     ItemUI getItemUI = itemInstance.get("item" + getCustIDFromTable);
                     if (getItemUI == null) {
                         ItemUI newItemUI = new ItemUI(counter, getCustIDFromTable, counterNumber);
@@ -102,7 +102,7 @@ public class CounterUI extends javax.swing.JFrame {
                     }
                     JTable target = (JTable) me.getSource();
                     int row = target.getSelectedRow(); // select a row
-                    String getCustIDFromTable = (String)customerTable.getValueAt(row, 0);
+                    String getCustIDFromTable = (String) customerTable.getValueAt(row, 0);
                     custIDPopupMenu = getCustIDFromTable;
                     popupCustomer.show(me.getComponent(), me.getX(), me.getY());
                 }
@@ -113,6 +113,8 @@ public class CounterUI extends javax.swing.JFrame {
     ImageIcon logo = new ImageIcon("src/images/mainicon.png");
 
     private void displayCustomerToTable(LinkedList counter) {
+        String currentCustID = "";
+
         DefaultTableModel customerTableModel = (DefaultTableModel) customerTable.getModel();
         //TO CONVERT, NEED TO FILTER CUSTOMER ONLY AND ADD TO NEW LIST
         List<CustomerInformation> convertedCustList = (List<CustomerInformation>) counter.stream().filter(counterdatas -> counterdatas.getClass() == CustomerInformation.class).collect(Collectors.toList());
@@ -120,7 +122,10 @@ public class CounterUI extends javax.swing.JFrame {
 
         for (Iterator iterator = convertedCustList.iterator(); iterator.hasNext();) {
             CustomerInformation nextCustomerData = (CustomerInformation) iterator.next();
-            customerTableModel.addRow(new Object[]{nextCustomerData.getCustID(), nextCustomerData.getCustIC(), nextCustomerData.getCustName()});
+            if (!nextCustomerData.getCustID().equalsIgnoreCase(currentCustID)) {
+                currentCustID = nextCustomerData.getCustID();
+                customerTableModel.addRow(new Object[]{nextCustomerData.getCustID(), nextCustomerData.getCustIC(), nextCustomerData.getCustName()});
+            }
         }
     }
 

@@ -1,11 +1,13 @@
 package gui;
 
+import classes.CustomerInformation;
 import classes.ItemInformation;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
@@ -14,10 +16,18 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class ItemUI extends javax.swing.JFrame {
+
     private String frameItemTitle = "";
     private String itemIDPopup = "";
-    /** Creates new form ItemUI */
+    private LinkedList counter;
+    private String custID;
+
+    /**
+     * Creates new form ItemUI
+     */
     public ItemUI(LinkedList counter, String custID, int counterNumber) {
+        this.counter = counter;
+        this.custID = custID;
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -39,8 +49,8 @@ public class ItemUI extends javax.swing.JFrame {
         itemtitlelabel.setText("List Item for customer " + custID);
         pack();
         setLocationRelativeTo(null);
-        displayItemToTable(counter, custID);
-        
+        displayItemToTable();
+
         //CREATE POPUP MENU AND ACTION CLICK
         ImageIcon editicon = new ImageIcon("src/images/edit.png");
         ImageIcon deleteicon = new ImageIcon("src/images/delete.png");
@@ -52,22 +62,25 @@ public class ItemUI extends javax.swing.JFrame {
         popupItem.add("custPopupEdit", editItemsMenuItem);
         popupItem.add("custPopupDelete", deleteItemsMenuItem);
         popupItem.add(new JMenuItem("Cancel", cancelicon));
-        
+
         editItemsMenuItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
-                System.out.println("MENU EDIT CLICKED: " );
-                
+                System.out.println("MENU EDIT CLICKED: ");
             }
         });
-        
+
+        //REMOVE ITEMS HERE
         deleteItemsMenuItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
-                System.out.println("MENU DELETE CLICKED: " );
+                System.out.println("MENU DELETE CLICKED: ");
+                Predicate<CustomerInformation> itemCondition = items -> items.getItemID().equalsIgnoreCase(itemIDPopup) && items.getCustID().equalsIgnoreCase(custID);
+                counter.removeIf(itemCondition);
+                displayItemToTable();
             }
         });
-        
+
         itemTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent me) {
@@ -80,34 +93,35 @@ public class ItemUI extends javax.swing.JFrame {
                     }
                     JTable target = (JTable) me.getSource();
                     int row = target.getSelectedRow(); // select a row
-                    String getCustIDFromTable = (String)itemTable.getValueAt(row, 0);
+                    String getCustIDFromTable = (String) itemTable.getValueAt(row, 0);
                     itemIDPopup = getCustIDFromTable;
                     popupItem.show(me.getComponent(), me.getX(), me.getY());
                 }
             }
         });
     }
-    
+
     ImageIcon logo = new ImageIcon("src/images/mainicon.png");
-    
-    private void displayItemToTable(LinkedList counter, String custID) {
+
+    private void displayItemToTable() {
         DefaultTableModel itemTableModel = (DefaultTableModel) itemTable.getModel();
+        itemTableModel.setRowCount(0);
         //TO CONVERT, NEED TO FILTER ITEM ONLY AND ADD TO NEW LIST
-        List<ItemInformation> convertedItemList = (List<ItemInformation>) counter.stream().filter(counterdatas -> counterdatas.getClass() == ItemInformation.class).collect(Collectors.toList());
-        List<ItemInformation> filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
-        
+        List<CustomerInformation> convertedItemList = (List<CustomerInformation>) counter.stream().collect(Collectors.toList());
+        List<CustomerInformation> filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
+
         countlabelitem.setText(filteredItemListCust.size() + " Items");
 
         for (Iterator iterator = filteredItemListCust.iterator(); iterator.hasNext();) {
-            ItemInformation nextItemData = (ItemInformation) iterator.next();
+            CustomerInformation nextItemData = (CustomerInformation) iterator.next();
             itemTableModel.addRow(new Object[]{nextItemData.getItemID(), nextItemData.getItemName(), nextItemData.getitemPrice(), nextItemData.getDatePurchase()});
         }
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -183,7 +197,7 @@ public class ItemUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
         );
 
         pack();

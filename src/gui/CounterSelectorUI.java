@@ -1,12 +1,9 @@
 package gui;
 
 import classes.CustomerInformation;
-import classes.ItemInformation;
 import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
 
 public class CounterSelectorUI extends javax.swing.JFrame {
@@ -50,42 +47,33 @@ public class CounterSelectorUI extends javax.swing.JFrame {
     }
 
     private void countCustomer() {
-        //TO CONVERT, NEED TO FILTER CUSTOMER ONLY AND ADD TO NEW LIST
-        List<CustomerInformation> convertedCustListcounter1 = (List<CustomerInformation>) counter1.stream().filter(counterdatas -> counterdatas.getClass() == CustomerInformation.class).collect(Collectors.toList());
-        List<CustomerInformation> convertedCustListcounter2 = (List<CustomerInformation>) counter2.stream().filter(counterdatas -> counterdatas.getClass() == CustomerInformation.class).collect(Collectors.toList());
-        List<CustomerInformation> convertedCustListcounter3 = (List<CustomerInformation>) counter3.stream().filter(counterdatas -> counterdatas.getClass() == CustomerInformation.class).collect(Collectors.toList());
-
         //SET TO GUI
-        countlabel1.setText(convertedCustListcounter1.size() + " Customers");
-        countlabel2.setText(convertedCustListcounter2.size() + " Customers");
-        countlabel3.setText(convertedCustListcounter3.size() + " Customers");
+        countlabel1.setText(getCustCount(counter1) + " Customers");
+        countlabel2.setText(getCustCount(counter2) + " Customers");
+        countlabel3.setText(getCustCount(counter3) + " Customers");
         
-        int totalAllCustomer = convertedCustListcounter1.size() + convertedCustListcounter2.size() + convertedCustListcounter3.size();
+        int totalAllCustomer = getCustCount(counter1) + getCustCount(counter2) + getCustCount(counter3);
         totalAllCustLabel.setText("Total customer: " + totalAllCustomer);
     }
     
     private void totalNet(){
-        List<ItemInformation> convertedItemListcounter1 = (List<ItemInformation>) counter1.stream().filter(counterdatas -> counterdatas.getClass() == ItemInformation.class).collect(Collectors.toList());
-        List<ItemInformation> convertedItemListcounter2 = (List<ItemInformation>) counter2.stream().filter(counterdatas -> counterdatas.getClass() == ItemInformation.class).collect(Collectors.toList());
-        List<ItemInformation> convertedItemListcounter3 = (List<ItemInformation>) counter3.stream().filter(counterdatas -> counterdatas.getClass() == ItemInformation.class).collect(Collectors.toList());
-        
         //CALCULATE AND ADD TO TOTAL
         double totalcounter1 = 0;
         double totalcounter2 = 0;
         double totalcounter3 = 0;
         
-        for (Iterator<ItemInformation> iterator = convertedItemListcounter1.iterator(); iterator.hasNext();) {
-            ItemInformation nextItem = iterator.next();
+        for (Iterator<CustomerInformation> iterator = counter1.iterator(); iterator.hasNext();) {
+            CustomerInformation nextItem = iterator.next();
             totalcounter1 = totalcounter1 + nextItem.getitemPrice();
         }
         
-        for (Iterator<ItemInformation> iterator = convertedItemListcounter2.iterator(); iterator.hasNext();) {
-            ItemInformation nextItem = iterator.next();
+        for (Iterator<CustomerInformation> iterator = counter2.iterator(); iterator.hasNext();) {
+            CustomerInformation nextItem = iterator.next();
             totalcounter2 = totalcounter2 + nextItem.getitemPrice();
         }
         
-        for (Iterator<ItemInformation> iterator = convertedItemListcounter3.iterator(); iterator.hasNext();) {
-            ItemInformation nextItem = iterator.next();
+        for (Iterator<CustomerInformation> iterator = counter3.iterator(); iterator.hasNext();) {
+            CustomerInformation nextItem = iterator.next();
             totalcounter3 = totalcounter3 + nextItem.getitemPrice();
         }
         
@@ -93,6 +81,21 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         String totalNetFormat = priceformatter.format(totalNet);
         
         netTotalLabel.setText("Net total: RM " + totalNetFormat);
+    }
+    
+    private int getCustCount(LinkedList counter){
+        String currentCustID = "";
+        int countID = 0;
+        
+        for (Iterator iterator = counter.iterator(); iterator.hasNext();) {
+            CustomerInformation custNextData = (CustomerInformation)iterator.next();
+            if(!custNextData.getCustID().equalsIgnoreCase(currentCustID)){
+                countID++;
+                currentCustID = custNextData.getCustID();
+            }
+        }
+        
+        return countID;
     }
 
     /**
