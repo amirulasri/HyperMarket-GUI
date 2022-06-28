@@ -1,6 +1,5 @@
 package gui;
 
-import bahagiamall.BahagiaMall;
 import classes.CustomerInformation;
 import java.util.Iterator;
 import javax.swing.ImageIcon;
@@ -10,6 +9,7 @@ public class EditItemUI extends javax.swing.JFrame {
     private String frameEditItemTitle = "";
     private String custID = "";
     private String itemID = "";
+    private int counterNumber = 0;
 
     /**
      * Creates new form EditItemUI
@@ -21,6 +21,7 @@ public class EditItemUI extends javax.swing.JFrame {
     public EditItemUI(int counterNumber, String custID, String itemID) {
         this.custID = custID;
         this.itemID = itemID;
+        this.counterNumber = counterNumber;
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -39,27 +40,52 @@ public class EditItemUI extends javax.swing.JFrame {
         }
         frameEditItemTitle = "Item " + itemID + " for customer " + custID;
         initComponents();
-        
+
         //GET OLD DATA AND DISPLAY TO UI
         int index = 0;
         String olditemName = "";
         double olditemPrice = 0;
         String olddatePurchase = "";
-        
-        for (Iterator iterator = bahagiamall.BahagiaMall.getCounter1().iterator(); iterator.hasNext();) {
-            index++;
-            CustomerInformation nextCustData = (CustomerInformation) iterator.next();
-            if(nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)){
-                //GET OLD ITEM DATA
-                olditemName = nextCustData.getItemName();
-                olditemPrice = nextCustData.getitemPrice();
-                olddatePurchase = nextCustData.getDatePurchase();                
+
+        if (counterNumber == 1) {
+            for (Iterator iterator = bahagiamall.BahagiaMall.getCounter1().iterator(); iterator.hasNext();) {
+                index++;
+                CustomerInformation nextCustData = (CustomerInformation) iterator.next();
+                if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
+                    //GET OLD ITEM DATA
+                    olditemName = nextCustData.getItemName();
+                    olditemPrice = nextCustData.getitemPrice();
+                    olddatePurchase = nextCustData.getDatePurchase();
+                }
+            }
+        } else if (counterNumber == 2) {
+            for (Iterator iterator = bahagiamall.BahagiaMall.getCounter2().iterator(); iterator.hasNext();) {
+                index++;
+                CustomerInformation nextCustData = (CustomerInformation) iterator.next();
+                if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
+                    //GET OLD ITEM DATA
+                    olditemName = nextCustData.getItemName();
+                    olditemPrice = nextCustData.getitemPrice();
+                    olddatePurchase = nextCustData.getDatePurchase();
+                }
+            }
+        } else if (counterNumber == 3) {
+            for (Iterator iterator = bahagiamall.BahagiaMall.getCounter3().iterator(); iterator.hasNext();) {
+                index++;
+                CustomerInformation nextCustData = (CustomerInformation) iterator.next();
+                if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
+                    //GET OLD ITEM DATA
+                    olditemName = nextCustData.getItemName();
+                    olditemPrice = nextCustData.getitemPrice();
+                    olddatePurchase = nextCustData.getDatePurchase();
+                }
             }
         }
+        
         itemNameEditField.setText(olditemName);
         itemPriceEditField.setText(Double.toString(olditemPrice));
         itemDateEditField.setText(olddatePurchase);
-        
+
         pack();
         setLocationRelativeTo(null);
         edititemtitle.setText("Edit item " + itemID + " for customer " + custID);
@@ -190,17 +216,45 @@ public class EditItemUI extends javax.swing.JFrame {
         String datePurchased = itemDateEditField.getText();
 
         int index = 0;
-        for (Iterator iterator = bahagiamall.BahagiaMall.getCounter1().iterator(); iterator.hasNext();) {
+        if (counterNumber == 1) {
+            for (Iterator iterator = bahagiamall.BahagiaMall.getCounter1().iterator(); iterator.hasNext();) {
             index++;
             CustomerInformation nextCustData = (CustomerInformation) iterator.next();
-            if(nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)){
+            if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
                 //GET OLD CUSTOMER DATA
                 String custName = nextCustData.getCustName();
                 String custIC = nextCustData.getCustIC();
                 String counterPaid = nextCustData.getCounterPaid();
-                
-                bahagiamall.BahagiaMall.getCounter1().set(index-1, new CustomerInformation(custID, custIC, custName, counterPaid, itemID, itemName, itemPrice, datePurchased));
+
+                bahagiamall.BahagiaMall.getCounter1().set(index - 1, new CustomerInformation(custID, custIC, custName, counterPaid, itemID, itemName, itemPrice, datePurchased));
             }
+        }
+        } else if (counterNumber == 2) {
+            for (Iterator iterator = bahagiamall.BahagiaMall.getCounter2().iterator(); iterator.hasNext();) {
+            index++;
+            CustomerInformation nextCustData = (CustomerInformation) iterator.next();
+            if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
+                //GET OLD CUSTOMER DATA
+                String custName = nextCustData.getCustName();
+                String custIC = nextCustData.getCustIC();
+                String counterPaid = nextCustData.getCounterPaid();
+
+                bahagiamall.BahagiaMall.getCounter2().set(index - 1, new CustomerInformation(custID, custIC, custName, counterPaid, itemID, itemName, itemPrice, datePurchased));
+            }
+        }
+        } else if (counterNumber == 3) {
+            for (Iterator iterator = bahagiamall.BahagiaMall.getCounter3().iterator(); iterator.hasNext();) {
+            index++;
+            CustomerInformation nextCustData = (CustomerInformation) iterator.next();
+            if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
+                //GET OLD CUSTOMER DATA
+                String custName = nextCustData.getCustName();
+                String custIC = nextCustData.getCustIC();
+                String counterPaid = nextCustData.getCounterPaid();
+
+                bahagiamall.BahagiaMall.getCounter3().set(index - 1, new CustomerInformation(custID, custIC, custName, counterPaid, itemID, itemName, itemPrice, datePurchased));
+            }
+        }
         }
     }//GEN-LAST:event_jButton1MouseReleased
 
