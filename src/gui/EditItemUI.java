@@ -81,7 +81,7 @@ public class EditItemUI extends javax.swing.JFrame {
                 }
             }
         }
-        
+
         itemNameEditField.setText(olditemName);
         itemPriceEditField.setText(Double.toString(olditemPrice));
         itemDateEditField.setText(olddatePurchase);
@@ -154,6 +154,11 @@ public class EditItemUI extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancel");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton2MouseReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -218,45 +223,51 @@ public class EditItemUI extends javax.swing.JFrame {
         int index = 0;
         if (counterNumber == 1) {
             for (Iterator iterator = bahagiamall.BahagiaMall.getCounter1().iterator(); iterator.hasNext();) {
-            index++;
-            CustomerInformation nextCustData = (CustomerInformation) iterator.next();
-            if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
-                //GET OLD CUSTOMER DATA
-                String custName = nextCustData.getCustName();
-                String custIC = nextCustData.getCustIC();
-                String counterPaid = nextCustData.getCounterPaid();
+                index++;
+                CustomerInformation nextCustData = (CustomerInformation) iterator.next();
+                if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
+                    //GET OLD CUSTOMER DATA
+                    String custName = nextCustData.getCustName();
+                    String custIC = nextCustData.getCustIC();
+                    String counterPaid = nextCustData.getCounterPaid();
 
-                bahagiamall.BahagiaMall.getCounter1().set(index - 1, new CustomerInformation(custID, custIC, custName, counterPaid, itemID, itemName, itemPrice, datePurchased));
+                    bahagiamall.BahagiaMall.getCounter1().set(index - 1, new CustomerInformation(custID, custIC, custName, counterPaid, itemID, itemName, itemPrice, datePurchased));
+                }
             }
-        }
         } else if (counterNumber == 2) {
             for (Iterator iterator = bahagiamall.BahagiaMall.getCounter2().iterator(); iterator.hasNext();) {
-            index++;
-            CustomerInformation nextCustData = (CustomerInformation) iterator.next();
-            if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
-                //GET OLD CUSTOMER DATA
-                String custName = nextCustData.getCustName();
-                String custIC = nextCustData.getCustIC();
-                String counterPaid = nextCustData.getCounterPaid();
+                index++;
+                CustomerInformation nextCustData = (CustomerInformation) iterator.next();
+                if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
+                    //GET OLD CUSTOMER DATA
+                    String custName = nextCustData.getCustName();
+                    String custIC = nextCustData.getCustIC();
+                    String counterPaid = nextCustData.getCounterPaid();
 
-                bahagiamall.BahagiaMall.getCounter2().set(index - 1, new CustomerInformation(custID, custIC, custName, counterPaid, itemID, itemName, itemPrice, datePurchased));
+                    bahagiamall.BahagiaMall.getCounter2().set(index - 1, new CustomerInformation(custID, custIC, custName, counterPaid, itemID, itemName, itemPrice, datePurchased));
+                }
             }
-        }
         } else if (counterNumber == 3) {
             for (Iterator iterator = bahagiamall.BahagiaMall.getCounter3().iterator(); iterator.hasNext();) {
-            index++;
-            CustomerInformation nextCustData = (CustomerInformation) iterator.next();
-            if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
-                //GET OLD CUSTOMER DATA
-                String custName = nextCustData.getCustName();
-                String custIC = nextCustData.getCustIC();
-                String counterPaid = nextCustData.getCounterPaid();
+                index++;
+                CustomerInformation nextCustData = (CustomerInformation) iterator.next();
+                if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
+                    //GET OLD CUSTOMER DATA
+                    String custName = nextCustData.getCustName();
+                    String custIC = nextCustData.getCustIC();
+                    String counterPaid = nextCustData.getCounterPaid();
 
-                bahagiamall.BahagiaMall.getCounter3().set(index - 1, new CustomerInformation(custID, custIC, custName, counterPaid, itemID, itemName, itemPrice, datePurchased));
+                    bahagiamall.BahagiaMall.getCounter3().set(index - 1, new CustomerInformation(custID, custIC, custName, counterPaid, itemID, itemName, itemPrice, datePurchased));
+                }
             }
         }
-        }
+        dispose();
     }//GEN-LAST:event_jButton1MouseReleased
+
+    private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
+        //CANCEL
+        dispose();
+    }//GEN-LAST:event_jButton2MouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

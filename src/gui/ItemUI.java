@@ -4,6 +4,8 @@ import classes.CustomerInformation;
 import classes.ItemInformation;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -79,6 +81,13 @@ public class ItemUI extends javax.swing.JFrame {
                     EditItemUI newItemUI = new EditItemUI(counterNumber, custID, itemIDPopup);
                     edititemInstance.put("edititem" + custID + itemIDPopup, newItemUI);
                     newItemUI.setVisible(true);
+                    newItemUI.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                            displayItemToTable();
+                        }
+
+                    });
                 } else {
                     getEditItemUI.setVisible(true);
                 }
