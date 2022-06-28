@@ -4,24 +4,19 @@ import classes.CustomerInformation;
 import java.util.Iterator;
 import javax.swing.ImageIcon;
 
-public class EditItemUI extends javax.swing.JFrame {
+public class EditCustUI extends javax.swing.JFrame {
 
-    private String frameEditItemTitle = "";
     private String custID = "";
-    private String itemID = "";
     private int counterNumber = 0;
+    private String framecustEditTitle = "";
 
     /**
-     * Creates new form EditItemUI
-     *
-     * @param counterNumber
-     * @param custID
-     * @param itemID
+     * Creates new form EditCustUI
      */
-    public EditItemUI(int counterNumber, String custID, String itemID) {
+    public EditCustUI(int counterNumber, String custID) {
         this.custID = custID;
-        this.itemID = itemID;
         this.counterNumber = counterNumber;
+        this.framecustEditTitle = "Customer " + custID;
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -30,63 +25,59 @@ public class EditItemUI extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditItemUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditCustUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditItemUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditCustUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditItemUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditCustUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditItemUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditCustUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        frameEditItemTitle = "Item " + itemID + " for customer " + custID;
         initComponents();
-
-        //GET OLD ITEM DATA AND DISPLAY TO UI
-        String olditemName = "";
-        double olditemPrice = 0;
-        String olddatePurchase = "";
-
+        editcusttitle.setText("Edit customer " + custID);
+        pack();
+        setLocationRelativeTo(null);
+        
+        //GET OLD CUST DATA AND DISPLAY TO UI
+        String custName = "";
+        String custIC = "";
+        
         if (counterNumber == 1) {
             for (Iterator iterator = bahagiamall.BahagiaMall.getCounter1().iterator(); iterator.hasNext();) {
                 CustomerInformation nextCustData = (CustomerInformation) iterator.next();
-                if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
-                    //GET OLD ITEM DATA
-                    olditemName = nextCustData.getItemName();
-                    olditemPrice = nextCustData.getitemPrice();
-                    olddatePurchase = nextCustData.getDatePurchase();
+                if (nextCustData.getCustID().equalsIgnoreCase(custID)) {
+                    //GET OLD CUST DATA
+                    custName = nextCustData.getCustName();
+                    custIC = nextCustData.getCustIC();
+                    break;
                 }
             }
         } else if (counterNumber == 2) {
             for (Iterator iterator = bahagiamall.BahagiaMall.getCounter2().iterator(); iterator.hasNext();) {
                 CustomerInformation nextCustData = (CustomerInformation) iterator.next();
-                if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
-                    //GET OLD ITEM DATA
-                    olditemName = nextCustData.getItemName();
-                    olditemPrice = nextCustData.getitemPrice();
-                    olddatePurchase = nextCustData.getDatePurchase();
+                if (nextCustData.getCustID().equalsIgnoreCase(custID)) {
+                    //GET OLD CUST DATA
+                    custName = nextCustData.getCustName();
+                    custIC = nextCustData.getCustIC();
+                    break;
                 }
             }
         } else if (counterNumber == 3) {
             for (Iterator iterator = bahagiamall.BahagiaMall.getCounter3().iterator(); iterator.hasNext();) {
                 CustomerInformation nextCustData = (CustomerInformation) iterator.next();
-                if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
-                    //GET OLD ITEM DATA
-                    olditemName = nextCustData.getItemName();
-                    olditemPrice = nextCustData.getitemPrice();
-                    olddatePurchase = nextCustData.getDatePurchase();
+                if (nextCustData.getCustID().equalsIgnoreCase(custID)) {
+                    //GET OLD CUST DATA
+                    custName = nextCustData.getCustName();
+                    custIC = nextCustData.getCustIC();
+                    break;
                 }
             }
         }
-
-        itemNameEditField.setText(olditemName);
-        itemPriceEditField.setText(Double.toString(olditemPrice));
-        itemDateEditField.setText(olddatePurchase);
-
-        pack();
-        setLocationRelativeTo(null);
-        edititemtitle.setText("Edit item " + itemID + " for customer " + custID);
+        
+        custnamefield.setText(custName);
+        custicfield.setText(custIC);
     }
-
+    
     ImageIcon logo = new ImageIcon("src/images/mainicon.png");
 
     /**
@@ -99,25 +90,23 @@ public class EditItemUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        edititemtitle = new javax.swing.JLabel();
+        editcusttitle = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        itemNameEditField = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        itemPriceEditField = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        itemDateEditField = new javax.swing.JTextField();
+        custnamefield = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        custicfield = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle(frameEditItemTitle);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle(framecustEditTitle);
         setIconImage(logo.getImage());
 
         jPanel2.setBackground(new java.awt.Color(255, 204, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        edititemtitle.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
-        edititemtitle.setText("Edit item - for customer -");
+        editcusttitle.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        editcusttitle.setText("Edit customer -");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -125,22 +114,18 @@ public class EditItemUI extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(edititemtitle)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(editcusttitle)
+                .addContainerGap(325, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(edititemtitle)
+                .addComponent(editcusttitle)
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
-        jLabel1.setText("Item name:");
-
-        jLabel2.setText("Price:");
-
-        jLabel3.setText("Date Purchased:");
+        jLabel1.setText("Customer name:");
 
         jButton1.setText("Save");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -150,11 +135,8 @@ public class EditItemUI extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancel");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton2MouseReleased(evt);
-            }
-        });
+
+        jLabel2.setText("Customer IC:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -164,24 +146,19 @@ public class EditItemUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(itemNameEditField)
-                            .addComponent(itemPriceEditField)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(itemDateEditField, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 158, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                            .addComponent(custnamefield)
+                            .addComponent(custicfield))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -191,16 +168,12 @@ public class EditItemUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(itemNameEditField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(custnamefield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(itemPriceEditField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(itemDateEditField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                    .addComponent(custicfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -212,20 +185,21 @@ public class EditItemUI extends javax.swing.JFrame {
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
         //SAVE EDITED ITEM HERE
-        String itemName = itemNameEditField.getText();
-        double itemPrice = Double.parseDouble(itemPriceEditField.getText());
-        String datePurchased = itemDateEditField.getText();
+        String custName = custnamefield.getText();
+        String custIC = custicfield.getText();
 
         int index = 0;
         if (counterNumber == 1) {
             for (Iterator iterator = bahagiamall.BahagiaMall.getCounter1().iterator(); iterator.hasNext();) {
                 index++;
                 CustomerInformation nextCustData = (CustomerInformation) iterator.next();
-                if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
+                if (nextCustData.getCustID().equalsIgnoreCase(custID)) {
                     //GET OLD CUSTOMER DATA
-                    String custName = nextCustData.getCustName();
-                    String custIC = nextCustData.getCustIC();
                     String counterPaid = nextCustData.getCounterPaid();
+                    String itemID = nextCustData.getItemID();
+                    String itemName = nextCustData.getItemName();
+                    double itemPrice = nextCustData.getitemPrice();
+                    String datePurchased = nextCustData.getDatePurchase();
 
                     bahagiamall.BahagiaMall.getCounter1().set(index - 1, new CustomerInformation(custID, custIC, custName, counterPaid, itemID, itemName, itemPrice, datePurchased));
                 }
@@ -234,11 +208,13 @@ public class EditItemUI extends javax.swing.JFrame {
             for (Iterator iterator = bahagiamall.BahagiaMall.getCounter2().iterator(); iterator.hasNext();) {
                 index++;
                 CustomerInformation nextCustData = (CustomerInformation) iterator.next();
-                if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
+                if (nextCustData.getCustID().equalsIgnoreCase(custID)) {
                     //GET OLD CUSTOMER DATA
-                    String custName = nextCustData.getCustName();
-                    String custIC = nextCustData.getCustIC();
                     String counterPaid = nextCustData.getCounterPaid();
+                    String itemID = nextCustData.getItemID();
+                    String itemName = nextCustData.getItemName();
+                    double itemPrice = nextCustData.getitemPrice();
+                    String datePurchased = nextCustData.getDatePurchase();
 
                     bahagiamall.BahagiaMall.getCounter2().set(index - 1, new CustomerInformation(custID, custIC, custName, counterPaid, itemID, itemName, itemPrice, datePurchased));
                 }
@@ -247,11 +223,13 @@ public class EditItemUI extends javax.swing.JFrame {
             for (Iterator iterator = bahagiamall.BahagiaMall.getCounter3().iterator(); iterator.hasNext();) {
                 index++;
                 CustomerInformation nextCustData = (CustomerInformation) iterator.next();
-                if (nextCustData.getCustID().equalsIgnoreCase(custID) && nextCustData.getItemID().equalsIgnoreCase(itemID)) {
+                if (nextCustData.getCustID().equalsIgnoreCase(custID)) {
                     //GET OLD CUSTOMER DATA
-                    String custName = nextCustData.getCustName();
-                    String custIC = nextCustData.getCustIC();
                     String counterPaid = nextCustData.getCounterPaid();
+                    String itemID = nextCustData.getItemID();
+                    String itemName = nextCustData.getItemName();
+                    double itemPrice = nextCustData.getitemPrice();
+                    String datePurchased = nextCustData.getDatePurchase();
 
                     bahagiamall.BahagiaMall.getCounter3().set(index - 1, new CustomerInformation(custID, custIC, custName, counterPaid, itemID, itemName, itemPrice, datePurchased));
                 }
@@ -260,22 +238,15 @@ public class EditItemUI extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton1MouseReleased
 
-    private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
-        //CANCEL
-        dispose();
-    }//GEN-LAST:event_jButton2MouseReleased
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel edititemtitle;
-    private javax.swing.JTextField itemDateEditField;
-    private javax.swing.JTextField itemNameEditField;
-    private javax.swing.JTextField itemPriceEditField;
+    private javax.swing.JTextField custicfield;
+    private javax.swing.JTextField custnamefield;
+    private javax.swing.JLabel editcusttitle;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 

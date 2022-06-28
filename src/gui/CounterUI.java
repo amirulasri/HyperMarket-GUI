@@ -3,11 +3,14 @@ package gui;
 import classes.CustomerInformation;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
@@ -48,9 +51,9 @@ public class CounterUI extends javax.swing.JFrame {
         counterlabel.setText("Counter " + counterNumber);
         if (counterNumber == 1) {
             displayCustomerToTable(bahagiamall.BahagiaMall.getCounter1());
-        }else if (counterNumber == 2) {
+        } else if (counterNumber == 2) {
             displayCustomerToTable(bahagiamall.BahagiaMall.getCounter2());
-        }else if (counterNumber == 3) {
+        } else if (counterNumber == 3) {
             displayCustomerToTable(bahagiamall.BahagiaMall.getCounter3());
         }
 
@@ -66,18 +69,52 @@ public class CounterUI extends javax.swing.JFrame {
         popupCustomer.add("custPopupDelete", deleteCustMenuItem);
         popupCustomer.add(new JMenuItem("Cancel", cancelicon));
 
+        //EDIT CUSTOMER HERE
+        Map<String, EditCustUI> editcustInstance = new TreeMap<String, EditCustUI>();
         editCustMenuItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
                 System.out.println("MENU EDIT CLICKED: " + custIDPopupMenu);
+                EditCustUI getEditCustUI = editcustInstance.get("editcust" + custIDPopupMenu);
+                if (getEditCustUI == null) {
+                    EditCustUI newCustUI = new EditCustUI(counterNumber, custIDPopupMenu);
+                    editcustInstance.put("editcust" + custIDPopupMenu, newCustUI);
+                    newCustUI.setVisible(true);
+                    newCustUI.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                            if (counterNumber == 1) {
+                                displayCustomerToTable(bahagiamall.BahagiaMall.getCounter1());
+                            } else if (counterNumber == 2) {
+                                displayCustomerToTable(bahagiamall.BahagiaMall.getCounter2());
+                            } else if (counterNumber == 3) {
+                                displayCustomerToTable(bahagiamall.BahagiaMall.getCounter3());
+                            }
+                        }
 
+                    });
+                } else {
+                    getEditCustUI.setVisible(true);
+                }
             }
         });
 
+        //DELETE CUSTOMER HERE
         deleteCustMenuItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
                 System.out.println("MENU DELETE CLICKED: " + custIDPopupMenu);
+                Predicate<CustomerInformation> itemCondition = customers -> customers.getCustID().equalsIgnoreCase(custIDPopupMenu);
+                if (counterNumber == 1) {
+                    bahagiamall.BahagiaMall.getCounter1().removeIf(itemCondition);
+                    displayCustomerToTable(bahagiamall.BahagiaMall.getCounter1());
+                } else if (counterNumber == 2) {
+                    bahagiamall.BahagiaMall.getCounter2().removeIf(itemCondition);
+                    displayCustomerToTable(bahagiamall.BahagiaMall.getCounter2());
+                } else if (counterNumber == 3) {
+                    bahagiamall.BahagiaMall.getCounter3().removeIf(itemCondition);
+                    displayCustomerToTable(bahagiamall.BahagiaMall.getCounter3());
+                }
             }
         });
 
@@ -119,19 +156,21 @@ public class CounterUI extends javax.swing.JFrame {
 
     private void displayCustomerToTable(LinkedList counter) {
         String currentCustID = "";
-
         DefaultTableModel customerTableModel = (DefaultTableModel) customerTable.getModel();
+        customerTableModel.setRowCount(0);
         //TO CONVERT, NEED TO FILTER CUSTOMER ONLY AND ADD TO NEW LIST
         List<CustomerInformation> convertedCustList = (List<CustomerInformation>) counter.stream().filter(counterdatas -> counterdatas.getClass() == CustomerInformation.class).collect(Collectors.toList());
-        countlabelcust.setText(convertedCustList.size() + " Customers");
 
+        int custCount = 0;
         for (Iterator iterator = convertedCustList.iterator(); iterator.hasNext();) {
             CustomerInformation nextCustomerData = (CustomerInformation) iterator.next();
             if (!nextCustomerData.getCustID().equalsIgnoreCase(currentCustID)) {
                 currentCustID = nextCustomerData.getCustID();
+                custCount++;
                 customerTableModel.addRow(new Object[]{nextCustomerData.getCustID(), nextCustomerData.getCustIC(), nextCustomerData.getCustName()});
             }
         }
+        countlabelcust.setText(custCount + " Customers");
     }
 
     /**

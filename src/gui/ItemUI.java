@@ -98,7 +98,6 @@ public class ItemUI extends javax.swing.JFrame {
         deleteItemsMenuItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
-                System.out.println("MENU DELETE CLICKED: ");
                 Predicate<CustomerInformation> itemCondition = items -> items.getItemID().equalsIgnoreCase(itemIDPopup) && items.getCustID().equalsIgnoreCase(custID);
                 if (counterNumber == 1) {
                     bahagiamall.BahagiaMall.getCounter1().removeIf(itemCondition);
