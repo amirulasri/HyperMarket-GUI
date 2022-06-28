@@ -1,13 +1,11 @@
 package gui;
 
 import classes.CustomerInformation;
-import classes.ItemInformation;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -25,6 +23,7 @@ public class ItemUI extends javax.swing.JFrame {
     private String itemIDPopup = "";
     private String custID;
     private int counterNumber = 0;
+    private double totalPayment = 0;
 
     /**
      * Creates new form ItemUI
@@ -153,6 +152,8 @@ public class ItemUI extends javax.swing.JFrame {
 
         for (Iterator iterator = filteredItemListCust.iterator(); iterator.hasNext();) {
             CustomerInformation nextItemData = (CustomerInformation) iterator.next();
+            //ALSO CALCULATE TOTAL PAYMENT HERE
+            totalPayment = totalPayment + nextItemData.getitemPrice();
             itemTableModel.addRow(new Object[]{nextItemData.getItemID(), nextItemData.getItemName(), nextItemData.getitemPrice(), nextItemData.getDatePurchase()});
         }
     }
@@ -171,6 +172,7 @@ public class ItemUI extends javax.swing.JFrame {
         countlabelitem = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         itemTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(frameItemTitle);
@@ -224,29 +226,55 @@ public class ItemUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(itemTable);
 
+        jButton1.setText("Pay");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton1MouseReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 357, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private PaymentUI paymentui;
+    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
+        //PAY PROCESS HERE
+        if(paymentui == null){
+            paymentui = new PaymentUI(custID, totalPayment, counterNumber);
+            paymentui.setVisible(true);
+        }else{
+            paymentui.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1MouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel countlabelitem;
     private javax.swing.JTable itemTable;
     private javax.swing.JLabel itemtitlelabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
