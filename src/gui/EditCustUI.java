@@ -135,6 +135,11 @@ public class EditCustUI extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancel");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jButton2MouseReleased(evt);
+            }
+        });
 
         jLabel2.setText("Customer IC:");
 
@@ -237,6 +242,11 @@ public class EditCustUI extends javax.swing.JFrame {
         }
         dispose();
     }//GEN-LAST:event_jButton1MouseReleased
+
+    private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
+        //CANCEL
+        dispose();
+    }//GEN-LAST:event_jButton2MouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
