@@ -7,6 +7,8 @@ import java.awt.event.MouseEvent;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
@@ -19,15 +21,18 @@ public class ItemUI extends javax.swing.JFrame {
 
     private String frameItemTitle = "";
     private String itemIDPopup = "";
-    private LinkedList counter;
     private String custID;
+    private int counterNumber = 0;
 
     /**
      * Creates new form ItemUI
+     *
+     * @param custID
+     * @param counterNumber
      */
-    public ItemUI(LinkedList counter, String custID, int counterNumber) {
-        this.counter = counter;
+    public ItemUI(String custID, int counterNumber) {
         this.custID = custID;
+        this.counterNumber = counterNumber;
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -63,10 +68,20 @@ public class ItemUI extends javax.swing.JFrame {
         popupItem.add("custPopupDelete", deleteItemsMenuItem);
         popupItem.add(new JMenuItem("Cancel", cancelicon));
 
+        //EDIT ITEMS HERE
+        Map<String, EditItemUI> edititemInstance = new TreeMap<String, EditItemUI>();
         editItemsMenuItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
                 System.out.println("MENU EDIT CLICKED: ");
+                EditItemUI getEditItemUI = edititemInstance.get("edititem" + custID + itemIDPopup);
+                if (getEditItemUI == null) {
+                    EditItemUI newItemUI = new EditItemUI(counterNumber, custID, itemIDPopup);
+                    edititemInstance.put("edititem" + custID + itemIDPopup, newItemUI);
+                    newItemUI.setVisible(true);
+                } else {
+                    getEditItemUI.setVisible(true);
+                }
             }
         });
 
@@ -76,7 +91,13 @@ public class ItemUI extends javax.swing.JFrame {
             public void mousePressed(MouseEvent me) {
                 System.out.println("MENU DELETE CLICKED: ");
                 Predicate<CustomerInformation> itemCondition = items -> items.getItemID().equalsIgnoreCase(itemIDPopup) && items.getCustID().equalsIgnoreCase(custID);
-                counter.removeIf(itemCondition);
+                if (counterNumber == 1) {
+                    bahagiamall.BahagiaMall.getCounter1().removeIf(itemCondition);
+                } else if (counterNumber == 2) {
+                    bahagiamall.BahagiaMall.getCounter2().removeIf(itemCondition);
+                } else if (counterNumber == 3) {
+                    bahagiamall.BahagiaMall.getCounter3().removeIf(itemCondition);
+                }
                 displayItemToTable();
             }
         });
@@ -107,8 +128,18 @@ public class ItemUI extends javax.swing.JFrame {
         DefaultTableModel itemTableModel = (DefaultTableModel) itemTable.getModel();
         itemTableModel.setRowCount(0);
         //TO CONVERT, NEED TO FILTER ITEM ONLY AND ADD TO NEW LIST
-        List<CustomerInformation> convertedItemList = (List<CustomerInformation>) counter.stream().collect(Collectors.toList());
-        List<CustomerInformation> filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
+        List<CustomerInformation> convertedItemList = null;
+        List<CustomerInformation> filteredItemListCust = null;
+        if (counterNumber == 1) {
+            convertedItemList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
+            filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
+        } else if (counterNumber == 2) {
+            convertedItemList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter2().stream().collect(Collectors.toList());
+            filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
+        } else if (counterNumber == 3) {
+            convertedItemList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter3().stream().collect(Collectors.toList());
+            filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
+        }
 
         countlabelitem.setText(filteredItemListCust.size() + " Items");
 

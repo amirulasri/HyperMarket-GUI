@@ -11,18 +11,11 @@ public class CounterSelectorUI extends javax.swing.JFrame {
     /**
      * Creates new form CounterSelectorUI
      */
-    LinkedList counter1;
-    LinkedList counter2;
-    LinkedList counter3;
 
     ImageIcon logo = new ImageIcon("src/images/mainicon.png");
     private DecimalFormat priceformatter = new DecimalFormat("0.00");
 
-    public CounterSelectorUI(LinkedList counter1, LinkedList counter2, LinkedList counter3) {
-        this.counter1 = counter1;
-        this.counter2 = counter2;
-        this.counter3 = counter3;
-
+    public CounterSelectorUI() {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -48,11 +41,11 @@ public class CounterSelectorUI extends javax.swing.JFrame {
 
     private void countCustomer() {
         //SET TO GUI
-        countlabel1.setText(getCustCount(counter1) + " Customers");
-        countlabel2.setText(getCustCount(counter2) + " Customers");
-        countlabel3.setText(getCustCount(counter3) + " Customers");
+        countlabel1.setText(getCustCount(bahagiamall.BahagiaMall.getCounter1()) + " Customers");
+        countlabel2.setText(getCustCount(bahagiamall.BahagiaMall.getCounter2()) + " Customers");
+        countlabel3.setText(getCustCount(bahagiamall.BahagiaMall.getCounter3()) + " Customers");
         
-        int totalAllCustomer = getCustCount(counter1) + getCustCount(counter2) + getCustCount(counter3);
+        int totalAllCustomer = getCustCount(bahagiamall.BahagiaMall.getCounter1()) + getCustCount(bahagiamall.BahagiaMall.getCounter2()) + getCustCount(bahagiamall.BahagiaMall.getCounter3());
         totalAllCustLabel.setText("Total customer: " + totalAllCustomer);
     }
     
@@ -62,17 +55,17 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         double totalcounter2 = 0;
         double totalcounter3 = 0;
         
-        for (Iterator<CustomerInformation> iterator = counter1.iterator(); iterator.hasNext();) {
+        for (Iterator<CustomerInformation> iterator = bahagiamall.BahagiaMall.getCounter1().iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
             totalcounter1 = totalcounter1 + nextItem.getitemPrice();
         }
         
-        for (Iterator<CustomerInformation> iterator = counter2.iterator(); iterator.hasNext();) {
+        for (Iterator<CustomerInformation> iterator = bahagiamall.BahagiaMall.getCounter2().iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
             totalcounter2 = totalcounter2 + nextItem.getitemPrice();
         }
         
-        for (Iterator<CustomerInformation> iterator = counter3.iterator(); iterator.hasNext();) {
+        for (Iterator<CustomerInformation> iterator = bahagiamall.BahagiaMall.getCounter3().iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
             totalcounter3 = totalcounter3 + nextItem.getitemPrice();
         }
@@ -375,7 +368,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         if(counterUI1 != null){
             counterUI1.setVisible(true);
         }else{
-            counterUI1 = new CounterUI(counter1, 1);
+            counterUI1 = new CounterUI(1);
             counterUI1.setVisible(true);
         }
     }//GEN-LAST:event_jButton1MouseReleased
@@ -385,7 +378,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         if(counterUI2 != null){
             counterUI2.setVisible(true);
         }else{
-            counterUI2 = new CounterUI(counter2, 2);
+            counterUI2 = new CounterUI(2);
             counterUI2.setVisible(true);
         }
     }//GEN-LAST:event_jButton2MouseReleased
@@ -395,7 +388,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         if(counterUI3 != null){
             counterUI3.setVisible(true);
         }else{
-            counterUI3 = new CounterUI(counter3, 3);
+            counterUI3 = new CounterUI(3);
             counterUI3.setVisible(true);
         }
     }//GEN-LAST:event_jButton3MouseReleased

@@ -12,8 +12,26 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import gui.HomeUI;
+import java.util.LinkedList;
 
 public class BahagiaMall {
+    
+    //ALL QUEUE DATA WILL STORED HERE
+    private static LinkedList counter1 = new LinkedList();
+    private static LinkedList counter2 = new LinkedList();
+    private static LinkedList counter3 = new LinkedList(); //WHEN ITEM MORE THAN 5
+    
+    public static LinkedList getCounter1(){
+        return counter1;
+    }
+    
+    public static LinkedList getCounter2(){
+        return counter2;
+    }
+    
+    public static LinkedList getCounter3(){
+        return counter3;
+    }
 
     /**
      * @param args the command line arguments

@@ -62,10 +62,6 @@ public class HomeUI extends javax.swing.JFrame {
     private ArrayList<CustomerInformation> tempDataList = new ArrayList();
     private ArrayList<String> listCustID = new ArrayList<String>();
 
-    private LinkedList counter1 = new LinkedList();
-    private LinkedList counter2 = new LinkedList();
-    private LinkedList counter3 = new LinkedList(); //WHEN ITEM MORE THAN 5
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -319,27 +315,53 @@ public class HomeUI extends javax.swing.JFrame {
                     if (counterswitching == 1) {
                         for (int j = 0; j < filtereditemcustomer.size(); j++) {
                             CustomerInformation itemdata = (CustomerInformation) filtereditemcustomer.get(j);
-                            counter1.addLast(itemdata);
+                            String custID = itemdata.getCustID();
+                            String custIC = itemdata.getCustIC();
+                            String custName = itemdata.getCustName();
+                            String itemID = itemdata.getItemID();
+                            String itemName = itemdata.getItemName();
+                            Double itemPrice = itemdata.getitemPrice();
+                            String datePurchased = itemdata.getDatePurchase();
+
+                            bahagiamall.BahagiaMall.getCounter1().addLast(new CustomerInformation(custID, custIC, custName, "counter1", itemID, itemName, itemPrice, datePurchased));
                         }
                         counterswitching = 2;
                     } else if (counterswitching == 2) {
                         for (int j = 0; j < filtereditemcustomer.size(); j++) {
                             CustomerInformation itemdata = (CustomerInformation) filtereditemcustomer.get(j);
-                            counter2.addLast(itemdata);
+                            String custID = itemdata.getCustID();
+                            String custIC = itemdata.getCustIC();
+                            String custName = itemdata.getCustName();
+                            String itemID = itemdata.getItemID();
+                            String itemName = itemdata.getItemName();
+                            Double itemPrice = itemdata.getitemPrice();
+                            String datePurchased = itemdata.getDatePurchase();
+
+                            bahagiamall.BahagiaMall.getCounter1().addLast(new CustomerInformation(custID, custIC, custName, "counter2", itemID, itemName, itemPrice, datePurchased));
+
                         }
                         counterswitching = 1;
                     }
                 } else {
                     for (int j = 0; j < filtereditemcustomer.size(); j++) {
                         CustomerInformation itemdata = (CustomerInformation) filtereditemcustomer.get(j);
-                        counter3.addLast(itemdata);
+                        String custID = itemdata.getCustID();
+                        String custIC = itemdata.getCustIC();
+                        String custName = itemdata.getCustName();
+                        String itemID = itemdata.getItemID();
+                        String itemName = itemdata.getItemName();
+                        Double itemPrice = itemdata.getitemPrice();
+                        String datePurchased = itemdata.getDatePurchase();
+
+                        bahagiamall.BahagiaMall.getCounter3().addLast(new CustomerInformation(custID, custIC, custName, "counter3", itemID, itemName, itemPrice, datePurchased));
+
                     }
                 }
             }
             System.out.println("DONE ADD TO COUNTER");
 
             //OPEN COUNTER SELECTOR UI
-            counterSelectorUI = new CounterSelectorUI(counter1, counter2, counter3);
+            counterSelectorUI = new CounterSelectorUI();
             counterSelectorUI.setVisible(true);
         } catch (EOFException ex) {
             System.out.println("End of file error");

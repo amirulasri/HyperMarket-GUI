@@ -1,7 +1,6 @@
 package gui;
 
 import classes.CustomerInformation;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Iterator;
@@ -24,7 +23,7 @@ public class CounterUI extends javax.swing.JFrame {
     /**
      * Creates new form CounterUI
      */
-    public CounterUI(LinkedList counter, int counterNumber) {
+    public CounterUI(int counterNumber) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -47,7 +46,13 @@ public class CounterUI extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
         counterlabel.setText("Counter " + counterNumber);
-        displayCustomerToTable(counter);
+        if (counterNumber == 1) {
+            displayCustomerToTable(bahagiamall.BahagiaMall.getCounter1());
+        }else if (counterNumber == 2) {
+            displayCustomerToTable(bahagiamall.BahagiaMall.getCounter2());
+        }else if (counterNumber == 3) {
+            displayCustomerToTable(bahagiamall.BahagiaMall.getCounter3());
+        }
 
         //CREATE POPUP MENU AND ACTION CLICK
         ImageIcon editicon = new ImageIcon("src/images/edit.png");
@@ -86,7 +91,7 @@ public class CounterUI extends javax.swing.JFrame {
                     String getCustIDFromTable = (String) customerTable.getValueAt(row, 0);
                     ItemUI getItemUI = itemInstance.get("item" + getCustIDFromTable);
                     if (getItemUI == null) {
-                        ItemUI newItemUI = new ItemUI(counter, getCustIDFromTable, counterNumber);
+                        ItemUI newItemUI = new ItemUI(getCustIDFromTable, counterNumber);
                         itemInstance.put("item" + getCustIDFromTable, newItemUI);
                         newItemUI.setVisible(true);
                     } else {
