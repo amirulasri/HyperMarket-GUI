@@ -66,7 +66,7 @@ public class CounterUI extends javax.swing.JFrame {
                     String getCustIDFromTable = (String) customerTable.getValueAt(row, 0);
                     ItemUI getItemUI = itemInstance.get("item" + getCustIDFromTable);
                     if (getItemUI == null) {
-                        ItemUI newItemUI = new ItemUI(getCustIDFromTable, counterNumber);
+                        ItemUI newItemUI = new ItemUI(getCustIDFromTable, counterNumber, "");
                         itemInstance.put("item" + getCustIDFromTable, newItemUI);
                         newItemUI.setVisible(true);
                     } else {
@@ -113,6 +113,8 @@ public class CounterUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         customerTable = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(counterNameTitle);
@@ -180,6 +182,16 @@ public class CounterUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(customerTable);
 
+        jMenu1.setText("Add new customer");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenu1MousePressed(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -192,7 +204,7 @@ public class CounterUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE))
         );
 
         pack();
@@ -211,7 +223,7 @@ public class CounterUI extends javax.swing.JFrame {
             } else if (counterNumber == 3) {
                 datacust = (CustomerInformation) bahagiamall.BahagiaMall.getCounter3().peek();
             }
-            if(datacust == null){
+            if (datacust == null) {
                 JOptionPane.showMessageDialog(null, "No customer queue to pay", "No customer", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -242,23 +254,41 @@ public class CounterUI extends javax.swing.JFrame {
             paymentui = new PaymentUI(custIDPay, totalPayment, counterNumber, countitem);
             paymentui.setVisible(true);
             paymentui.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (counterNumber == 1) {
-                    displayCustomerToTable(bahagiamall.BahagiaMall.getCounter1());
-                } else if (counterNumber == 2) {
-                    displayCustomerToTable(bahagiamall.BahagiaMall.getCounter2());
-                } else if (counterNumber == 3) {
-                    displayCustomerToTable(bahagiamall.BahagiaMall.getCounter3());
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if (counterNumber == 1) {
+                        displayCustomerToTable(bahagiamall.BahagiaMall.getCounter1());
+                    } else if (counterNumber == 2) {
+                        displayCustomerToTable(bahagiamall.BahagiaMall.getCounter2());
+                    } else if (counterNumber == 3) {
+                        displayCustomerToTable(bahagiamall.BahagiaMall.getCounter3());
+                    }
+                    paymentui = null;
                 }
-                paymentui = null;
-            }
 
-        });
+            });
         } else {
             paymentui.setVisible(true);
         }
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jMenu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MousePressed
+        //ADD CUSTOMER TO QUEUE
+        if (bahagiamall.BahagiaMall.getAddCustUI() == null) {
+            bahagiamall.BahagiaMall.createCustomerAddUIInstance(counterNumber);
+            bahagiamall.BahagiaMall.getAddCustUI().addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    bahagiamall.BahagiaMall.setCustomerAddUINull();
+                }
+            });
+            bahagiamall.BahagiaMall.getAddCustUI().setVisible(true);
+        } else {
+            bahagiamall.BahagiaMall.getAddCustUI().setVisible(true);
+            JOptionPane.showMessageDialog(null, "There are customers who have not finished managing items. Please finish first and try again", "Error Customer Queue", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_jMenu1MousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -266,6 +296,8 @@ public class CounterUI extends javax.swing.JFrame {
     private javax.swing.JLabel countlabelcust;
     private javax.swing.JTable customerTable;
     private javax.swing.JButton jButton1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

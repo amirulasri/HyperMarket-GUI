@@ -1,5 +1,7 @@
 package bahagiamall;
 
+import gui.AddCustomerUI;
+import gui.AddItemUI;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -23,6 +25,10 @@ public class BahagiaMall {
     private static Queue qcounter2 = new LinkedList();
     private static Queue qcounter3 = new LinkedList(); //WHEN ITEM MORE THAN 5
     
+    //OBJECT FOR ADD CUST AND ITEM UI
+    private static AddCustomerUI addcustui;
+    private static AddItemUI additemui;
+    
     public static Queue getCounter1(){
         return qcounter1;
     }
@@ -33,6 +39,30 @@ public class BahagiaMall {
     
     public static Queue getCounter3(){
         return qcounter3;
+    }
+    
+    public static AddCustomerUI getAddCustUI(){
+        return addcustui;
+    }
+    
+    public static void createCustomerAddUIInstance(int counterNumber){
+        addcustui = new AddCustomerUI(counterNumber);
+    }
+    
+    public static void setCustomerAddUINull(){
+        addcustui = null;
+    }
+    
+    public static AddItemUI getAddItemUI(){
+        return additemui;
+    }
+    
+    public static void createItemAddUIInstance(int counterNumber, String custID){
+        additemui = new AddItemUI(counterNumber, custID);
+    }
+    
+    public static void setItemAddUINull(){
+        additemui = null;
     }
 
     /**

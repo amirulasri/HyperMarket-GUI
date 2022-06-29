@@ -51,7 +51,7 @@ public class ReceiptUI extends javax.swing.JFrame {
         custNamelabel.setText(custName);
         custIDlabel.setText(custID);
         custIClabel.setText(custIC);
-        paymenttitle.setText("Receipt customer " + custID);
+        paymenttitle.setText("Receipt - customer " + custID);
         String paymentmethodtext = "";
         if (paymentMethod.equalsIgnoreCase("credit")) {
             paymentmethodtext = "Credit Card";
