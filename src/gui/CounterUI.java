@@ -12,6 +12,7 @@ import java.util.Queue;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -202,7 +203,18 @@ public class CounterUI extends javax.swing.JFrame {
         //PAY PROCESS HERE
         if (paymentui == null) {
             //GET WHO FIRST QUEUE OF CUSTOMER
-            CustomerInformation datacust = (CustomerInformation) bahagiamall.BahagiaMall.getCounter1().peek();
+            CustomerInformation datacust = null;
+            if (counterNumber == 1) {
+                datacust = (CustomerInformation) bahagiamall.BahagiaMall.getCounter1().peek();
+            } else if (counterNumber == 2) {
+                datacust = (CustomerInformation) bahagiamall.BahagiaMall.getCounter2().peek();
+            } else if (counterNumber == 3) {
+                datacust = (CustomerInformation) bahagiamall.BahagiaMall.getCounter3().peek();
+            }
+            if(datacust == null){
+                JOptionPane.showMessageDialog(null, "No customer queue to pay", "No customer", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
             String custIDPay = datacust.getCustID();
             double totalPayment = 0;
 
