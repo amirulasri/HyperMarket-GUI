@@ -6,27 +6,25 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.TreeMap;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 public class CounterUI extends javax.swing.JFrame {
 
     private String counterNameTitle = "Counter";
-    private String custIDPopupMenu = "";
+    private int counterNumber = 0;
 
     /**
      * Creates new form CounterUI
      */
     public CounterUI(int counterNumber) {
+        this.counterNumber = counterNumber;
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -57,67 +55,6 @@ public class CounterUI extends javax.swing.JFrame {
             displayCustomerToTable(bahagiamall.BahagiaMall.getCounter3());
         }
 
-        //CREATE POPUP MENU AND ACTION CLICK
-        ImageIcon editicon = new ImageIcon("src/images/edit.png");
-        ImageIcon deleteicon = new ImageIcon("src/images/delete.png");
-        ImageIcon cancelicon = new ImageIcon("src/images/cancel.png");
-        JPopupMenu popupCustomer;
-        popupCustomer = new JPopupMenu();
-        JMenuItem editCustMenuItem = new JMenuItem("Edit", editicon);
-        JMenuItem deleteCustMenuItem = new JMenuItem("Delete", deleteicon);
-        popupCustomer.add("custPopupEdit", editCustMenuItem);
-        popupCustomer.add("custPopupDelete", deleteCustMenuItem);
-        popupCustomer.add(new JMenuItem("Cancel", cancelicon));
-
-        //EDIT CUSTOMER HERE
-        Map<String, EditCustUI> editcustInstance = new TreeMap<String, EditCustUI>();
-        editCustMenuItem.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent me) {
-                System.out.println("MENU EDIT CLICKED: " + custIDPopupMenu);
-                EditCustUI getEditCustUI = editcustInstance.get("editcust" + custIDPopupMenu);
-                if (getEditCustUI == null) {
-                    EditCustUI newCustUI = new EditCustUI(counterNumber, custIDPopupMenu);
-                    editcustInstance.put("editcust" + custIDPopupMenu, newCustUI);
-                    newCustUI.setVisible(true);
-                    newCustUI.addWindowListener(new WindowAdapter() {
-                        @Override
-                        public void windowClosed(WindowEvent e) {
-                            if (counterNumber == 1) {
-                                displayCustomerToTable(bahagiamall.BahagiaMall.getCounter1());
-                            } else if (counterNumber == 2) {
-                                displayCustomerToTable(bahagiamall.BahagiaMall.getCounter2());
-                            } else if (counterNumber == 3) {
-                                displayCustomerToTable(bahagiamall.BahagiaMall.getCounter3());
-                            }
-                        }
-
-                    });
-                } else {
-                    getEditCustUI.setVisible(true);
-                }
-            }
-        });
-
-        //DELETE CUSTOMER HERE
-        deleteCustMenuItem.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent me) {
-                System.out.println("MENU DELETE CLICKED: " + custIDPopupMenu);
-                Predicate<CustomerInformation> itemCondition = customers -> customers.getCustID().equalsIgnoreCase(custIDPopupMenu);
-                if (counterNumber == 1) {
-                    bahagiamall.BahagiaMall.getCounter1().removeIf(itemCondition);
-                    displayCustomerToTable(bahagiamall.BahagiaMall.getCounter1());
-                } else if (counterNumber == 2) {
-                    bahagiamall.BahagiaMall.getCounter2().removeIf(itemCondition);
-                    displayCustomerToTable(bahagiamall.BahagiaMall.getCounter2());
-                } else if (counterNumber == 3) {
-                    bahagiamall.BahagiaMall.getCounter3().removeIf(itemCondition);
-                    displayCustomerToTable(bahagiamall.BahagiaMall.getCounter3());
-                }
-            }
-        });
-
         Map<String, ItemUI> itemInstance = new TreeMap<String, ItemUI>();
         customerTable.addMouseListener(new MouseAdapter() {
             @Override
@@ -135,31 +72,18 @@ public class CounterUI extends javax.swing.JFrame {
                         getItemUI.setVisible(true);
                     }
                 }
-                if (me.getButton() == MouseEvent.BUTTON3) {
-                    int tablepoint = customerTable.rowAtPoint(me.getPoint());
-                    if (tablepoint >= 0 && tablepoint < customerTable.getRowCount()) {
-                        customerTable.setRowSelectionInterval(tablepoint, tablepoint);
-                    } else {
-                        customerTable.clearSelection();
-                    }
-                    JTable target = (JTable) me.getSource();
-                    int row = target.getSelectedRow(); // select a row
-                    String getCustIDFromTable = (String) customerTable.getValueAt(row, 0);
-                    custIDPopupMenu = getCustIDFromTable;
-                    popupCustomer.show(me.getComponent(), me.getX(), me.getY());
-                }
             }
         });
     }
 
     ImageIcon logo = new ImageIcon("src/images/mainicon.png");
 
-    private void displayCustomerToTable(LinkedList counter) {
+    private void displayCustomerToTable(Queue counter) {
         String currentCustID = "";
         DefaultTableModel customerTableModel = (DefaultTableModel) customerTable.getModel();
         customerTableModel.setRowCount(0);
         //TO CONVERT, NEED TO FILTER CUSTOMER ONLY AND ADD TO NEW LIST
-        List<CustomerInformation> convertedCustList = (List<CustomerInformation>) counter.stream().filter(counterdatas -> counterdatas.getClass() == CustomerInformation.class).collect(Collectors.toList());
+        List<CustomerInformation> convertedCustList = (List<CustomerInformation>) counter.stream().collect(Collectors.toList());
 
         int custCount = 0;
         for (Iterator iterator = convertedCustList.iterator(); iterator.hasNext();) {
@@ -185,6 +109,7 @@ public class CounterUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         counterlabel = new javax.swing.JLabel();
         countlabelcust = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         customerTable = new javax.swing.JTable();
 
@@ -201,6 +126,13 @@ public class CounterUI extends javax.swing.JFrame {
         countlabelcust.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         countlabelcust.setText("0 Customers");
 
+        jButton1.setText("Pay in order");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -208,16 +140,23 @@ public class CounterUI extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(counterlabel)
-                    .addComponent(countlabelcust))
-                .addContainerGap(706, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(counterlabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(countlabelcust)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(counterlabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(counterlabel)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addComponent(countlabelcust)
                 .addContainerGap())
         );
@@ -245,24 +184,76 @@ public class CounterUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 798, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private PaymentUI paymentui;
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        //PAY PROCESS HERE
+        if (paymentui == null) {
+            //GET WHO FIRST QUEUE OF CUSTOMER
+            CustomerInformation datacust = (CustomerInformation) bahagiamall.BahagiaMall.getCounter1().peek();
+            String custIDPay = datacust.getCustID();
+            double totalPayment = 0;
+
+            List<CustomerInformation> convertedItemList = null;
+            List<CustomerInformation> filteredItemListCust = null;
+            if (counterNumber == 1) {
+                convertedItemList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
+                filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custIDPay)).collect(Collectors.toList());
+            } else if (counterNumber == 2) {
+                convertedItemList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter2().stream().collect(Collectors.toList());
+                filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custIDPay)).collect(Collectors.toList());
+            } else if (counterNumber == 3) {
+                convertedItemList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter3().stream().collect(Collectors.toList());
+                filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custIDPay)).collect(Collectors.toList());
+            }
+
+            int countitem = 0;
+            for (Iterator iterator = filteredItemListCust.iterator(); iterator.hasNext();) {
+                CustomerInformation nextItemData = (CustomerInformation) iterator.next();
+                countitem++;
+                //CALCULATE TOTAL PAYMENT HERE
+                totalPayment = totalPayment + nextItemData.getitemPrice();
+            }
+
+            paymentui = new PaymentUI(custIDPay, totalPayment, counterNumber, countitem);
+            paymentui.setVisible(true);
+            paymentui.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (counterNumber == 1) {
+                    displayCustomerToTable(bahagiamall.BahagiaMall.getCounter1());
+                } else if (counterNumber == 2) {
+                    displayCustomerToTable(bahagiamall.BahagiaMall.getCounter2());
+                } else if (counterNumber == 3) {
+                    displayCustomerToTable(bahagiamall.BahagiaMall.getCounter3());
+                }
+                paymentui = null;
+            }
+
+        });
+        } else {
+            paymentui.setVisible(true);
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel counterlabel;
     private javax.swing.JLabel countlabelcust;
     private javax.swing.JTable customerTable;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

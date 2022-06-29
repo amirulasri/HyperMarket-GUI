@@ -4,6 +4,7 @@ import classes.CustomerInformation;
 import java.text.DecimalFormat;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Queue;
 import javax.swing.ImageIcon;
 
 public class CounterSelectorUI extends javax.swing.JFrame {
@@ -76,7 +77,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         netTotalLabel.setText("Net total: RM " + totalNetFormat);
     }
     
-    private int getCustCount(LinkedList counter){
+    private int getCustCount(Queue counter){
         String currentCustID = "";
         int countID = 0;
         

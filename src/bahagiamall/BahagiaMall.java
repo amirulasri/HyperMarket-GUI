@@ -13,24 +13,26 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import gui.HomeUI;
 import java.util.LinkedList;
+import java.util.Queue;
 
 public class BahagiaMall {
     
     //ALL QUEUE DATA WILL STORED HERE
-    private static LinkedList counter1 = new LinkedList();
-    private static LinkedList counter2 = new LinkedList();
-    private static LinkedList counter3 = new LinkedList(); //WHEN ITEM MORE THAN 5
+    //USING LINKEDLIST IMPLEMENT TO QUEUE
+    private static Queue qcounter1 = new LinkedList();
+    private static Queue qcounter2 = new LinkedList();
+    private static Queue qcounter3 = new LinkedList(); //WHEN ITEM MORE THAN 5
     
-    public static LinkedList getCounter1(){
-        return counter1;
+    public static Queue getCounter1(){
+        return qcounter1;
     }
     
-    public static LinkedList getCounter2(){
-        return counter2;
+    public static Queue getCounter2(){
+        return qcounter2;
     }
     
-    public static LinkedList getCounter3(){
-        return counter3;
+    public static Queue getCounter3(){
+        return qcounter3;
     }
 
     /**

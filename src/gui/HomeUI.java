@@ -323,7 +323,7 @@ public class HomeUI extends javax.swing.JFrame {
                             Double itemPrice = itemdata.getitemPrice();
                             String datePurchased = itemdata.getDatePurchase();
 
-                            bahagiamall.BahagiaMall.getCounter1().addLast(new CustomerInformation(custID, custIC, custName, "counter1", itemID, itemName, itemPrice, datePurchased));
+                            bahagiamall.BahagiaMall.getCounter1().add(new CustomerInformation(custID, custIC, custName, "counter1", itemID, itemName, itemPrice, datePurchased));
                         }
                         counterswitching = 2;
                     } else if (counterswitching == 2) {
@@ -337,7 +337,7 @@ public class HomeUI extends javax.swing.JFrame {
                             Double itemPrice = itemdata.getitemPrice();
                             String datePurchased = itemdata.getDatePurchase();
 
-                            bahagiamall.BahagiaMall.getCounter2().addLast(new CustomerInformation(custID, custIC, custName, "counter2", itemID, itemName, itemPrice, datePurchased));
+                            bahagiamall.BahagiaMall.getCounter2().add(new CustomerInformation(custID, custIC, custName, "counter2", itemID, itemName, itemPrice, datePurchased));
 
                         }
                         counterswitching = 1;
@@ -353,7 +353,7 @@ public class HomeUI extends javax.swing.JFrame {
                         Double itemPrice = itemdata.getitemPrice();
                         String datePurchased = itemdata.getDatePurchase();
 
-                        bahagiamall.BahagiaMall.getCounter3().addLast(new CustomerInformation(custID, custIC, custName, "counter3", itemID, itemName, itemPrice, datePurchased));
+                        bahagiamall.BahagiaMall.getCounter3().add(new CustomerInformation(custID, custIC, custName, "counter3", itemID, itemName, itemPrice, datePurchased));
 
                     }
                 }

@@ -1,5 +1,11 @@
 package gui;
 
+import classes.CustomerInformation;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+import java.util.stream.Collectors;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -12,9 +18,15 @@ public class PaymentUI extends javax.swing.JFrame {
     private String framepaytitle = "";
     private ButtonGroup paymentMethodGroup = new ButtonGroup();
     private double totalPayment = 0;
-    
-    public PaymentUI(String custID, double totalPayment, int counterNumber) {
+    private String custID = "";
+    private int counterNumber = 0;
+    private int countItem = 0;
+
+    public PaymentUI(String custID, double totalPayment, int counterNumber, int countItem) {
         this.totalPayment = totalPayment;
+        this.custID = custID;
+        this.counterNumber = counterNumber;
+        this.countItem = countItem;
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -35,9 +47,10 @@ public class PaymentUI extends javax.swing.JFrame {
         initComponents();
         pack();
         setLocationRelativeTo(null);
-        
+
         paymenttitle.setText("Pay for customer " + custID + " counter " + counterNumber);
-        
+        totalNeedPaylabel.setText("Total: RM " + totalPayment);
+
         paymentMethodGroup.add(cashbgroup);
         paymentMethodGroup.add(debitbgroup);
         paymentMethodGroup.add(creditcardbgroup);
@@ -45,7 +58,7 @@ public class PaymentUI extends javax.swing.JFrame {
         debitbgroup.setActionCommand("debit");
         creditcardbgroup.setActionCommand("credit");
     }
-    
+
     ImageIcon logo = new ImageIcon("src/images/mainicon.png");
 
     /**
@@ -74,7 +87,7 @@ public class PaymentUI extends javax.swing.JFrame {
         totalNeedPaylabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(framepaytitle);
         setIconImage(logo.getImage());
 
@@ -312,14 +325,55 @@ public class PaymentUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please select valid amount", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if(amountpay < totalPayment){
+        if (amountpay < totalPayment) {
             JOptionPane.showMessageDialog(null, "Insufficient amount", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
-        
-        
-        System.out.println("TEST DONE");
+
+        double balance = amountpay - totalPayment;
+
+        //FIND CUSTOMER DATA IN QUEUE
+        List<CustomerInformation> convertedCustList = null;
+        if (counterNumber == 1) {
+            convertedCustList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
+        } else if (counterNumber == 2) {
+            convertedCustList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
+        } else if (counterNumber == 3) {
+            convertedCustList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
+        }
+        String custIC = "";
+        String custName = "";
+        for (Iterator iterator = convertedCustList.iterator(); iterator.hasNext();) {
+            CustomerInformation nextCustomerData = (CustomerInformation) iterator.next();
+            if (nextCustomerData.getCustID().equalsIgnoreCase(custID)) {
+                custIC = nextCustomerData.getCustIC();
+                custName = nextCustomerData.getCustName();
+                break;
+            }
+        }
+
+        //REMOVE CUSTOMER AND ITEM AFTER PAYMENT MADE AND ALSO SAVE LIST ITEM FOR RECEIPT DISPLAY
+        Queue listItem = new LinkedList();
+        for (int i = 0; i < countItem; i++) {
+            if (counterNumber == 1) {
+                CustomerInformation itemCurrent = (CustomerInformation) bahagiamall.BahagiaMall.getCounter1().peek();
+                listItem.add(itemCurrent);
+                bahagiamall.BahagiaMall.getCounter1().remove();
+            } else if (counterNumber == 2) {
+                CustomerInformation itemCurrent = (CustomerInformation) bahagiamall.BahagiaMall.getCounter2().peek();
+                listItem.add(itemCurrent);
+                bahagiamall.BahagiaMall.getCounter2().remove();
+            } else if (counterNumber == 3) {
+                CustomerInformation itemCurrent = (CustomerInformation) bahagiamall.BahagiaMall.getCounter3().peek();
+                listItem.add(itemCurrent);
+                bahagiamall.BahagiaMall.getCounter3().remove();
+            }
+        }
+
+        //DISPLAY RECEIPT HERE
+        ReceiptUI receipt = new ReceiptUI(custID, custIC, custName, paymenttype, totalPayment, amountpay, balance, listItem);
+        receipt.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton1MouseReleased
 
     private void debitbgroupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_debitbgroupMousePressed

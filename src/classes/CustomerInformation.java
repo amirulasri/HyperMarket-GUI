@@ -5,6 +5,7 @@ public class CustomerInformation {
     private String custName;
     private String counterPaid;
     
+    //RELATION WITH ITEMINFORMATION
     private ItemInformation itemInformation;
     
     public CustomerInformation(String custID, String custIC, String custName, String counterPaid, String itemID, String itemName, double itemPrice, String datePurchase){
