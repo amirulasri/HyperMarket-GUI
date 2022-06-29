@@ -1,6 +1,7 @@
 package gui;
 
 import classes.CustomerInformation;
+import classes.PDFReceipt;
 import java.util.Iterator;
 import java.util.Queue;
 import javax.swing.ImageIcon;
@@ -14,17 +15,20 @@ public class ReceiptUI extends javax.swing.JFrame {
     String paymentMethod = "";
     double totalAmount = 0;
     double paidAmount = 0;
-    double balance = 0;
     String framereceipttitle = "";
+    int counterNumber = 0;
+    int countitem = 0;
+    Queue listItem = null;
 
-    public ReceiptUI(String custID, String custIC, String custName, String paymentMethod, double totalAmount, double paidAmount, double balance, Queue listItem) {
+    public ReceiptUI(String custID, String custIC, String custName, String paymentMethod, double totalAmount, double paidAmount, double balance, int counterNumber, Queue listItem) {
         this.custID = custID;
         this.custIC = custIC;
         this.custName = custName;
         this.paymentMethod = paymentMethod;
         this.totalAmount = totalAmount;
         this.paidAmount = paidAmount;
-        this.balance = balance;
+        this.counterNumber = counterNumber;
+        this.listItem = listItem;
         this.framereceipttitle = "Receipt for customer " + custID;
 
         try {
@@ -65,12 +69,15 @@ public class ReceiptUI extends javax.swing.JFrame {
         paidlabel.setText("Paid: RM " + paidAmount);
         balancelabel.setText("Balance: RM " + balance);
 
+        int countitem = 0;
         //DISPLAY ITEM TO TABLE
         DefaultTableModel receiptTableModel = (DefaultTableModel) itemReceiptTable.getModel();
         for (Iterator iterator = listItem.iterator(); iterator.hasNext();) {
+            countitem++;
             CustomerInformation customeritemdata = (CustomerInformation) iterator.next();
             receiptTableModel.addRow(new Object[]{customeritemdata.getItemName(), "RM " + customeritemdata.getitemPrice(), customeritemdata.getDatePurchase()});
         }
+        this.countitem = countitem;
     }
 
     ImageIcon logo = new ImageIcon("src/images/mainicon.png");
@@ -96,6 +103,7 @@ public class ReceiptUI extends javax.swing.JFrame {
         paidlabel = new javax.swing.JLabel();
         balancelabel = new javax.swing.JLabel();
         paymentMethodlabel = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(framereceipttitle);
@@ -157,6 +165,13 @@ public class ReceiptUI extends javax.swing.JFrame {
 
         paymentMethodlabel.setText("Payment Method: -");
 
+        jButton1.setText("Save As PDF");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -165,15 +180,21 @@ public class ReceiptUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(custNamelabel)
-                    .addComponent(custIClabel)
-                    .addComponent(custIDlabel)
-                    .addComponent(totalAmountlabel)
-                    .addComponent(paidlabel)
-                    .addComponent(balancelabel)
-                    .addComponent(paymentMethodlabel))
-                .addContainerGap(455, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(paymentMethodlabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(custNamelabel)
+                            .addComponent(custIClabel)
+                            .addComponent(custIDlabel)
+                            .addComponent(totalAmountlabel)
+                            .addComponent(paidlabel)
+                            .addComponent(balancelabel))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,15 +208,21 @@ public class ReceiptUI extends javax.swing.JFrame {
                 .addComponent(custIDlabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(totalAmountlabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(paidlabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(balancelabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(paymentMethodlabel)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(totalAmountlabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(paidlabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(balancelabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(paymentMethodlabel)
+                        .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -212,6 +239,16 @@ public class ReceiptUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        //SAVE AS PDF
+        try {
+            new PDFReceipt(custName, custID, custIC, totalAmount, paidAmount, countitem, counterNumber, listItem, paymentMethod);
+        } catch (Exception e) {
+            System.out.println("ERROR: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel balancelabel;
@@ -219,6 +256,7 @@ public class ReceiptUI extends javax.swing.JFrame {
     private javax.swing.JLabel custIDlabel;
     private javax.swing.JLabel custNamelabel;
     private javax.swing.JTable itemReceiptTable;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;

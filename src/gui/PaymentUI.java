@@ -337,9 +337,9 @@ public class PaymentUI extends javax.swing.JFrame {
         if (counterNumber == 1) {
             convertedCustList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
         } else if (counterNumber == 2) {
-            convertedCustList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
+            convertedCustList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter2().stream().collect(Collectors.toList());
         } else if (counterNumber == 3) {
-            convertedCustList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
+            convertedCustList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter3().stream().collect(Collectors.toList());
         }
         String custIC = "";
         String custName = "";
@@ -371,7 +371,7 @@ public class PaymentUI extends javax.swing.JFrame {
         }
 
         //DISPLAY RECEIPT HERE
-        ReceiptUI receipt = new ReceiptUI(custID, custIC, custName, paymenttype, totalPayment, amountpay, balance, listItem);
+        ReceiptUI receipt = new ReceiptUI(custID, custIC, custName, paymenttype, totalPayment, amountpay, balance, counterNumber, listItem);
         receipt.setVisible(true);
         dispose();
     }//GEN-LAST:event_jButton1MouseReleased
