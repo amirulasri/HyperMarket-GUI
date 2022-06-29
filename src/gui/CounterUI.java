@@ -280,6 +280,13 @@ public class CounterUI extends javax.swing.JFrame {
                 @Override
                 public void windowClosed(WindowEvent e) {
                     bahagiamall.BahagiaMall.setCustomerAddUINull();
+                    if (counterNumber == 1) {
+                        displayCustomerToTable(bahagiamall.BahagiaMall.getCounter1());
+                    } else if (counterNumber == 2) {
+                        displayCustomerToTable(bahagiamall.BahagiaMall.getCounter2());
+                    } else if (counterNumber == 3) {
+                        displayCustomerToTable(bahagiamall.BahagiaMall.getCounter3());
+                    }
                 }
             });
             bahagiamall.BahagiaMall.getAddCustUI().setVisible(true);

@@ -42,9 +42,11 @@ public class AddCustomerUI extends javax.swing.JFrame {
                 String ObjButtons[] = {"Yes", "No"};
                 int PromptResult = JOptionPane.showOptionDialog(null, "Are you sure to close this window? You will not be able to manage this customer items?", "Alert item manage!", JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, ObjButtons, ObjButtons[1]);
                 if (PromptResult == JOptionPane.YES_OPTION) {
+                    if (itemuiwithaddbutton != null) {
+                        itemuiwithaddbutton.dispose();
+                    }
                     dispose();
                 }
-                return;
             }
         });
     }
@@ -237,30 +239,39 @@ public class AddCustomerUI extends javax.swing.JFrame {
 
         jButton1.setEnabled(false);
 
-        if(custID.isEmpty()){
+        if (custID.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Customer ID is empty", "Error Customer Data", JOptionPane.ERROR_MESSAGE);
             jButton1.setEnabled(true);
             return;
         }
-        
-        if(custName.isEmpty()){
+
+        if (custName.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Customer name is empty", "Error Customer Data", JOptionPane.ERROR_MESSAGE);
             jButton1.setEnabled(true);
             return;
         }
-        
-        if(custIC.isEmpty()){
+
+        if (custIC.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Customer IC is empty", "Error Customer Data", JOptionPane.ERROR_MESSAGE);
             jButton1.setEnabled(true);
             return;
         }
-        
-        if(itemID.isEmpty()){
-            JOptionPane.showMessageDialog(null, "Item ID is empty", "Error Customer Data", JOptionPane.ERROR_MESSAGE);
-            jButton1.setEnabled(true);
+
+        if (itemID.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Item ID is empty.", "Error Item ID", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        
+
+        if (itemName.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Item Name is empty.", "Error Item Name", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (datepurchased.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Item date purchased is empty.", "Error Item date purchased", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         //CHECK IF CUST ID EXISTS
         List<CustomerInformation> convertedItemList1 = null;
         List<CustomerInformation> filteredItemListCust1 = null;
@@ -277,7 +288,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
 
         convertedItemList3 = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter3().stream().collect(Collectors.toList());
         filteredItemListCust3 = convertedItemList3.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
-        
+
         for (Iterator<CustomerInformation> iterator = filteredItemListCust1.iterator(); iterator.hasNext();) {
             CustomerInformation customerData = iterator.next();
             if (customerData.getCustID().equalsIgnoreCase(custID)) {
@@ -285,7 +296,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
                 jButton1.setEnabled(true);
                 return;
             }
-            
+
             //USE LATER ON ADD ITEM
             if (customerData.getCustID().equalsIgnoreCase(custID) && customerData.getItemID().equalsIgnoreCase(itemID)) {
                 JOptionPane.showMessageDialog(null, "Item ID you entered exists. ID must be different.", "Error Item ID", JOptionPane.ERROR_MESSAGE);
@@ -293,7 +304,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
                 return;
             }
         }
-        
+
         for (Iterator<CustomerInformation> iterator = filteredItemListCust2.iterator(); iterator.hasNext();) {
             CustomerInformation customerData = iterator.next();
             if (customerData.getCustID().equalsIgnoreCase(custID)) {
@@ -301,7 +312,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
                 jButton1.setEnabled(true);
                 return;
             }
-            
+
             //USE LATER ON ADD ITEM
             if (customerData.getCustID().equalsIgnoreCase(custID) && customerData.getItemID().equalsIgnoreCase(itemID)) {
                 JOptionPane.showMessageDialog(null, "Item ID you entered exists. ID must be different.", "Error Item ID", JOptionPane.ERROR_MESSAGE);
@@ -309,7 +320,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
                 return;
             }
         }
-        
+
         for (Iterator<CustomerInformation> iterator = filteredItemListCust3.iterator(); iterator.hasNext();) {
             CustomerInformation customerData = iterator.next();
             if (customerData.getCustID().equalsIgnoreCase(custID)) {
@@ -317,7 +328,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
                 jButton1.setEnabled(true);
                 return;
             }
-            
+
             //USE LATER ON ADD ITEM
             if (customerData.getCustID().equalsIgnoreCase(custID) && customerData.getItemID().equalsIgnoreCase(itemID)) {
                 JOptionPane.showMessageDialog(null, "Item ID you entered exists. ID must be different.", "Error Item ID", JOptionPane.ERROR_MESSAGE);
@@ -325,7 +336,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
                 return;
             }
         }
-        
+
         double itemPrice = 0;
         try {
             itemPrice = Double.parseDouble(additempricefield.getText());
@@ -334,17 +345,31 @@ public class AddCustomerUI extends javax.swing.JFrame {
             jButton1.setEnabled(true);
             return;
         }
-        
+
         if (counterNumber == 1) {
             bahagiamall.BahagiaMall.getCounter1().add(new CustomerInformation(custID, custIC, custName, "counter1", itemID, itemName, itemPrice, datepurchased));
             if (itemuiwithaddbutton == null) {
                 itemuiwithaddbutton = new ItemUI(custID, counterNumber, "editable");
                 itemuiwithaddbutton.setVisible(true);
+            } else {
+                itemuiwithaddbutton.setVisible(true);
             }
         } else if (counterNumber == 2) {
             bahagiamall.BahagiaMall.getCounter2().add(new CustomerInformation(custID, custIC, custName, "counter2", itemID, itemName, itemPrice, datepurchased));
+            if (itemuiwithaddbutton == null) {
+                itemuiwithaddbutton = new ItemUI(custID, counterNumber, "editable");
+                itemuiwithaddbutton.setVisible(true);
+            } else {
+                itemuiwithaddbutton.setVisible(true);
+            }
         } else if (counterNumber == 3) {
             bahagiamall.BahagiaMall.getCounter3().add(new CustomerInformation(custID, custIC, custName, "counter3", itemID, itemName, itemPrice, datepurchased));
+            if (itemuiwithaddbutton == null) {
+                itemuiwithaddbutton = new ItemUI(custID, counterNumber, "editable");
+                itemuiwithaddbutton.setVisible(true);
+            } else {
+                itemuiwithaddbutton.setVisible(true);
+            }
         }
     }//GEN-LAST:event_jButton1MouseClicked
 

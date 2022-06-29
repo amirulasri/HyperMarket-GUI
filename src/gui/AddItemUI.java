@@ -1,11 +1,22 @@
 package gui;
 
+import classes.CustomerInformation;
+import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
+
 public class AddItemUI extends javax.swing.JFrame {
 
     /**
      * Creates new form AddItemUI
      */
+    private int counterNumber = 0;
+    private String custID = "";
+
     public AddItemUI(int counterNumber, String custID) {
+        this.custID = custID;
+        this.counterNumber = counterNumber;
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Windows".equals(info.getName())) {
@@ -43,10 +54,10 @@ public class AddItemUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        datepurchasedfield = new javax.swing.JTextField();
+        itempricefield = new javax.swing.JTextField();
+        itemnamefield = new javax.swing.JTextField();
+        itemidfield = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -84,6 +95,11 @@ public class AddItemUI extends javax.swing.JFrame {
         jLabel4.setText("Date purchased:");
 
         jButton1.setText("Add");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,10 +115,10 @@ public class AddItemUI extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
+                    .addComponent(datepurchasedfield)
+                    .addComponent(itempricefield)
+                    .addComponent(itemnamefield)
+                    .addComponent(itemidfield, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -116,19 +132,19 @@ public class AddItemUI extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(itemidfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(itemnamefield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(itempricefield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(datepurchasedfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
@@ -137,19 +153,100 @@ public class AddItemUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        //ADD NEW ITEM TO LIST WITH CUSTOMER DATA
+        String itemID = itemidfield.getText();
+        String itemName = itemnamefield.getText();
+        double itemPrice = 0;
+        try {
+            itemPrice = Double.parseDouble(itempricefield.getText());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Invalid item price", "Error Item Price", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String datePurchased = datepurchasedfield.getText();
+        
+        //CHECK IF ALL FULFILL
+        if(itemID.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Item ID is empty.", "Error Item ID", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(itemName.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Item Name is empty.", "Error Item Name", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if(datePurchased.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Item date purchased is empty.", "Error Item date purchased", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        List<CustomerInformation> convertedItemList = null;
+        List<CustomerInformation> filteredItemListCust = null;
+        if (counterNumber == 1) {
+            convertedItemList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
+            filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
+        } else if (counterNumber == 2) {
+            convertedItemList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter2().stream().collect(Collectors.toList());
+            filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
+        } else if (counterNumber == 3) {
+            convertedItemList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter3().stream().collect(Collectors.toList());
+            filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
+        }
+
+        for (Iterator iterator = filteredItemListCust.iterator(); iterator.hasNext();) {
+            CustomerInformation nextItemData = (CustomerInformation) iterator.next();
+            //USE LATER ON ADD ITEM
+            if (nextItemData.getCustID().equalsIgnoreCase(custID) && nextItemData.getItemID().equalsIgnoreCase(itemID)) {
+                JOptionPane.showMessageDialog(null, "Item ID you entered exists. ID must be different.", "Error Item ID", JOptionPane.ERROR_MESSAGE);
+                jButton1.setEnabled(true);
+                return;
+            }
+        }
+        
+        //FIND CUSTOMER DATA IN QUEUE
+        List<CustomerInformation> convertedCustList = null;
+        if (counterNumber == 1) {
+            convertedCustList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
+        } else if (counterNumber == 2) {
+            convertedCustList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
+        } else if (counterNumber == 3) {
+            convertedCustList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
+        }
+        String custIC = "";
+        String custName = "";
+        for (Iterator iterator = convertedCustList.iterator(); iterator.hasNext();) {
+            CustomerInformation nextCustomerData = (CustomerInformation) iterator.next();
+            if (nextCustomerData.getCustID().equalsIgnoreCase(custID)) {
+                custIC = nextCustomerData.getCustIC();
+                custName = nextCustomerData.getCustName();
+                break;
+            }
+        }
+        
+        if (counterNumber == 1) {
+            bahagiamall.BahagiaMall.getCounter1().add(new CustomerInformation(custID, custIC, custName, "counter1", itemID, itemName, itemPrice, datePurchased));
+        } else if (counterNumber == 2) {
+            bahagiamall.BahagiaMall.getCounter2().add(new CustomerInformation(custID, custIC, custName, "counter2", itemID, itemName, itemPrice, datePurchased));
+        } else if (counterNumber == 3) {
+            bahagiamall.BahagiaMall.getCounter3().add(new CustomerInformation(custID, custIC, custName, "counter3", itemID, itemName, itemPrice, datePurchased));
+        }
+        
+        dispose();
+    }//GEN-LAST:event_jButton1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addtitleitemlabel;
+    private javax.swing.JTextField datepurchasedfield;
+    private javax.swing.JTextField itemidfield;
+    private javax.swing.JTextField itemnamefield;
+    private javax.swing.JTextField itempricefield;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     // End of variables declaration//GEN-END:variables
 
 }

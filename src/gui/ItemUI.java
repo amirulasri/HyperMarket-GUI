@@ -1,10 +1,13 @@
 package gui;
 
 import classes.CustomerInformation;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class ItemUI extends javax.swing.JFrame {
@@ -42,9 +45,9 @@ public class ItemUI extends javax.swing.JFrame {
         frameItemTitle = "Items for customer " + custID;
         initComponents();
         itemtitlelabel.setText("List Item for customer " + custID);
-        if(editable.equals("editable")){
+        if (editable.equals("editable")) {
             additembutton.setVisible(true);
-        }else{
+        } else {
             additembutton.setVisible(false);
         }
         pack();
@@ -111,6 +114,11 @@ public class ItemUI extends javax.swing.JFrame {
         countlabelitem.setText("0 Items");
 
         additembutton.setText("Add item");
+        additembutton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                additembuttonMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -175,6 +183,24 @@ public class ItemUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void additembuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_additembuttonMouseClicked
+        //ADD ITEM HERE
+        if (bahagiamall.BahagiaMall.getAddItemUI() == null) {
+            bahagiamall.BahagiaMall.createItemAddUIInstance(counterNumber, custID);
+            bahagiamall.BahagiaMall.getAddItemUI().setVisible(true);
+            bahagiamall.BahagiaMall.getAddItemUI().addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    bahagiamall.BahagiaMall.setItemAddUINull();
+                    displayItemToTable();
+                }
+            });
+        } else {
+            bahagiamall.BahagiaMall.getAddItemUI().setVisible(true);
+            JOptionPane.showMessageDialog(null, "There are customers who have not finished managing items. Please finish first and try again", "Error Customer Queue", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_additembuttonMouseClicked
 
     private PaymentUI paymentui;
 
