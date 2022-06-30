@@ -386,13 +386,19 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="totalAllCustLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="netTotalLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton5" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="totalAllCustLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="netTotalLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="0" pref="137" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="143" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -403,6 +409,8 @@
                   <Component id="totalAllCustLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="netTotalLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="jButton5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -424,6 +432,14 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Net total: RM 0"/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton5">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Create Report"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton5MouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

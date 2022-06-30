@@ -17,7 +17,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import classes.*;
 
 import java.util.List;
-import java.util.LinkedList;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -46,7 +45,6 @@ public class HomeUI extends javax.swing.JFrame {
         initComponents();
         pack();
         setLocationRelativeTo(null);
-        setVisible(true);
     }
 
     /**
@@ -91,7 +89,8 @@ public class HomeUI extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jLabel1.setText("Bahagia Mall");
 
-        jLabel2.setText("Home");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Founded by Nurul Ain - Collaboration with Nurin Ainul, Amymelinda, Putra, Amirul Asri");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

@@ -1,18 +1,18 @@
 package gui;
 
 import classes.CustomerInformation;
+import classes.ExcelCounterCust;
 import java.text.DecimalFormat;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.Queue;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class CounterSelectorUI extends javax.swing.JFrame {
 
     /**
      * Creates new form CounterSelectorUI
      */
-
     ImageIcon logo = new ImageIcon("src/images/mainicon.png");
     private DecimalFormat priceformatter = new DecimalFormat("0.00");
 
@@ -45,50 +45,50 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         countlabel1.setText(getCustCount(bahagiamall.BahagiaMall.getCounter1()) + " Customers");
         countlabel2.setText(getCustCount(bahagiamall.BahagiaMall.getCounter2()) + " Customers");
         countlabel3.setText(getCustCount(bahagiamall.BahagiaMall.getCounter3()) + " Customers");
-        
+
         int totalAllCustomer = getCustCount(bahagiamall.BahagiaMall.getCounter1()) + getCustCount(bahagiamall.BahagiaMall.getCounter2()) + getCustCount(bahagiamall.BahagiaMall.getCounter3());
         totalAllCustLabel.setText("Total customer: " + totalAllCustomer);
     }
-    
-    private void totalNet(){
+
+    private void totalNet() {
         //CALCULATE AND ADD TO TOTAL
         double totalcounter1 = 0;
         double totalcounter2 = 0;
         double totalcounter3 = 0;
-        
+
         for (Iterator<CustomerInformation> iterator = bahagiamall.BahagiaMall.getCounter1().iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
             totalcounter1 = totalcounter1 + nextItem.getitemPrice();
         }
-        
+
         for (Iterator<CustomerInformation> iterator = bahagiamall.BahagiaMall.getCounter2().iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
             totalcounter2 = totalcounter2 + nextItem.getitemPrice();
         }
-        
+
         for (Iterator<CustomerInformation> iterator = bahagiamall.BahagiaMall.getCounter3().iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
             totalcounter3 = totalcounter3 + nextItem.getitemPrice();
         }
-        
+
         double totalNet = totalcounter1 + totalcounter2 + totalcounter3;
         String totalNetFormat = priceformatter.format(totalNet);
-        
+
         netTotalLabel.setText("Net total: RM " + totalNetFormat);
     }
-    
-    private int getCustCount(Queue counter){
+
+    private int getCustCount(Queue counter) {
         String currentCustID = "";
         int countID = 0;
-        
+
         for (Iterator iterator = counter.iterator(); iterator.hasNext();) {
-            CustomerInformation custNextData = (CustomerInformation)iterator.next();
-            if(!custNextData.getCustID().equalsIgnoreCase(currentCustID)){
+            CustomerInformation custNextData = (CustomerInformation) iterator.next();
+            if (!custNextData.getCustID().equalsIgnoreCase(currentCustID)) {
                 countID++;
                 currentCustID = custNextData.getCustID();
             }
         }
-        
+
         return countID;
     }
 
@@ -121,6 +121,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         totalAllCustLabel = new javax.swing.JLabel();
         netTotalLabel = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Counter Selector");
@@ -320,6 +321,13 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         netTotalLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         netTotalLabel.setText("Net total: RM 0");
 
+        jButton5.setText("Create Report");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -327,9 +335,13 @@ public class CounterSelectorUI extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(totalAllCustLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(netTotalLabel))
-                .addContainerGap(143, Short.MAX_VALUE))
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(totalAllCustLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(netTotalLabel))
+                        .addGap(0, 137, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,6 +350,8 @@ public class CounterSelectorUI extends javax.swing.JFrame {
                 .addComponent(totalAllCustLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(netTotalLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -378,12 +392,12 @@ public class CounterSelectorUI extends javax.swing.JFrame {
     CounterUI counterUI1;
     CounterUI counterUI2;
     CounterUI counterUI3;
-    
+
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
         //OPEN FOR COUNTER 1
-        if(counterUI1 != null){
+        if (counterUI1 != null) {
             counterUI1.setVisible(true);
-        }else{
+        } else {
             counterUI1 = new CounterUI(1);
             counterUI1.setVisible(true);
         }
@@ -391,9 +405,9 @@ public class CounterSelectorUI extends javax.swing.JFrame {
 
     private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
         //OPEN FOR COUNTER 2
-        if(counterUI2 != null){
+        if (counterUI2 != null) {
             counterUI2.setVisible(true);
-        }else{
+        } else {
             counterUI2 = new CounterUI(2);
             counterUI2.setVisible(true);
         }
@@ -401,9 +415,9 @@ public class CounterSelectorUI extends javax.swing.JFrame {
 
     private void jButton3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseReleased
         //OPEN FOR COUNTER 3
-        if(counterUI3 != null){
+        if (counterUI3 != null) {
             counterUI3.setVisible(true);
-        }else{
+        } else {
             counterUI3 = new CounterUI(3);
             counterUI3.setVisible(true);
         }
@@ -415,6 +429,42 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         totalNet();
     }//GEN-LAST:event_jButton4MouseClicked
 
+    //THIS QUEUE/LIST ONLY FOR EXCEL REPORTING
+    Queue excelCounter1 = bahagiamall.BahagiaMall.getCounter1();
+    Queue excelCounter2 = bahagiamall.BahagiaMall.getCounter2();
+    Queue excelCounter3 = bahagiamall.BahagiaMall.getCounter3();
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        Object[] options = {"Only unpaid customer",
+            "Only paid customer",
+            "All customer"};
+        int buttonChoose = JOptionPane.showOptionDialog(null,//parent container of JOptionPane
+                "There are 3 option you can choose to create excel report",
+                "Choose report option",
+                JOptionPane.YES_NO_CANCEL_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,//do not use a custom Icon
+                options,//the titles of buttons
+                options[2]);//default button title
+        
+        if(buttonChoose == 0){
+            
+        }else if(buttonChoose == 1){
+            try {
+                //CREATE EXCEL FILE HERE
+                new ExcelCounterCust(bahagiamall.BahagiaMall.getCounter1(), bahagiamall.BahagiaMall.getCounter2(), bahagiamall.BahagiaMall.getCounter3());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error to save file: " + ex.getMessage(), "Error create excel", HEIGHT);
+            }
+        }else if(buttonChoose == 2){
+            try {
+                //CREATE EXCEL FILE HERE
+                new ExcelCounterCust(excelCounter1, excelCounter2, excelCounter3);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error to save file: " + ex.getMessage(), "Error create excel", HEIGHT);
+            }
+        }
+    }//GEN-LAST:event_jButton5MouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel countlabel1;
     private javax.swing.JLabel countlabel2;
@@ -423,6 +473,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
