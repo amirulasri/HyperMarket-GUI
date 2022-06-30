@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.text.DecimalFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.Queue;
 import javax.swing.ImageIcon;
@@ -36,6 +38,8 @@ public class ExcelCounterCust {
 
     public ExcelCounterCust(Queue counter1, Queue counter2, Queue counter3) throws FileNotFoundException, Exception {
         DecimalFormat priceformatter = new DecimalFormat("#0.00");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss");
+        LocalDateTime datetimenow = LocalDateTime.now();
 
         // workbook object
         XSSFWorkbook workbook = new XSSFWorkbook();
@@ -63,8 +67,7 @@ public class ExcelCounterCust {
         stylecellitemlist.setBorderLeft(BorderStyle.MEDIUM);
         stylecellitemlist.setFillForegroundColor(coloritemlist);
 
-        //CREATE STYLING FOR BAHAGIA MALL TITLE
-        // CREATE STYLING FOR ROW ITEMS LIST
+        // CREATE STYLING FOR BAHAGIA MALL TITLE
         XSSFColor colortitle = new XSSFColor(new Color(179, 255, 252), null);
         XSSFCellStyle stylecelltitle = workbook.createCellStyle();
         stylecelltitle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
@@ -72,7 +75,25 @@ public class ExcelCounterCust {
         Font fonttitle = workbook.createFont();
         fonttitle.setFontHeightInPoints((short) 20);
         stylecelltitle.setFont(fonttitle);
-        
+
+        // CREATE STYLING FOR REPORT PART
+        XSSFColor colorreport = new XSSFColor(new Color(238, 255, 153), null);
+        XSSFCellStyle stylecellreport = workbook.createCellStyle();
+        stylecellreport.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        stylecellreport.setFillForegroundColor(colorreport);
+        Font fontreport = workbook.createFont();
+        fontreport.setFontHeightInPoints((short) 15);
+        stylecellreport.setFont(fontreport);
+
+        // CREATE STYLING FOR HEADER REPORT
+        XSSFColor colorheaderreport = new XSSFColor(new Color(150, 255, 253), null);
+        XSSFCellStyle stylecellheaderreport = workbook.createCellStyle();
+        stylecellheaderreport.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        stylecellheaderreport.setFillForegroundColor(colorheaderreport);
+        Font fontheaderreport = workbook.createFont();
+        fontheaderreport.setFontHeightInPoints((short) 18);
+        stylecellheaderreport.setFont(fontheaderreport);
+
         //ADD LOGO
         //FileInputStream obtains input bytes from the image file
         InputStream inputStream = new FileInputStream("src/images/mainicon.png");
@@ -83,7 +104,7 @@ public class ExcelCounterCust {
         Drawing drawing;
         ClientAnchor anchor;
         Picture bahagiamalllogo;
-        
+
         //CREATE FOR COUNTER 1
         spreadsheet = workbook.createSheet("Counter 1");
         spreadsheet.setColumnWidth(1, 8000);
@@ -91,7 +112,7 @@ public class ExcelCounterCust {
         spreadsheet.setColumnWidth(3, 5000);
         // creating a row object
         XSSFRow row;
-        
+
         //Creates the top-level drawing patriarch.
         drawing = spreadsheet.createDrawingPatriarch();
 
@@ -116,7 +137,7 @@ public class ExcelCounterCust {
         cell = row.createCell(1);
         cell.setCellValue("              Bahagia Mall - Counter 1");
         cell.setCellStyle(stylecelltitle);
-        
+
         String currentCustID = "";
         //CREATE DATA IN EXCEL SHEET 1 - COUNTER 1
         for (Iterator<CustomerInformation> iterator = counter1.iterator(); iterator.hasNext();) {
@@ -182,7 +203,7 @@ public class ExcelCounterCust {
         spreadsheet.setColumnWidth(1, 8000);
         spreadsheet.setColumnWidth(2, 4000);
         spreadsheet.setColumnWidth(3, 5000);
-        
+
         //Creates the top-level drawing patriarch.
         drawing = spreadsheet.createDrawingPatriarch();
 
@@ -198,14 +219,14 @@ public class ExcelCounterCust {
         //Creates a picture
         bahagiamalllogo = drawing.createPicture(anchor, pictureIdx);
         bahagiamalllogo.resize(0.32, 2);
-        
+
         rowid = 5;
         spreadsheet.addMergedRegion(new CellRangeAddress(3, 3, 1, 4));//MERGE CELL
         row = spreadsheet.createRow(3);
         cell = row.createCell(1);
         cell.setCellValue("              Bahagia Mall - Counter 2");
         cell.setCellStyle(stylecelltitle);
-        
+
         //CREATE DATA IN EXCEL SHEET 2 - COUNTER 2
         for (Iterator<CustomerInformation> iterator = counter2.iterator(); iterator.hasNext();) {
             int cellid = 0;
@@ -270,7 +291,7 @@ public class ExcelCounterCust {
         spreadsheet.setColumnWidth(1, 8000);
         spreadsheet.setColumnWidth(2, 4000);
         spreadsheet.setColumnWidth(3, 5000);
-        
+
         //Creates the top-level drawing patriarch.
         drawing = spreadsheet.createDrawingPatriarch();
 
@@ -352,9 +373,7 @@ public class ExcelCounterCust {
             cell.setCellValue(nextCustomerData.getDatePurchase());
             cell.setCellStyle(stylecellitemlist);
         }
-        
-        
-        
+
         //CREATE REPORTING
         spreadsheet = workbook.createSheet("Report");
         //Creates the top-level drawing patriarch.
@@ -377,12 +396,12 @@ public class ExcelCounterCust {
         spreadsheet.addMergedRegion(new CellRangeAddress(3, 3, 1, 7));//MERGE CELL
         row = spreadsheet.createRow(3);
         cell = row.createCell(1);
-        cell.setCellValue("              Bahagia Mall - Counter 3");
+        cell.setCellValue("              Bahagia Mall - Report");
         cell.setCellStyle(stylecelltitle);
-        
+
         //CALCULATE NUMBER OF CUSTOMER
         int totalAllCustomer = getCustCount(bahagiamall.BahagiaMall.getCounter1()) + getCustCount(bahagiamall.BahagiaMall.getCounter2()) + getCustCount(bahagiamall.BahagiaMall.getCounter3());
-        
+
         //CALCULATE NET TOTAL
         double totalcounter1 = 0;
         double totalcounter2 = 0;
@@ -401,21 +420,29 @@ public class ExcelCounterCust {
         }
         double totalNet = totalcounter1 + totalcounter2 + totalcounter3;
         String totalNetFormat = priceformatter.format(totalNet);
-        
+
         //CALCULATE EACH COUNTER NET TOTAL
-        
         row = spreadsheet.createRow(8);
+        spreadsheet.addMergedRegion(new CellRangeAddress(8, 8, 1, 6));//MERGE CELL
         cell = row.createCell(1);
         cell.setCellValue("Total customer from all counter");
+        cell.setCellStyle(stylecellheaderreport);
         row = spreadsheet.createRow(9);
+        spreadsheet.addMergedRegion(new CellRangeAddress(9, 9, 1, 6));//MERGE CELL
         cell = row.createCell(1);
-        cell.setCellValue(totalAllCustomer);
-        
-        cell = row.createCell(6);
+        cell.setCellValue(String.valueOf(totalAllCustomer) + " Customers");
+        cell.setCellStyle(stylecellreport);
+
+        row = spreadsheet.createRow(12);
+        spreadsheet.addMergedRegion(new CellRangeAddress(12, 12, 1, 6));//MERGE CELL
+        cell = row.createCell(1);
         cell.setCellValue("Net total from all counter");
-        row = spreadsheet.createRow(9);
-        cell = row.createCell(6);
+        cell.setCellStyle(stylecellheaderreport);
+        row = spreadsheet.createRow(13);
+        spreadsheet.addMergedRegion(new CellRangeAddress(13, 13, 1, 6));//MERGE CELL
+        cell = row.createCell(1);
         cell.setCellValue("RM " + totalNetFormat);
+        cell.setCellStyle(stylecellreport);
 
         JFrame saveframe = new JFrame();
         saveframe.setIconImage(new ImageIcon(PDFReceipt.class.getResource("/images/mainicon.png")).getImage());
@@ -455,7 +482,7 @@ public class ExcelCounterCust {
             }
         };
         fileChooser.setDialogTitle("Save Report Excel file");
-        fileChooser.setSelectedFile(new File("Counter Bahagia Mall Report DATETIME"));
+        fileChooser.setSelectedFile(new File("Counter Bahagia Mall Report " + dtf.format(datetimenow)));
         fileChooser.setFileFilter(new FileNameExtensionFilter("xlsx file", "xlsx"));
         int userSelection = fileChooser.showSaveDialog(saveframe);
         if (userSelection == JFileChooser.APPROVE_OPTION) {
@@ -471,7 +498,7 @@ public class ExcelCounterCust {
             }
         }
     }
-    
+
     private int getCustCount(Queue counter) {
         String currentCustID = "";
         int countID = 0;

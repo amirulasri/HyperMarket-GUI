@@ -96,6 +96,7 @@ public class PaymentUI extends javax.swing.JFrame {
 
         paymenttitle.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         paymenttitle.setForeground(new java.awt.Color(51, 51, 51));
+        paymenttitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/payment-method.png"))); // NOI18N
         paymenttitle.setText("Pay for customer - counter -");
 
         countlabelcust.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -226,6 +227,7 @@ public class PaymentUI extends javax.swing.JFrame {
         );
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png"))); // NOI18N
         jButton1.setText("Pay");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {

@@ -89,6 +89,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         addtitlecustlabel.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        addtitlecustlabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add-cust.png"))); // NOI18N
         addtitlecustlabel.setText("Add new customer to queue counter -");
 
         label.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -110,9 +111,9 @@ public class AddCustomerUI extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(addtitlecustlabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(label)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel1.setText("Customer name:");
@@ -135,6 +136,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
 
         jLabel7.setText("Date of purchased:");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/gear.png"))); // NOI18N
         jButton1.setText("Manage item list");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

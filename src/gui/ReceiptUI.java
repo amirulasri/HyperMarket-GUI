@@ -125,6 +125,7 @@ public class ReceiptUI extends javax.swing.JFrame {
 
         paymenttitle.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         paymenttitle.setForeground(new java.awt.Color(51, 51, 51));
+        paymenttitle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/bill.png"))); // NOI18N
         paymenttitle.setText("Receipt - Customer --");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -165,6 +166,7 @@ public class ReceiptUI extends javax.swing.JFrame {
 
         paymentMethodlabel.setText("Payment Method: -");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pdf.png"))); // NOI18N
         jButton1.setText("Save As PDF");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -218,7 +220,7 @@ public class ReceiptUI extends javax.swing.JFrame {
                         .addComponent(balancelabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(paymentMethodlabel)
-                        .addContainerGap(20, Short.MAX_VALUE))
+                        .addContainerGap(12, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1)

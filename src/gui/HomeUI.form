@@ -96,6 +96,9 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="sansserif" size="24" style="0"/>
             </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/mainuiicon.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Bahagia Mall"/>
           </Properties>
         </Component>

@@ -131,10 +131,12 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/choice.png"))); // NOI18N
         jLabel1.setText("Counter Selector");
 
         jLabel2.setText("1 - 3 Counter Available");
 
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
         jButton4.setText("Refresh");
         jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -321,6 +323,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         netTotalLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         netTotalLabel.setText("Net total: RM 0");
 
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excel.png"))); // NOI18N
         jButton5.setText("Create Report");
         jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -434,9 +437,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
     Queue excelCounter2 = bahagiamall.BahagiaMall.getCounter2();
     Queue excelCounter3 = bahagiamall.BahagiaMall.getCounter3();
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        Object[] options = {"Only unpaid customer",
-            "Only paid customer",
-            "All customer"};
+        Object[] options = {"Only unpaid customer", "All customer"};
         int buttonChoose = JOptionPane.showOptionDialog(null,//parent container of JOptionPane
                 "There are 3 option you can choose to create excel report",
                 "Choose report option",
@@ -444,20 +445,18 @@ public class CounterSelectorUI extends javax.swing.JFrame {
                 JOptionPane.QUESTION_MESSAGE,
                 null,//do not use a custom Icon
                 options,//the titles of buttons
-                options[2]);//default button title
+                options[1]);//default button title
         
         if(buttonChoose == 0){
-            
-        }else if(buttonChoose == 1){
             try {
-                //CREATE EXCEL FILE HERE
+                //CREATE EXCEL FILE HERE - UNPAID
                 new ExcelCounterCust(bahagiamall.BahagiaMall.getCounter1(), bahagiamall.BahagiaMall.getCounter2(), bahagiamall.BahagiaMall.getCounter3());
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Error to save file: " + ex.getMessage(), "Error create excel", HEIGHT);
             }
-        }else if(buttonChoose == 2){
+        }else if(buttonChoose == 1){
             try {
-                //CREATE EXCEL FILE HERE
+                //CREATE EXCEL FILE HERE - ALL CUSTOMERS
                 new ExcelCounterCust(excelCounter1, excelCounter2, excelCounter3);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Error to save file: " + ex.getMessage(), "Error create excel", HEIGHT);

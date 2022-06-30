@@ -108,11 +108,13 @@ public class ItemUI extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         itemtitlelabel.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        itemtitlelabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/products.png"))); // NOI18N
         itemtitlelabel.setText("List Item for customer -");
 
         countlabelitem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         countlabelitem.setText("0 Items");
 
+        additembutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/plus.png"))); // NOI18N
         additembutton.setText("Add item");
         additembutton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

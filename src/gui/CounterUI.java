@@ -124,11 +124,13 @@ public class CounterUI extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         counterlabel.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        counterlabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/counter.png"))); // NOI18N
         counterlabel.setText("Counter 0");
 
         countlabelcust.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         countlabelcust.setText("0 Customers");
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png"))); // NOI18N
         jButton1.setText("Pay in order");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -159,7 +161,7 @@ public class CounterUI extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(counterlabel)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(countlabelcust)
                 .addContainerGap())
         );

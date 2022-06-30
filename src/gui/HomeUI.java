@@ -57,7 +57,7 @@ public class HomeUI extends javax.swing.JFrame {
     private CounterSelectorUI counterSelectorUI;
 
     //TEMPORARY BEFORE ASSIGN COUNTER NUMBER AUTOMATICALLY
-    private ArrayList<CustomerInformation> tempDataList = new ArrayList();
+    private ArrayList<CustomerInformation> customerList = new ArrayList();
     private ArrayList<String> listCustID = new ArrayList<String>();
 
     @SuppressWarnings("unchecked")
@@ -87,6 +87,7 @@ public class HomeUI extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mainuiicon.png"))); // NOI18N
         jLabel1.setText("Bahagia Mall");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -258,7 +259,7 @@ public class HomeUI extends javax.swing.JFrame {
     //GET ONLY SELECTED ITEM BY CUSTOMER ID TO ADD TO COUNTER
     public List filteritemdatacust(String custID) {
         Predicate<CustomerInformation> itemSelectCondition = itemsCond -> itemsCond.getCustID().equalsIgnoreCase(custID);
-        List itemsCustomer = tempDataList.stream().filter(itemSelectCondition).collect(Collectors.toList());
+        List itemsCustomer = customerList.stream().filter(itemSelectCondition).collect(Collectors.toList());
         return itemsCustomer;
     }
 
@@ -296,13 +297,12 @@ public class HomeUI extends javax.swing.JFrame {
                     }
                     String datePurchase = st.nextToken();
 
-                    tempDataList.add(new CustomerInformation(customerID, customerIC, customerName, itemID, itemName, itemPrice, datePurchase));
+                    customerList.add(new CustomerInformation(customerID, customerIC, customerName, itemID, itemName, itemPrice, datePurchase));
                 }
 
                 line = br.readLine();
             }
             br.close();
-            System.out.println("DONE TEMP");
 
             //2. READ TEMP ARRAY AND ADD TO EVERY QUEUE COUNTER
             int counterswitching = 1;
@@ -357,7 +357,6 @@ public class HomeUI extends javax.swing.JFrame {
                     }
                 }
             }
-            System.out.println("DONE ADD TO COUNTER");
 
             //OPEN COUNTER SELECTOR UI
             counterSelectorUI = new CounterSelectorUI();

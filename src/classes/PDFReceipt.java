@@ -50,6 +50,7 @@ public class PDFReceipt {
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
         LocalDateTime datetimenow = LocalDateTime.now();
+        
         String paymentmethodtext = "";
         if (paymenttype.equalsIgnoreCase("credit")) {
             paymentmethodtext = "Credit Card";

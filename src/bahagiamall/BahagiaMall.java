@@ -14,6 +14,7 @@ public class BahagiaMall {
     private static Queue qcounter2 = new LinkedList();
     private static Queue qcounter3 = new LinkedList(); //WHEN ITEM MORE THAN 5
     
+    
     //OBJECT FOR ADD CUST AND ITEM UI
     private static AddCustomerUI addcustui;
     private static AddItemUI additemui;
