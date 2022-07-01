@@ -440,7 +440,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         Object[] options = {"Only unpaid customer", "All customer"};
         int buttonChoose = JOptionPane.showOptionDialog(null,//parent container of JOptionPane
-                "There are 3 option you can choose to create excel report",
+                "There are 2 option you can choose to create excel report",
                 "Choose report option",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
