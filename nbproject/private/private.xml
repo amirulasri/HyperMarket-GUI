@@ -2,20 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/amiru/Documents/NetBeansProjects/BahagiaMall/src/gui/HomeUI.java</file>
-            <file>file:/C:/Users/amiru/Documents/NetBeansProjects/BahagiaMall/src/gui/AddItemUI.java</file>
-            <file>file:/C:/Users/amiru/Documents/NetBeansProjects/BahagiaMall/src/gui/ReceiptUI.java</file>
-            <file>file:/C:/Users/amiru/Documents/NetBeansProjects/BahagiaMall/src/hypermarket/HyperMarket.java</file>
-            <file>file:/C:/Users/amiru/Documents/NetBeansProjects/BahagiaMall/src/gui/PaymentUI.java</file>
-            <file>file:/C:/Users/amiru/Documents/NetBeansProjects/BahagiaMall/src/gui/AddCustomerUI.java</file>
-            <file>file:/C:/Users/amiru/Documents/NetBeansProjects/BahagiaMall/src/classes/ItemInformation.java</file>
-            <file>file:/C:/Users/amiru/Documents/NetBeansProjects/BahagiaMall/src/classes/ExcelCounterCust.java</file>
-            <file>file:/C:/Users/amiru/Documents/NetBeansProjects/BahagiaMall/src/gui/ItemUI.java</file>
-            <file>file:/C:/Users/amiru/Documents/NetBeansProjects/BahagiaMall/src/classes/CustomerInformation.java</file>
-            <file>file:/C:/Users/amiru/Documents/NetBeansProjects/BahagiaMall/src/classes/PDFReceipt.java</file>
-            <file>file:/C:/Users/amiru/Documents/NetBeansProjects/BahagiaMall/src/gui/CounterSelectorUI.java</file>
-            <file>file:/C:/Users/amiru/Documents/NetBeansProjects/BahagiaMall/src/gui/CounterUI.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
