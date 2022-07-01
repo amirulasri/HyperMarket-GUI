@@ -4,6 +4,7 @@ import classes.CustomerInformation;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class AddItemUI extends javax.swing.JFrame {
@@ -13,6 +14,8 @@ public class AddItemUI extends javax.swing.JFrame {
      */
     private int counterNumber = 0;
     private String custID = "";
+    
+    private ImageIcon logo = new ImageIcon("src/images/mainicon.png");
 
     public AddItemUI(int counterNumber, String custID) {
         this.custID = custID;
@@ -62,6 +65,7 @@ public class AddItemUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add item customer");
+        setIconImage(logo.getImage());
 
         jPanel2.setBackground(new java.awt.Color(102, 204, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));

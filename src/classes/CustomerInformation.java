@@ -5,7 +5,7 @@ public class CustomerInformation {
     private String custName;
     private String counterPaid;
     
-    //RELATION WITH ITEMINFORMATION
+    //RELATION WITH ITEMINFORMATION CLASS
     private ItemInformation itemInformation;
     
     public CustomerInformation(String custID, String custIC, String custName, String counterPaid, String itemID, String itemName, double itemPrice, String datePurchase){
@@ -14,14 +14,6 @@ public class CustomerInformation {
         this.custIC = custIC;
         this.custName = custName;
         this.counterPaid = counterPaid;
-    }
-    
-    public CustomerInformation(String custID, String custIC, String custName, String itemID, String itemName, double itemPrice, String datePurchase){
-        this.itemInformation = new ItemInformation(itemID, itemName, itemPrice, datePurchase, custID);
-        this.custID = custID;
-        this.custIC = custIC;
-        this.custName = custName;
-        this.counterPaid = null;
     }
     
     public String getCustID(){

@@ -69,11 +69,11 @@ public class HomeUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        importbutton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
+        displaydatabutton = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -119,16 +119,16 @@ public class HomeUI extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(33, 181, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
-        jButton1.setBackground(new java.awt.Color(153, 204, 255));
-        jButton1.setText("Import Data");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        importbutton.setBackground(new java.awt.Color(153, 204, 255));
+        importbutton.setText("Import Data");
+        importbutton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton1MouseReleased(evt);
+                importbuttonMouseReleased(evt);
             }
         });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        importbutton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                importbuttonActionPerformed(evt);
             }
         });
 
@@ -148,7 +148,7 @@ public class HomeUI extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(importbutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -160,18 +160,18 @@ public class HomeUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(importbutton, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         jPanel3.setBackground(new java.awt.Color(33, 181, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
-        jButton2.setBackground(new java.awt.Color(204, 255, 204));
-        jButton2.setText("Display Stored Data");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        displaydatabutton.setBackground(new java.awt.Color(204, 255, 204));
+        displaydatabutton.setText("Display Stored Data");
+        displaydatabutton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton2MouseReleased(evt);
+                displaydatabuttonMouseReleased(evt);
             }
         });
 
@@ -187,7 +187,7 @@ public class HomeUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(displaydatabutton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -203,7 +203,7 @@ public class HomeUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(displaydatabutton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -252,9 +252,9 @@ public class HomeUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void importbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importbuttonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_importbuttonActionPerformed
 
     //GET ONLY SELECTED ITEM BY CUSTOMER ID TO ADD TO COUNTER
     public List filteritemdatacust(String custID) {
@@ -264,7 +264,7 @@ public class HomeUI extends javax.swing.JFrame {
     }
 
     public void importtxtFile(File selectedFile) {
-        jButton1.setEnabled(false);
+        importbutton.setEnabled(false);
         //1. READ TEXTFILE AND ADD TO TEMPORARY ARRAY
         try {
             BufferedReader br = new BufferedReader(new FileReader(selectedFile));
@@ -297,7 +297,7 @@ public class HomeUI extends javax.swing.JFrame {
                     }
                     String datePurchase = st.nextToken();
 
-                    customerList.add(new CustomerInformation(customerID, customerIC, customerName, itemID, itemName, itemPrice, datePurchase));
+                    customerList.add(new CustomerInformation(customerID, customerIC, customerName, "", itemID, itemName, itemPrice, datePurchase));
                 }
 
                 line = br.readLine();
@@ -389,28 +389,28 @@ public class HomeUI extends javax.swing.JFrame {
     }
 
     private JFileChooser txtfilechooser;
-    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
+    private void importbuttonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_importbuttonMouseReleased
         //IMPORT FILE PROCESS HERE
-        if (!jButton1.isEnabled()) {
+        if (!importbutton.isEnabled()) {
             return;
         }
         txtfilechooser = new JFileChooser();
         opentxtFile(txtfilechooser);
-    }//GEN-LAST:event_jButton1MouseReleased
+    }//GEN-LAST:event_importbuttonMouseReleased
 
-    private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
+    private void displaydatabuttonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_displaydatabuttonMouseReleased
         //JUST OPEN IF FILE IMPORTED
         if (counterSelectorUI == null) {
             JOptionPane.showMessageDialog(null, "Please import data using .txt file by clicking button (Import Data)", "No data imported", JOptionPane.ERROR_MESSAGE);
         } else {
             counterSelectorUI.setVisible(true);
         }
-    }//GEN-LAST:event_jButton2MouseReleased
+    }//GEN-LAST:event_displaydatabuttonMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton displaydatabutton;
+    private javax.swing.JButton importbutton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

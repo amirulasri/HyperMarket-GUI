@@ -104,24 +104,24 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        refreshButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        openCounter1Button = new javax.swing.JButton();
         countlabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        openCounter2Button = new javax.swing.JButton();
         countlabel2 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
+        openCounter3Button = new javax.swing.JButton();
         countlabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         totalAllCustLabel = new javax.swing.JLabel();
         netTotalLabel = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        createReportButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Counter Selector");
@@ -137,11 +137,11 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("1 - 3 Counter Available");
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
-        jButton4.setText("Refresh");
-        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+        refreshButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
+        refreshButton.setText("Refresh");
+        refreshButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton4MouseClicked(evt);
+                refreshButtonMouseClicked(evt);
             }
         });
 
@@ -155,7 +155,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4))
+                        .addComponent(refreshButton))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -167,7 +167,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jButton4))
+                    .addComponent(refreshButton))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addContainerGap())
@@ -179,10 +179,10 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel5.setText("Counter 1");
 
-        jButton1.setText("Open Counter");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        openCounter1Button.setText("Open Counter");
+        openCounter1Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton1MouseReleased(evt);
+                openCounter1ButtonMouseReleased(evt);
             }
         });
 
@@ -202,7 +202,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(countlabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(openCounter1Button)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -213,7 +213,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(openCounter1Button)
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -227,10 +227,10 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         jLabel4.setText("Counter 2");
 
-        jButton2.setText("Open Counter");
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+        openCounter2Button.setText("Open Counter");
+        openCounter2Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton2MouseReleased(evt);
+                openCounter2ButtonMouseReleased(evt);
             }
         });
 
@@ -250,7 +250,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addComponent(countlabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(openCounter2Button)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -260,7 +260,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
+                    .addComponent(openCounter2Button)
                     .addComponent(countlabel2))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
@@ -273,10 +273,10 @@ public class CounterSelectorUI extends javax.swing.JFrame {
 
         jLabel6.setText("* Customer who buy more than 5 items");
 
-        jButton3.setText("Open Counter");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        openCounter3Button.setText("Open Counter");
+        openCounter3Button.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton3MouseReleased(evt);
+                openCounter3ButtonMouseReleased(evt);
             }
         });
 
@@ -298,7 +298,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(countlabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)))
+                        .addComponent(openCounter3Button)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -310,7 +310,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3)
+                    .addComponent(openCounter3Button)
                     .addComponent(countlabel3))
                 .addContainerGap(8, Short.MAX_VALUE))
         );
@@ -324,11 +324,11 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         netTotalLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         netTotalLabel.setText("Net total: RM 0");
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excel.png"))); // NOI18N
-        jButton5.setText("Create Report");
-        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+        createReportButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/excel.png"))); // NOI18N
+        createReportButton.setText("Create Report");
+        createReportButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton5MouseClicked(evt);
+                createReportButtonMouseClicked(evt);
             }
         });
 
@@ -339,7 +339,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(createReportButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(totalAllCustLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -355,7 +355,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(netTotalLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(createReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -397,7 +397,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
     private CounterUI counterUI2;
     private CounterUI counterUI3;
 
-    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
+    private void openCounter1ButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openCounter1ButtonMouseReleased
         //OPEN FOR COUNTER 1
         if (counterUI1 != null) {
             counterUI1.setVisible(true);
@@ -405,9 +405,9 @@ public class CounterSelectorUI extends javax.swing.JFrame {
             counterUI1 = new CounterUI(1);
             counterUI1.setVisible(true);
         }
-    }//GEN-LAST:event_jButton1MouseReleased
+    }//GEN-LAST:event_openCounter1ButtonMouseReleased
 
-    private void jButton2MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseReleased
+    private void openCounter2ButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openCounter2ButtonMouseReleased
         //OPEN FOR COUNTER 2
         if (counterUI2 != null) {
             counterUI2.setVisible(true);
@@ -415,9 +415,9 @@ public class CounterSelectorUI extends javax.swing.JFrame {
             counterUI2 = new CounterUI(2);
             counterUI2.setVisible(true);
         }
-    }//GEN-LAST:event_jButton2MouseReleased
+    }//GEN-LAST:event_openCounter2ButtonMouseReleased
 
-    private void jButton3MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseReleased
+    private void openCounter3ButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_openCounter3ButtonMouseReleased
         //OPEN FOR COUNTER 3
         if (counterUI3 != null) {
             counterUI3.setVisible(true);
@@ -425,19 +425,19 @@ public class CounterSelectorUI extends javax.swing.JFrame {
             counterUI3 = new CounterUI(3);
             counterUI3.setVisible(true);
         }
-    }//GEN-LAST:event_jButton3MouseReleased
+    }//GEN-LAST:event_openCounter3ButtonMouseReleased
 
-    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+    private void refreshButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshButtonMouseClicked
         //REFRESH IF ANY CHANGE TO THE QUEUE
         countCustomer();
         totalNet();
-    }//GEN-LAST:event_jButton4MouseClicked
+    }//GEN-LAST:event_refreshButtonMouseClicked
 
     //THIS QUEUE/LIST ONLY FOR EXCEL REPORTING
     private Queue excelCounter1 = hypermarket.HyperMarket.getCounter1();
     private Queue excelCounter2 = hypermarket.HyperMarket.getCounter2();
     private Queue excelCounter3 = hypermarket.HyperMarket.getCounter3();
-    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+    private void createReportButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createReportButtonMouseClicked
         Object[] options = {"Only unpaid customer",
             "Only paid customer",
             "All customer"};
@@ -472,17 +472,13 @@ public class CounterSelectorUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Error to save file: " + ex.getMessage(), "Error create excel", HEIGHT);
             }
         }
-    }//GEN-LAST:event_jButton5MouseClicked
+    }//GEN-LAST:event_createReportButtonMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel countlabel1;
     private javax.swing.JLabel countlabel2;
     private javax.swing.JLabel countlabel3;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton createReportButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -495,6 +491,10 @@ public class CounterSelectorUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel netTotalLabel;
+    private javax.swing.JButton openCounter1Button;
+    private javax.swing.JButton openCounter2Button;
+    private javax.swing.JButton openCounter3Button;
+    private javax.swing.JButton refreshButton;
     private javax.swing.JLabel totalAllCustLabel;
     // End of variables declaration//GEN-END:variables
 
