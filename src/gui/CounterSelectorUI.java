@@ -134,6 +134,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/choice.png"))); // NOI18N
         jLabel1.setText("Counter Selector");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("1 - 3 Counter Available");
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/refresh.png"))); // NOI18N
