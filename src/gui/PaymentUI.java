@@ -337,11 +337,11 @@ public class PaymentUI extends javax.swing.JFrame {
         //FIND CUSTOMER DATA IN QUEUE
         List<CustomerInformation> convertedCustList = null;
         if (counterNumber == 1) {
-            convertedCustList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
+            convertedCustList = (List<CustomerInformation>) hypermarket.HyperMarket.getCounter1().stream().collect(Collectors.toList());
         } else if (counterNumber == 2) {
-            convertedCustList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter2().stream().collect(Collectors.toList());
+            convertedCustList = (List<CustomerInformation>) hypermarket.HyperMarket.getCounter2().stream().collect(Collectors.toList());
         } else if (counterNumber == 3) {
-            convertedCustList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter3().stream().collect(Collectors.toList());
+            convertedCustList = (List<CustomerInformation>) hypermarket.HyperMarket.getCounter3().stream().collect(Collectors.toList());
         }
         String custIC = "";
         String custName = "";
@@ -358,17 +358,17 @@ public class PaymentUI extends javax.swing.JFrame {
         Queue listItem = new LinkedList();
         for (int i = 0; i < countItem; i++) {
             if (counterNumber == 1) {
-                CustomerInformation itemCurrent = (CustomerInformation) bahagiamall.BahagiaMall.getCounter1().peek();
+                CustomerInformation itemCurrent = (CustomerInformation) hypermarket.HyperMarket.getCounter1().peek();
                 listItem.add(itemCurrent);
-                bahagiamall.BahagiaMall.getCounter1().remove();
+                hypermarket.HyperMarket.getCounter1().remove();
             } else if (counterNumber == 2) {
-                CustomerInformation itemCurrent = (CustomerInformation) bahagiamall.BahagiaMall.getCounter2().peek();
+                CustomerInformation itemCurrent = (CustomerInformation) hypermarket.HyperMarket.getCounter2().peek();
                 listItem.add(itemCurrent);
-                bahagiamall.BahagiaMall.getCounter2().remove();
+                hypermarket.HyperMarket.getCounter2().remove();
             } else if (counterNumber == 3) {
-                CustomerInformation itemCurrent = (CustomerInformation) bahagiamall.BahagiaMall.getCounter3().peek();
+                CustomerInformation itemCurrent = (CustomerInformation) hypermarket.HyperMarket.getCounter3().peek();
                 listItem.add(itemCurrent);
-                bahagiamall.BahagiaMall.getCounter3().remove();
+                hypermarket.HyperMarket.getCounter3().remove();
             }
         }
 

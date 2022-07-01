@@ -64,13 +64,13 @@ public class ItemUI extends javax.swing.JFrame {
         List<CustomerInformation> convertedItemList = null;
         List<CustomerInformation> filteredItemListCust = null;
         if (counterNumber == 1) {
-            convertedItemList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
+            convertedItemList = (List<CustomerInformation>) hypermarket.HyperMarket.getCounter1().stream().collect(Collectors.toList());
             filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
         } else if (counterNumber == 2) {
-            convertedItemList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter2().stream().collect(Collectors.toList());
+            convertedItemList = (List<CustomerInformation>) hypermarket.HyperMarket.getCounter2().stream().collect(Collectors.toList());
             filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
         } else if (counterNumber == 3) {
-            convertedItemList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter3().stream().collect(Collectors.toList());
+            convertedItemList = (List<CustomerInformation>) hypermarket.HyperMarket.getCounter3().stream().collect(Collectors.toList());
             filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
         }
 
@@ -188,18 +188,18 @@ public class ItemUI extends javax.swing.JFrame {
 
     private void additembuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_additembuttonMouseClicked
         //ADD ITEM HERE
-        if (bahagiamall.BahagiaMall.getAddItemUI() == null) {
-            bahagiamall.BahagiaMall.createItemAddUIInstance(counterNumber, custID);
-            bahagiamall.BahagiaMall.getAddItemUI().setVisible(true);
-            bahagiamall.BahagiaMall.getAddItemUI().addWindowListener(new WindowAdapter() {
+        if (hypermarket.HyperMarket.getAddItemUI() == null) {
+            hypermarket.HyperMarket.createItemAddUIInstance(counterNumber, custID);
+            hypermarket.HyperMarket.getAddItemUI().setVisible(true);
+            hypermarket.HyperMarket.getAddItemUI().addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    bahagiamall.BahagiaMall.setItemAddUINull();
+                    hypermarket.HyperMarket.setItemAddUINull();
                     displayItemToTable();
                 }
             });
         } else {
-            bahagiamall.BahagiaMall.getAddItemUI().setVisible(true);
+            hypermarket.HyperMarket.getAddItemUI().setVisible(true);
             JOptionPane.showMessageDialog(null, "There are customers who have not finished managing items. Please finish first and try again", "Error Customer Queue", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_additembuttonMouseClicked

@@ -49,11 +49,11 @@ public class CounterUI extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         counterlabel.setText("Counter " + counterNumber);
         if (counterNumber == 1) {
-            displayCustomerToTable(bahagiamall.BahagiaMall.getCounter1());
+            displayCustomerToTable(hypermarket.HyperMarket.getCounter1());
         } else if (counterNumber == 2) {
-            displayCustomerToTable(bahagiamall.BahagiaMall.getCounter2());
+            displayCustomerToTable(hypermarket.HyperMarket.getCounter2());
         } else if (counterNumber == 3) {
-            displayCustomerToTable(bahagiamall.BahagiaMall.getCounter3());
+            displayCustomerToTable(hypermarket.HyperMarket.getCounter3());
         }
 
         Map<String, ItemUI> itemInstance = new TreeMap<String, ItemUI>();
@@ -219,11 +219,11 @@ public class CounterUI extends javax.swing.JFrame {
             //GET WHO FIRST QUEUE OF CUSTOMER
             CustomerInformation datacust = null;
             if (counterNumber == 1) {
-                datacust = (CustomerInformation) bahagiamall.BahagiaMall.getCounter1().peek();
+                datacust = (CustomerInformation) hypermarket.HyperMarket.getCounter1().peek();
             } else if (counterNumber == 2) {
-                datacust = (CustomerInformation) bahagiamall.BahagiaMall.getCounter2().peek();
+                datacust = (CustomerInformation) hypermarket.HyperMarket.getCounter2().peek();
             } else if (counterNumber == 3) {
-                datacust = (CustomerInformation) bahagiamall.BahagiaMall.getCounter3().peek();
+                datacust = (CustomerInformation) hypermarket.HyperMarket.getCounter3().peek();
             }
             if (datacust == null) {
                 JOptionPane.showMessageDialog(null, "No customer queue to pay", "No customer", JOptionPane.ERROR_MESSAGE);
@@ -235,13 +235,13 @@ public class CounterUI extends javax.swing.JFrame {
             List<CustomerInformation> convertedItemList = null;
             List<CustomerInformation> filteredItemListCust = null;
             if (counterNumber == 1) {
-                convertedItemList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
+                convertedItemList = (List<CustomerInformation>) hypermarket.HyperMarket.getCounter1().stream().collect(Collectors.toList());
                 filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custIDPay)).collect(Collectors.toList());
             } else if (counterNumber == 2) {
-                convertedItemList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter2().stream().collect(Collectors.toList());
+                convertedItemList = (List<CustomerInformation>) hypermarket.HyperMarket.getCounter2().stream().collect(Collectors.toList());
                 filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custIDPay)).collect(Collectors.toList());
             } else if (counterNumber == 3) {
-                convertedItemList = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter3().stream().collect(Collectors.toList());
+                convertedItemList = (List<CustomerInformation>) hypermarket.HyperMarket.getCounter3().stream().collect(Collectors.toList());
                 filteredItemListCust = convertedItemList.stream().filter(items -> items.getCustID().equalsIgnoreCase(custIDPay)).collect(Collectors.toList());
             }
 
@@ -259,11 +259,11 @@ public class CounterUI extends javax.swing.JFrame {
                 @Override
                 public void windowClosed(WindowEvent e) {
                     if (counterNumber == 1) {
-                        displayCustomerToTable(bahagiamall.BahagiaMall.getCounter1());
+                        displayCustomerToTable(hypermarket.HyperMarket.getCounter1());
                     } else if (counterNumber == 2) {
-                        displayCustomerToTable(bahagiamall.BahagiaMall.getCounter2());
+                        displayCustomerToTable(hypermarket.HyperMarket.getCounter2());
                     } else if (counterNumber == 3) {
-                        displayCustomerToTable(bahagiamall.BahagiaMall.getCounter3());
+                        displayCustomerToTable(hypermarket.HyperMarket.getCounter3());
                     }
                     paymentui = null;
                 }
@@ -276,24 +276,24 @@ public class CounterUI extends javax.swing.JFrame {
 
     private void jMenu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MousePressed
         //ADD CUSTOMER TO QUEUE
-        if (bahagiamall.BahagiaMall.getAddCustUI() == null) {
-            bahagiamall.BahagiaMall.createCustomerAddUIInstance(counterNumber);
-            bahagiamall.BahagiaMall.getAddCustUI().addWindowListener(new WindowAdapter() {
+        if (hypermarket.HyperMarket.getAddCustUI() == null) {
+            hypermarket.HyperMarket.createCustomerAddUIInstance(counterNumber);
+            hypermarket.HyperMarket.getAddCustUI().addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    bahagiamall.BahagiaMall.setCustomerAddUINull();
+                    hypermarket.HyperMarket.setCustomerAddUINull();
                     if (counterNumber == 1) {
-                        displayCustomerToTable(bahagiamall.BahagiaMall.getCounter1());
+                        displayCustomerToTable(hypermarket.HyperMarket.getCounter1());
                     } else if (counterNumber == 2) {
-                        displayCustomerToTable(bahagiamall.BahagiaMall.getCounter2());
+                        displayCustomerToTable(hypermarket.HyperMarket.getCounter2());
                     } else if (counterNumber == 3) {
-                        displayCustomerToTable(bahagiamall.BahagiaMall.getCounter3());
+                        displayCustomerToTable(hypermarket.HyperMarket.getCounter3());
                     }
                 }
             });
-            bahagiamall.BahagiaMall.getAddCustUI().setVisible(true);
+            hypermarket.HyperMarket.getAddCustUI().setVisible(true);
         } else {
-            bahagiamall.BahagiaMall.getAddCustUI().setVisible(true);
+            hypermarket.HyperMarket.getAddCustUI().setVisible(true);
             JOptionPane.showMessageDialog(null, "There are customers who have not finished managing items. Please finish first and try again", "Error Customer Queue", JOptionPane.ERROR_MESSAGE);
         }
 

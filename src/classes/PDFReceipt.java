@@ -76,7 +76,7 @@ public class PDFReceipt {
         contentStream.beginText();
         contentStream.setFont(PDType1Font.HELVETICA, 30);
         contentStream.newLineAtOffset(74, 738);
-        contentStream.showText("Bahagia Mall");
+        contentStream.showText("HyperMarket");
         contentStream.endText();
 
         // ADD CUSTOMER NAME TITLE

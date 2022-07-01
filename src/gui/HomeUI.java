@@ -88,7 +88,7 @@ public class HomeUI extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/mainuiicon.png"))); // NOI18N
-        jLabel1.setText("Bahagia Mall");
+        jLabel1.setText("HyperMarket");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Founded by Nurul Ain - Collaboration with Nurin Ainul, Amymelinda, Putra, Amirul Asri");
@@ -322,7 +322,7 @@ public class HomeUI extends javax.swing.JFrame {
                             Double itemPrice = itemdata.getitemPrice();
                             String datePurchased = itemdata.getDatePurchase();
 
-                            bahagiamall.BahagiaMall.getCounter1().add(new CustomerInformation(custID, custIC, custName, "counter1", itemID, itemName, itemPrice, datePurchased));
+                            hypermarket.HyperMarket.getCounter1().add(new CustomerInformation(custID, custIC, custName, "counter1", itemID, itemName, itemPrice, datePurchased));
                         }
                         counterswitching = 2;
                     } else if (counterswitching == 2) {
@@ -336,7 +336,7 @@ public class HomeUI extends javax.swing.JFrame {
                             Double itemPrice = itemdata.getitemPrice();
                             String datePurchased = itemdata.getDatePurchase();
 
-                            bahagiamall.BahagiaMall.getCounter2().add(new CustomerInformation(custID, custIC, custName, "counter2", itemID, itemName, itemPrice, datePurchased));
+                            hypermarket.HyperMarket.getCounter2().add(new CustomerInformation(custID, custIC, custName, "counter2", itemID, itemName, itemPrice, datePurchased));
 
                         }
                         counterswitching = 1;
@@ -352,7 +352,7 @@ public class HomeUI extends javax.swing.JFrame {
                         Double itemPrice = itemdata.getitemPrice();
                         String datePurchased = itemdata.getDatePurchase();
 
-                        bahagiamall.BahagiaMall.getCounter3().add(new CustomerInformation(custID, custIC, custName, "counter3", itemID, itemName, itemPrice, datePurchased));
+                        hypermarket.HyperMarket.getCounter3().add(new CustomerInformation(custID, custIC, custName, "counter3", itemID, itemName, itemPrice, datePurchased));
 
                     }
                 }

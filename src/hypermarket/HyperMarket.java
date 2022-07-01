@@ -1,4 +1,4 @@
-package bahagiamall;
+package hypermarket;
 
 import gui.AddCustomerUI;
 import gui.AddItemUI;
@@ -6,14 +6,13 @@ import gui.HomeUI;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class BahagiaMall {
+public class HyperMarket {
     
     //ALL QUEUE DATA WILL STORED HERE
     //USING LINKEDLIST IMPLEMENT TO QUEUE
     private static Queue qcounter1 = new LinkedList();
     private static Queue qcounter2 = new LinkedList();
     private static Queue qcounter3 = new LinkedList(); //WHEN ITEM MORE THAN 5
-    
     
     //OBJECT FOR ADD CUST AND ITEM UI
     private static AddCustomerUI addcustui;

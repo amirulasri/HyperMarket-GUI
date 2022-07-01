@@ -42,11 +42,11 @@ public class CounterSelectorUI extends javax.swing.JFrame {
 
     private void countCustomer() {
         //SET TO GUI
-        countlabel1.setText(getCustCount(bahagiamall.BahagiaMall.getCounter1()) + " Customers");
-        countlabel2.setText(getCustCount(bahagiamall.BahagiaMall.getCounter2()) + " Customers");
-        countlabel3.setText(getCustCount(bahagiamall.BahagiaMall.getCounter3()) + " Customers");
+        countlabel1.setText(getCustCount(hypermarket.HyperMarket.getCounter1()) + " Customers");
+        countlabel2.setText(getCustCount(hypermarket.HyperMarket.getCounter2()) + " Customers");
+        countlabel3.setText(getCustCount(hypermarket.HyperMarket.getCounter3()) + " Customers");
 
-        int totalAllCustomer = getCustCount(bahagiamall.BahagiaMall.getCounter1()) + getCustCount(bahagiamall.BahagiaMall.getCounter2()) + getCustCount(bahagiamall.BahagiaMall.getCounter3());
+        int totalAllCustomer = getCustCount(hypermarket.HyperMarket.getCounter1()) + getCustCount(hypermarket.HyperMarket.getCounter2()) + getCustCount(hypermarket.HyperMarket.getCounter3());
         totalAllCustLabel.setText("Total customer: " + totalAllCustomer);
     }
 
@@ -56,17 +56,17 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         double totalcounter2 = 0;
         double totalcounter3 = 0;
 
-        for (Iterator<CustomerInformation> iterator = bahagiamall.BahagiaMall.getCounter1().iterator(); iterator.hasNext();) {
+        for (Iterator<CustomerInformation> iterator = hypermarket.HyperMarket.getCounter1().iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
             totalcounter1 = totalcounter1 + nextItem.getitemPrice();
         }
 
-        for (Iterator<CustomerInformation> iterator = bahagiamall.BahagiaMall.getCounter2().iterator(); iterator.hasNext();) {
+        for (Iterator<CustomerInformation> iterator = hypermarket.HyperMarket.getCounter2().iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
             totalcounter2 = totalcounter2 + nextItem.getitemPrice();
         }
 
-        for (Iterator<CustomerInformation> iterator = bahagiamall.BahagiaMall.getCounter3().iterator(); iterator.hasNext();) {
+        for (Iterator<CustomerInformation> iterator = hypermarket.HyperMarket.getCounter3().iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
             totalcounter3 = totalcounter3 + nextItem.getitemPrice();
         }
@@ -433,9 +433,9 @@ public class CounterSelectorUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseClicked
 
     //THIS QUEUE/LIST ONLY FOR EXCEL REPORTING
-    Queue excelCounter1 = bahagiamall.BahagiaMall.getCounter1();
-    Queue excelCounter2 = bahagiamall.BahagiaMall.getCounter2();
-    Queue excelCounter3 = bahagiamall.BahagiaMall.getCounter3();
+    Queue excelCounter1 = hypermarket.HyperMarket.getCounter1();
+    Queue excelCounter2 = hypermarket.HyperMarket.getCounter2();
+    Queue excelCounter3 = hypermarket.HyperMarket.getCounter3();
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         Object[] options = {"Only unpaid customer", "All customer"};
         int buttonChoose = JOptionPane.showOptionDialog(null,//parent container of JOptionPane
@@ -450,7 +450,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         if(buttonChoose == 0){
             try {
                 //CREATE EXCEL FILE HERE - UNPAID
-                new ExcelCounterCust(bahagiamall.BahagiaMall.getCounter1(), bahagiamall.BahagiaMall.getCounter2(), bahagiamall.BahagiaMall.getCounter3());
+                new ExcelCounterCust(hypermarket.HyperMarket.getCounter1(), hypermarket.HyperMarket.getCounter2(), hypermarket.HyperMarket.getCounter3());
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Error to save file: " + ex.getMessage(), "Error create excel", HEIGHT);
             }

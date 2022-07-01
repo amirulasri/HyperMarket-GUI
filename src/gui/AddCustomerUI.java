@@ -282,13 +282,13 @@ public class AddCustomerUI extends javax.swing.JFrame {
         List<CustomerInformation> convertedItemList3 = null;
         List<CustomerInformation> filteredItemListCust3 = null;
 
-        convertedItemList1 = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter1().stream().collect(Collectors.toList());
+        convertedItemList1 = (List<CustomerInformation>) hypermarket.HyperMarket.getCounter1().stream().collect(Collectors.toList());
         filteredItemListCust1 = convertedItemList1.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
 
-        convertedItemList2 = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter2().stream().collect(Collectors.toList());
+        convertedItemList2 = (List<CustomerInformation>) hypermarket.HyperMarket.getCounter2().stream().collect(Collectors.toList());
         filteredItemListCust2 = convertedItemList2.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
 
-        convertedItemList3 = (List<CustomerInformation>) bahagiamall.BahagiaMall.getCounter3().stream().collect(Collectors.toList());
+        convertedItemList3 = (List<CustomerInformation>) hypermarket.HyperMarket.getCounter3().stream().collect(Collectors.toList());
         filteredItemListCust3 = convertedItemList3.stream().filter(items -> items.getCustID().equalsIgnoreCase(custID)).collect(Collectors.toList());
 
         for (Iterator<CustomerInformation> iterator = filteredItemListCust1.iterator(); iterator.hasNext();) {
@@ -349,7 +349,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
         }
 
         if (counterNumber == 1) {
-            bahagiamall.BahagiaMall.getCounter1().add(new CustomerInformation(custID, custIC, custName, "counter1", itemID, itemName, itemPrice, datepurchased));
+            hypermarket.HyperMarket.getCounter1().add(new CustomerInformation(custID, custIC, custName, "counter1", itemID, itemName, itemPrice, datepurchased));
             if (itemuiwithaddbutton == null) {
                 itemuiwithaddbutton = new ItemUI(custID, counterNumber, "editable");
                 itemuiwithaddbutton.setVisible(true);
@@ -357,7 +357,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
                 itemuiwithaddbutton.setVisible(true);
             }
         } else if (counterNumber == 2) {
-            bahagiamall.BahagiaMall.getCounter2().add(new CustomerInformation(custID, custIC, custName, "counter2", itemID, itemName, itemPrice, datepurchased));
+            hypermarket.HyperMarket.getCounter2().add(new CustomerInformation(custID, custIC, custName, "counter2", itemID, itemName, itemPrice, datepurchased));
             if (itemuiwithaddbutton == null) {
                 itemuiwithaddbutton = new ItemUI(custID, counterNumber, "editable");
                 itemuiwithaddbutton.setVisible(true);
@@ -365,7 +365,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
                 itemuiwithaddbutton.setVisible(true);
             }
         } else if (counterNumber == 3) {
-            bahagiamall.BahagiaMall.getCounter3().add(new CustomerInformation(custID, custIC, custName, "counter3", itemID, itemName, itemPrice, datepurchased));
+            hypermarket.HyperMarket.getCounter3().add(new CustomerInformation(custID, custIC, custName, "counter3", itemID, itemName, itemPrice, datepurchased));
             if (itemuiwithaddbutton == null) {
                 itemuiwithaddbutton = new ItemUI(custID, counterNumber, "editable");
                 itemuiwithaddbutton.setVisible(true);

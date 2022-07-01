@@ -135,7 +135,7 @@ public class ExcelCounterCust {
         spreadsheet.addMergedRegion(new CellRangeAddress(3, 3, 1, 4));//MERGE CELL
         row = spreadsheet.createRow(3);
         cell = row.createCell(1);
-        cell.setCellValue("              Bahagia Mall - Counter 1");
+        cell.setCellValue("              HyperMarket - Counter 1");
         cell.setCellStyle(stylecelltitle);
 
         String currentCustID = "";
@@ -224,7 +224,7 @@ public class ExcelCounterCust {
         spreadsheet.addMergedRegion(new CellRangeAddress(3, 3, 1, 4));//MERGE CELL
         row = spreadsheet.createRow(3);
         cell = row.createCell(1);
-        cell.setCellValue("              Bahagia Mall - Counter 2");
+        cell.setCellValue("              HyperMarket - Counter 2");
         cell.setCellStyle(stylecelltitle);
 
         //CREATE DATA IN EXCEL SHEET 2 - COUNTER 2
@@ -312,7 +312,7 @@ public class ExcelCounterCust {
         spreadsheet.addMergedRegion(new CellRangeAddress(3, 3, 1, 4));//MERGE CELL
         row = spreadsheet.createRow(3);
         cell = row.createCell(1);
-        cell.setCellValue("              Bahagia Mall - Counter 3");
+        cell.setCellValue("              HyperMarket - Counter 3");
         cell.setCellStyle(stylecelltitle);
 
         //CREATE DATA IN EXCEL SHEET 3 - COUNTER 3
@@ -396,25 +396,25 @@ public class ExcelCounterCust {
         spreadsheet.addMergedRegion(new CellRangeAddress(3, 3, 1, 7));//MERGE CELL
         row = spreadsheet.createRow(3);
         cell = row.createCell(1);
-        cell.setCellValue("              Bahagia Mall - Report");
+        cell.setCellValue("              HyperMarket - Report");
         cell.setCellStyle(stylecelltitle);
 
         //CALCULATE NUMBER OF CUSTOMER
-        int totalAllCustomer = getCustCount(bahagiamall.BahagiaMall.getCounter1()) + getCustCount(bahagiamall.BahagiaMall.getCounter2()) + getCustCount(bahagiamall.BahagiaMall.getCounter3());
+        int totalAllCustomer = getCustCount(hypermarket.HyperMarket.getCounter1()) + getCustCount(hypermarket.HyperMarket.getCounter2()) + getCustCount(hypermarket.HyperMarket.getCounter3());
 
         //CALCULATE NET TOTAL
         double totalcounter1 = 0;
         double totalcounter2 = 0;
         double totalcounter3 = 0;
-        for (Iterator<CustomerInformation> iterator = bahagiamall.BahagiaMall.getCounter1().iterator(); iterator.hasNext();) {
+        for (Iterator<CustomerInformation> iterator = hypermarket.HyperMarket.getCounter1().iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
             totalcounter1 = totalcounter1 + nextItem.getitemPrice();
         }
-        for (Iterator<CustomerInformation> iterator = bahagiamall.BahagiaMall.getCounter2().iterator(); iterator.hasNext();) {
+        for (Iterator<CustomerInformation> iterator = hypermarket.HyperMarket.getCounter2().iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
             totalcounter2 = totalcounter2 + nextItem.getitemPrice();
         }
-        for (Iterator<CustomerInformation> iterator = bahagiamall.BahagiaMall.getCounter3().iterator(); iterator.hasNext();) {
+        for (Iterator<CustomerInformation> iterator = hypermarket.HyperMarket.getCounter3().iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
             totalcounter3 = totalcounter3 + nextItem.getitemPrice();
         }
