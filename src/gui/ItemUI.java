@@ -55,7 +55,7 @@ public class ItemUI extends javax.swing.JFrame {
         displayItemToTable();
     }
 
-    ImageIcon logo = new ImageIcon("src/images/mainicon.png");
+    private ImageIcon logo = new ImageIcon("src/images/mainicon.png");
 
     private void displayItemToTable() {
         DefaultTableModel itemTableModel = (DefaultTableModel) itemTable.getModel();

@@ -9,16 +9,16 @@ import javax.swing.table.DefaultTableModel;
 
 public class ReceiptUI extends javax.swing.JFrame {
 
-    String custName = "";
-    String custID = "";
-    String custIC = "";
-    String paymentMethod = "";
-    double totalAmount = 0;
-    double paidAmount = 0;
-    String framereceipttitle = "";
-    int counterNumber = 0;
-    int countitem = 0;
-    Queue listItem = null;
+    private String custName = "";
+    private String custID = "";
+    private String custIC = "";
+    private String paymentMethod = "";
+    private double totalAmount = 0;
+    private double paidAmount = 0;
+    private String framereceipttitle = "";
+    private int counterNumber = 0;
+    private int countitem = 0;
+    private Queue listItem = null;
 
     public ReceiptUI(String custID, String custIC, String custName, String paymentMethod, double totalAmount, double paidAmount, double balance, int counterNumber, Queue listItem) {
         this.custID = custID;
@@ -80,7 +80,7 @@ public class ReceiptUI extends javax.swing.JFrame {
         this.countitem = countitem;
     }
 
-    ImageIcon logo = new ImageIcon("src/images/mainicon.png");
+    private ImageIcon logo = new ImageIcon("src/images/mainicon.png");
 
     /**
      * This method is called from within the constructor to initialize the form.

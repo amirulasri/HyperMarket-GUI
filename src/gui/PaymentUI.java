@@ -59,7 +59,7 @@ public class PaymentUI extends javax.swing.JFrame {
         creditcardbgroup.setActionCommand("credit");
     }
 
-    ImageIcon logo = new ImageIcon("src/images/mainicon.png");
+    private ImageIcon logo = new ImageIcon("src/images/mainicon.png");
 
     /**
      * This method is called from within the constructor to initialize the form.

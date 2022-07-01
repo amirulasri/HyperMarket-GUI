@@ -13,7 +13,7 @@ public class CounterSelectorUI extends javax.swing.JFrame {
     /**
      * Creates new form CounterSelectorUI
      */
-    ImageIcon logo = new ImageIcon("src/images/mainicon.png");
+    private ImageIcon logo = new ImageIcon("src/images/mainicon.png");
     private DecimalFormat priceformatter = new DecimalFormat("0.00");
 
     public CounterSelectorUI() {
@@ -393,9 +393,9 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    CounterUI counterUI1;
-    CounterUI counterUI2;
-    CounterUI counterUI3;
+    private CounterUI counterUI1;
+    private CounterUI counterUI2;
+    private CounterUI counterUI3;
 
     private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
         //OPEN FOR COUNTER 1
@@ -434,9 +434,9 @@ public class CounterSelectorUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4MouseClicked
 
     //THIS QUEUE/LIST ONLY FOR EXCEL REPORTING
-    Queue excelCounter1 = hypermarket.HyperMarket.getCounter1();
-    Queue excelCounter2 = hypermarket.HyperMarket.getCounter2();
-    Queue excelCounter3 = hypermarket.HyperMarket.getCounter3();
+    private Queue excelCounter1 = hypermarket.HyperMarket.getCounter1();
+    private Queue excelCounter2 = hypermarket.HyperMarket.getCounter2();
+    private Queue excelCounter3 = hypermarket.HyperMarket.getCounter3();
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         Object[] options = {"Only unpaid customer", "All customer"};
         int buttonChoose = JOptionPane.showOptionDialog(null,//parent container of JOptionPane
