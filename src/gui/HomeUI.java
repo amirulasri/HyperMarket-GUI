@@ -79,7 +79,7 @@ public class HomeUI extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Home - Bahagia Mall");
+        setTitle("Home - HyperMarket");
         setBackground(new java.awt.Color(255, 255, 255));
         setIconImage(logo.getImage());
 
