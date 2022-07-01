@@ -438,26 +438,35 @@ public class CounterSelectorUI extends javax.swing.JFrame {
     private Queue excelCounter2 = hypermarket.HyperMarket.getCounter2();
     private Queue excelCounter3 = hypermarket.HyperMarket.getCounter3();
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
-        Object[] options = {"Only unpaid customer", "All customer"};
-        int buttonChoose = JOptionPane.showOptionDialog(null,//parent container of JOptionPane
-                "There are 2 option you can choose to create excel report",
+        Object[] options = {"Only unpaid customer",
+            "Only paid customer",
+            "All customer"};
+        int buttonChoose = JOptionPane.showOptionDialog(null,
+                "There are 3 option you can choose to create excel report",
                 "Choose report option",
                 JOptionPane.YES_NO_CANCEL_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
-                null,//do not use a custom Icon
-                options,//the titles of buttons
-                options[1]);//default button title
-        
-        if(buttonChoose == 0){
+                null,
+                options,
+                options[2]);
+
+        if (buttonChoose == 0) {
             try {
-                //CREATE EXCEL FILE HERE - UNPAID
+                //CREATE EXCEL FILE HERE
                 new ExcelCounterCust(hypermarket.HyperMarket.getCounter1(), hypermarket.HyperMarket.getCounter2(), hypermarket.HyperMarket.getCounter3());
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Error to save file: " + ex.getMessage(), "Error create excel", HEIGHT);
             }
-        }else if(buttonChoose == 1){
+        } else if (buttonChoose == 1) {
             try {
-                //CREATE EXCEL FILE HERE - ALL CUSTOMERS
+                //CREATE EXCEL FILE HERE
+                new ExcelCounterCust(hypermarket.HyperMarket.getExcelCounter1(), hypermarket.HyperMarket.getExcelCounter2(), hypermarket.HyperMarket.getExcelCounter3());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Error to save file: " + ex.getMessage(), "Error create excel", HEIGHT);
+            }
+        } else if (buttonChoose == 2) {
+            try {
+                //CREATE EXCEL FILE HERE
                 new ExcelCounterCust(excelCounter1, excelCounter2, excelCounter3);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "Error to save file: " + ex.getMessage(), "Error create excel", HEIGHT);

@@ -312,7 +312,7 @@ public class PDFReceipt {
             }
         };
         fileChooser.setDialogTitle("Save Receipt PDF file");
-        fileChooser.setSelectedFile(new File("Receipt Bahagia Mall " + custID));
+        fileChooser.setSelectedFile(new File("Receipt HyperMarket " + custID));
         fileChooser.setFileFilter(new FileNameExtensionFilter("pdf file", "pdf"));
         int userSelection = fileChooser.showSaveDialog(saveframe);
         if (userSelection == JFileChooser.APPROVE_OPTION) {

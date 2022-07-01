@@ -354,20 +354,23 @@ public class PaymentUI extends javax.swing.JFrame {
             }
         }
 
-        //REMOVE CUSTOMER AND ITEM AFTER PAYMENT MADE AND ALSO SAVE LIST ITEM FOR RECEIPT DISPLAY
+        //REMOVE CUSTOMER AND ITEM AFTER PAYMENT MADE AND ALSO SAVE LIST ITEM FOR RECEIPT DISPLAY AND ALSO TO EXCEL REPORTING
         Queue listItem = new LinkedList();
         for (int i = 0; i < countItem; i++) {
             if (counterNumber == 1) {
                 CustomerInformation itemCurrent = (CustomerInformation) hypermarket.HyperMarket.getCounter1().peek();
                 listItem.add(itemCurrent);
+                hypermarket.HyperMarket.getExcelCounter1().add(itemCurrent);
                 hypermarket.HyperMarket.getCounter1().remove();
             } else if (counterNumber == 2) {
                 CustomerInformation itemCurrent = (CustomerInformation) hypermarket.HyperMarket.getCounter2().peek();
                 listItem.add(itemCurrent);
+                hypermarket.HyperMarket.getExcelCounter2().add(itemCurrent);
                 hypermarket.HyperMarket.getCounter2().remove();
             } else if (counterNumber == 3) {
                 CustomerInformation itemCurrent = (CustomerInformation) hypermarket.HyperMarket.getCounter3().peek();
                 listItem.add(itemCurrent);
+                hypermarket.HyperMarket.getExcelCounter3().add(itemCurrent);
                 hypermarket.HyperMarket.getCounter3().remove();
             }
         }

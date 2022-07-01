@@ -18,6 +18,11 @@ public class HyperMarket {
     private static AddCustomerUI addcustui;
     private static AddItemUI additemui;
     
+    //QUEUE ONLY FOR PAID CUSTOMER - EXCEL EXPORTING
+    private static Queue excelcounter1 = new LinkedList();
+    private static Queue excelcounter2 = new LinkedList();
+    private static Queue excelcounter3 = new LinkedList();
+    
     public static Queue getCounter1(){
         return qcounter1;
     }
@@ -28,6 +33,18 @@ public class HyperMarket {
     
     public static Queue getCounter3(){
         return qcounter3;
+    }
+    
+    public static Queue getExcelCounter1(){
+        return excelcounter1;
+    }
+    
+    public static Queue getExcelCounter2(){
+        return excelcounter2;
+    }
+    
+    public static Queue getExcelCounter3(){
+        return excelcounter3;
     }
     
     public static AddCustomerUI getAddCustUI(){

@@ -67,7 +67,7 @@ public class ExcelCounterCust {
         stylecellitemlist.setBorderLeft(BorderStyle.MEDIUM);
         stylecellitemlist.setFillForegroundColor(coloritemlist);
 
-        // CREATE STYLING FOR BAHAGIA MALL TITLE
+        // CREATE STYLING FOR HYPERMARKET TITLE
         XSSFColor colortitle = new XSSFColor(new Color(179, 255, 252), null);
         XSSFCellStyle stylecelltitle = workbook.createCellStyle();
         stylecelltitle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
@@ -103,7 +103,7 @@ public class ExcelCounterCust {
         CreationHelper helper = workbook.getCreationHelper();
         Drawing drawing;
         ClientAnchor anchor;
-        Picture bahagiamalllogo;
+        Picture hypermarketlogo;
 
         //CREATE FOR COUNTER 1
         spreadsheet = workbook.createSheet("Counter 1");
@@ -126,8 +126,8 @@ public class ExcelCounterCust {
         anchor.setRow2(3); //Row 4
 
         //Creates a picture
-        bahagiamalllogo = drawing.createPicture(anchor, pictureIdx);
-        bahagiamalllogo.resize(0.32, 2);
+        hypermarketlogo = drawing.createPicture(anchor, pictureIdx);
+        hypermarketlogo.resize(0.32, 2);
 
         int rowid;
         rowid = 5;
@@ -217,8 +217,8 @@ public class ExcelCounterCust {
         anchor.setRow2(3); //Row 4
 
         //Creates a picture
-        bahagiamalllogo = drawing.createPicture(anchor, pictureIdx);
-        bahagiamalllogo.resize(0.32, 2);
+        hypermarketlogo = drawing.createPicture(anchor, pictureIdx);
+        hypermarketlogo.resize(0.32, 2);
 
         rowid = 5;
         spreadsheet.addMergedRegion(new CellRangeAddress(3, 3, 1, 4));//MERGE CELL
@@ -305,8 +305,8 @@ public class ExcelCounterCust {
         anchor.setRow2(3); //Row 4
 
         //Creates a picture
-        bahagiamalllogo = drawing.createPicture(anchor, pictureIdx);
-        bahagiamalllogo.resize(0.32, 2);
+        hypermarketlogo = drawing.createPicture(anchor, pictureIdx);
+        hypermarketlogo.resize(0.32, 2);
 
         rowid = 5;
         spreadsheet.addMergedRegion(new CellRangeAddress(3, 3, 1, 4));//MERGE CELL
@@ -389,8 +389,8 @@ public class ExcelCounterCust {
         anchor.setRow2(3); //Row 4
 
         //Creates a picture
-        bahagiamalllogo = drawing.createPicture(anchor, pictureIdx);
-        bahagiamalllogo.resize(0.76, 2);
+        hypermarketlogo = drawing.createPicture(anchor, pictureIdx);
+        hypermarketlogo.resize(0.76, 2);
 
         rowid = 5;
         spreadsheet.addMergedRegion(new CellRangeAddress(3, 3, 1, 7));//MERGE CELL
@@ -400,21 +400,21 @@ public class ExcelCounterCust {
         cell.setCellStyle(stylecelltitle);
 
         //CALCULATE NUMBER OF CUSTOMER
-        int totalAllCustomer = getCustCount(hypermarket.HyperMarket.getCounter1()) + getCustCount(hypermarket.HyperMarket.getCounter2()) + getCustCount(hypermarket.HyperMarket.getCounter3());
+        int totalAllCustomer = getCustCount(counter1) + getCustCount(counter2) + getCustCount(counter3);
 
         //CALCULATE NET TOTAL
         double totalcounter1 = 0;
         double totalcounter2 = 0;
         double totalcounter3 = 0;
-        for (Iterator<CustomerInformation> iterator = hypermarket.HyperMarket.getCounter1().iterator(); iterator.hasNext();) {
+        for (Iterator<CustomerInformation> iterator = counter1.iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
             totalcounter1 = totalcounter1 + nextItem.getitemPrice();
         }
-        for (Iterator<CustomerInformation> iterator = hypermarket.HyperMarket.getCounter2().iterator(); iterator.hasNext();) {
+        for (Iterator<CustomerInformation> iterator = counter2.iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
             totalcounter2 = totalcounter2 + nextItem.getitemPrice();
         }
-        for (Iterator<CustomerInformation> iterator = hypermarket.HyperMarket.getCounter3().iterator(); iterator.hasNext();) {
+        for (Iterator<CustomerInformation> iterator = counter3.iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
             totalcounter3 = totalcounter3 + nextItem.getitemPrice();
         }
@@ -482,7 +482,7 @@ public class ExcelCounterCust {
             }
         };
         fileChooser.setDialogTitle("Save Report Excel file");
-        fileChooser.setSelectedFile(new File("Counter Bahagia Mall Report " + dtf.format(datetimenow)));
+        fileChooser.setSelectedFile(new File("Counter HyperMarket Report " + dtf.format(datetimenow)));
         fileChooser.setFileFilter(new FileNameExtensionFilter("xlsx file", "xlsx"));
         int userSelection = fileChooser.showSaveDialog(saveframe);
         if (userSelection == JFileChooser.APPROVE_OPTION) {
