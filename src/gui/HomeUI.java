@@ -91,7 +91,7 @@ public class HomeUI extends javax.swing.JFrame {
         jLabel1.setText("HyperMarket");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Founded by Nurul Ain - Collaboration with Nurin Ainul, Amymelinda, Putra, Amirul Asri");
+        jLabel2.setText("Collaboration with Nurul Ain, Nurin Ainul, Amymelinda, Putra, Amirul Asri");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
