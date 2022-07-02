@@ -110,11 +110,11 @@ public class CounterUI extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         counterlabel = new javax.swing.JLabel();
         countlabelcust = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        payqueuebutton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         customerTable = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        addcustmenu = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(counterNameTitle);
@@ -130,11 +130,11 @@ public class CounterUI extends javax.swing.JFrame {
         countlabelcust.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         countlabelcust.setText("0 Customers");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png"))); // NOI18N
-        jButton1.setText("Pay in order");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        payqueuebutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png"))); // NOI18N
+        payqueuebutton.setText("Pay in order");
+        payqueuebutton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                payqueuebuttonMouseClicked(evt);
             }
         });
 
@@ -148,7 +148,7 @@ public class CounterUI extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(counterlabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(payqueuebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(countlabelcust)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -160,7 +160,7 @@ public class CounterUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(counterlabel)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(payqueuebutton, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(countlabelcust)
                 .addContainerGap())
@@ -184,13 +184,13 @@ public class CounterUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(customerTable);
 
-        jMenu1.setText("Add new customer");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+        addcustmenu.setText("Add new customer");
+        addcustmenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                jMenu1MousePressed(evt);
+                addcustmenuMousePressed(evt);
             }
         });
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(addcustmenu);
 
         setJMenuBar(jMenuBar1);
 
@@ -213,7 +213,7 @@ public class CounterUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private PaymentUI paymentui;
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void payqueuebuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_payqueuebuttonMouseClicked
         //PAY PROCESS HERE
         if (paymentui == null) {
             //GET WHO FIRST QUEUE OF CUSTOMER
@@ -272,9 +272,9 @@ public class CounterUI extends javax.swing.JFrame {
         } else {
             paymentui.setVisible(true);
         }
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_payqueuebuttonMouseClicked
 
-    private void jMenu1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MousePressed
+    private void addcustmenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addcustmenuMousePressed
         //ADD CUSTOMER TO QUEUE
         if (hypermarket.HyperMarket.getAddCustUI() == null) {
             hypermarket.HyperMarket.createCustomerAddUIInstance(counterNumber);
@@ -297,18 +297,18 @@ public class CounterUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "There are customers who have not finished managing items. Please finish first and try again", "Error Customer Queue", JOptionPane.ERROR_MESSAGE);
         }
 
-    }//GEN-LAST:event_jMenu1MousePressed
+    }//GEN-LAST:event_addcustmenuMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu addcustmenu;
     private javax.swing.JLabel counterlabel;
     private javax.swing.JLabel countlabelcust;
     private javax.swing.JTable customerTable;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton payqueuebutton;
     // End of variables declaration//GEN-END:variables
 
 }

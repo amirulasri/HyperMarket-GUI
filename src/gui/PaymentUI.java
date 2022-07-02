@@ -82,7 +82,7 @@ public class PaymentUI extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         amountpayfield = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        payButton = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         totalNeedPaylabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -226,12 +226,12 @@ public class PaymentUI extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png"))); // NOI18N
-        jButton1.setText("Pay");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        payButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        payButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/money.png"))); // NOI18N
+        payButton.setText("Pay");
+        payButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jButton1MouseReleased(evt);
+                payButtonMouseReleased(evt);
             }
         });
 
@@ -281,7 +281,7 @@ public class PaymentUI extends javax.swing.JFrame {
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(payButton, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -300,7 +300,7 @@ public class PaymentUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                .addComponent(payButton, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -311,7 +311,7 @@ public class PaymentUI extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cashbgroupActionPerformed
 
-    private void jButton1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseReleased
+    private void payButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_payButtonMouseReleased
         //PAY PROCESS HERE AND DISPLAY RECEIPT
         String paymenttype = "";
         double amountpay = 0;
@@ -379,7 +379,7 @@ public class PaymentUI extends javax.swing.JFrame {
         ReceiptUI receipt = new ReceiptUI(custID, custIC, custName, paymenttype, totalPayment, amountpay, balance, counterNumber, listItem);
         receipt.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1MouseReleased
+    }//GEN-LAST:event_payButtonMouseReleased
 
     private void debitbgroupMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_debitbgroupMousePressed
         //AUTO FILL AMOUNT NEED TO PAY
@@ -405,7 +405,6 @@ public class PaymentUI extends javax.swing.JFrame {
     private javax.swing.JLabel countlabelcust;
     private javax.swing.JRadioButton creditcardbgroup;
     private javax.swing.JRadioButton debitbgroup;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
@@ -414,6 +413,7 @@ public class PaymentUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JButton payButton;
     private javax.swing.JLabel paymenttitle;
     private javax.swing.JLabel totalNeedPaylabel;
     // End of variables declaration//GEN-END:variables

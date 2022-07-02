@@ -79,7 +79,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
         additempricefield = new javax.swing.JTextField();
         additemnamefield = new javax.swing.JTextField();
         additemidfield = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        manageitembutton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("Add new customer");
@@ -136,11 +136,11 @@ public class AddCustomerUI extends javax.swing.JFrame {
 
         jLabel7.setText("Date of purchased:");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/gear.png"))); // NOI18N
-        jButton1.setText("Manage item list");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        manageitembutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/gear.png"))); // NOI18N
+        manageitembutton.setText("Manage item list");
+        manageitembutton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                manageitembuttonMouseClicked(evt);
             }
         });
 
@@ -176,7 +176,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
                             .addComponent(additemidfield)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(manageitembutton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -212,7 +212,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(adddatepurchasedfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(manageitembutton)
                 .addContainerGap())
         );
 
@@ -224,8 +224,8 @@ public class AddCustomerUI extends javax.swing.JFrame {
     }//GEN-LAST:event_addcustidfieldActionPerformed
 
     private ItemUI itemuiwithaddbutton;
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        if (!jButton1.isEnabled()) {
+    private void manageitembuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageitembuttonMouseClicked
+        if (!manageitembutton.isEnabled()) {
             return;
         }
 
@@ -239,23 +239,23 @@ public class AddCustomerUI extends javax.swing.JFrame {
         String itemID = additemidfield.getText();
         String datepurchased = adddatepurchasedfield.getText();
 
-        jButton1.setEnabled(false);
+        manageitembutton.setEnabled(false);
 
         if (custID.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Customer ID is empty", "Error Customer Data", JOptionPane.ERROR_MESSAGE);
-            jButton1.setEnabled(true);
+            manageitembutton.setEnabled(true);
             return;
         }
 
         if (custName.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Customer name is empty", "Error Customer Data", JOptionPane.ERROR_MESSAGE);
-            jButton1.setEnabled(true);
+            manageitembutton.setEnabled(true);
             return;
         }
 
         if (custIC.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Customer IC is empty", "Error Customer Data", JOptionPane.ERROR_MESSAGE);
-            jButton1.setEnabled(true);
+            manageitembutton.setEnabled(true);
             return;
         }
 
@@ -295,14 +295,14 @@ public class AddCustomerUI extends javax.swing.JFrame {
             CustomerInformation customerData = iterator.next();
             if (customerData.getCustID().equalsIgnoreCase(custID)) {
                 JOptionPane.showMessageDialog(null, "Customer ID you entered exists. ID must be different.", "Error Customer ID", JOptionPane.ERROR_MESSAGE);
-                jButton1.setEnabled(true);
+                manageitembutton.setEnabled(true);
                 return;
             }
 
             //USE LATER ON ADD ITEM
             if (customerData.getCustID().equalsIgnoreCase(custID) && customerData.getItemID().equalsIgnoreCase(itemID)) {
                 JOptionPane.showMessageDialog(null, "Item ID you entered exists. ID must be different.", "Error Item ID", JOptionPane.ERROR_MESSAGE);
-                jButton1.setEnabled(true);
+                manageitembutton.setEnabled(true);
                 return;
             }
         }
@@ -311,14 +311,14 @@ public class AddCustomerUI extends javax.swing.JFrame {
             CustomerInformation customerData = iterator.next();
             if (customerData.getCustID().equalsIgnoreCase(custID)) {
                 JOptionPane.showMessageDialog(null, "Customer ID you entered exists. ID must be different.", "Error Customer ID", JOptionPane.ERROR_MESSAGE);
-                jButton1.setEnabled(true);
+                manageitembutton.setEnabled(true);
                 return;
             }
 
             //USE LATER ON ADD ITEM
             if (customerData.getCustID().equalsIgnoreCase(custID) && customerData.getItemID().equalsIgnoreCase(itemID)) {
                 JOptionPane.showMessageDialog(null, "Item ID you entered exists. ID must be different.", "Error Item ID", JOptionPane.ERROR_MESSAGE);
-                jButton1.setEnabled(true);
+                manageitembutton.setEnabled(true);
                 return;
             }
         }
@@ -327,14 +327,14 @@ public class AddCustomerUI extends javax.swing.JFrame {
             CustomerInformation customerData = iterator.next();
             if (customerData.getCustID().equalsIgnoreCase(custID)) {
                 JOptionPane.showMessageDialog(null, "Customer ID you entered exists. ID must be different.", "Error Customer ID", JOptionPane.ERROR_MESSAGE);
-                jButton1.setEnabled(true);
+                manageitembutton.setEnabled(true);
                 return;
             }
 
             //USE LATER ON ADD ITEM
             if (customerData.getCustID().equalsIgnoreCase(custID) && customerData.getItemID().equalsIgnoreCase(itemID)) {
                 JOptionPane.showMessageDialog(null, "Item ID you entered exists. ID must be different.", "Error Item ID", JOptionPane.ERROR_MESSAGE);
-                jButton1.setEnabled(true);
+                manageitembutton.setEnabled(true);
                 return;
             }
         }
@@ -344,7 +344,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
             itemPrice = Double.parseDouble(additempricefield.getText());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Invalid item price", "Error item price", JOptionPane.ERROR_MESSAGE);
-            jButton1.setEnabled(true);
+            manageitembutton.setEnabled(true);
             return;
         }
 
@@ -373,7 +373,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
                 itemuiwithaddbutton.setVisible(true);
             }
         }
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_manageitembuttonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -385,7 +385,6 @@ public class AddCustomerUI extends javax.swing.JFrame {
     private javax.swing.JTextField additemnamefield;
     private javax.swing.JTextField additempricefield;
     private javax.swing.JLabel addtitlecustlabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -395,6 +394,7 @@ public class AddCustomerUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel label;
+    private javax.swing.JButton manageitembutton;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -61,7 +61,7 @@ public class AddItemUI extends javax.swing.JFrame {
         itempricefield = new javax.swing.JTextField();
         itemnamefield = new javax.swing.JTextField();
         itemidfield = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        addcustbutton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add item customer");
@@ -99,11 +99,11 @@ public class AddItemUI extends javax.swing.JFrame {
 
         jLabel4.setText("Date purchased:");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/plus.png"))); // NOI18N
-        jButton1.setText("Add");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        addcustbutton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/plus.png"))); // NOI18N
+        addcustbutton.setText("Add");
+        addcustbutton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                addcustbuttonMouseClicked(evt);
             }
         });
 
@@ -128,7 +128,7 @@ public class AddItemUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(addcustbutton)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -152,14 +152,14 @@ public class AddItemUI extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(datepurchasedfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(addcustbutton)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void addcustbuttonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addcustbuttonMouseClicked
         //ADD NEW ITEM TO LIST WITH CUSTOMER DATA
         String itemID = itemidfield.getText();
         String itemName = itemnamefield.getText();
@@ -204,7 +204,7 @@ public class AddItemUI extends javax.swing.JFrame {
             //USE LATER ON ADD ITEM
             if (nextItemData.getCustID().equalsIgnoreCase(custID) && nextItemData.getItemID().equalsIgnoreCase(itemID)) {
                 JOptionPane.showMessageDialog(null, "Item ID you entered exists. ID must be different.", "Error Item ID", JOptionPane.ERROR_MESSAGE);
-                jButton1.setEnabled(true);
+                addcustbutton.setEnabled(true);
                 return;
             }
         }
@@ -238,16 +238,16 @@ public class AddItemUI extends javax.swing.JFrame {
         }
         
         dispose();
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_addcustbuttonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addcustbutton;
     private javax.swing.JLabel addtitleitemlabel;
     private javax.swing.JTextField datepurchasedfield;
     private javax.swing.JTextField itemidfield;
     private javax.swing.JTextField itemnamefield;
     private javax.swing.JTextField itempricefield;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

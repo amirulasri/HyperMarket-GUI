@@ -103,7 +103,7 @@ public class ReceiptUI extends javax.swing.JFrame {
         paidlabel = new javax.swing.JLabel();
         balancelabel = new javax.swing.JLabel();
         paymentMethodlabel = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        savePDFButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(framereceipttitle);
@@ -166,11 +166,11 @@ public class ReceiptUI extends javax.swing.JFrame {
 
         paymentMethodlabel.setText("Payment Method: -");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pdf.png"))); // NOI18N
-        jButton1.setText("Save As PDF");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        savePDFButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/pdf.png"))); // NOI18N
+        savePDFButton.setText("Save As PDF");
+        savePDFButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
+                savePDFButtonMouseClicked(evt);
             }
         });
 
@@ -185,7 +185,7 @@ public class ReceiptUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(paymentMethodlabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
+                        .addComponent(savePDFButton))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(custNamelabel)
@@ -223,7 +223,7 @@ public class ReceiptUI extends javax.swing.JFrame {
                         .addContainerGap(12, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(savePDFButton)
                         .addContainerGap())))
         );
 
@@ -241,7 +241,7 @@ public class ReceiptUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+    private void savePDFButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_savePDFButtonMouseClicked
         //SAVE AS PDF
         try {
             new PDFReceipt(custName, custID, custIC, totalAmount, paidAmount, countitem, counterNumber, listItem, paymentMethod);
@@ -249,7 +249,7 @@ public class ReceiptUI extends javax.swing.JFrame {
             System.out.println("ERROR: " + e.getMessage());
             e.printStackTrace();
         }
-    }//GEN-LAST:event_jButton1MouseClicked
+    }//GEN-LAST:event_savePDFButtonMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -258,13 +258,13 @@ public class ReceiptUI extends javax.swing.JFrame {
     private javax.swing.JLabel custIDlabel;
     private javax.swing.JLabel custNamelabel;
     private javax.swing.JTable itemReceiptTable;
-    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel paidlabel;
     private javax.swing.JLabel paymentMethodlabel;
     private javax.swing.JLabel paymenttitle;
+    private javax.swing.JButton savePDFButton;
     private javax.swing.JLabel totalAmountlabel;
     // End of variables declaration//GEN-END:variables
 
