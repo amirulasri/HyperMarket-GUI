@@ -257,13 +257,14 @@ public class HomeUI extends javax.swing.JFrame {
     }//GEN-LAST:event_importbuttonActionPerformed
 
     //GET ONLY SELECTED ITEM BY CUSTOMER ID TO ADD TO COUNTER
-    public List filteritemdatacust(String custID) {
+    private List filteritemdatacust(String custID) {
         Predicate<CustomerInformation> itemSelectCondition = itemsCond -> itemsCond.getCustID().equalsIgnoreCase(custID);
         List itemsCustomer = customerList.stream().filter(itemSelectCondition).collect(Collectors.toList());
         return itemsCustomer;
     }
 
-    public void importtxtFile(File selectedFile) {
+    int loopfileline = 0;
+    private void importtxtFile(File selectedFile) {
         importbutton.setEnabled(false);
         //1. READ TEXTFILE AND ADD TO TEMPORARY ARRAY
         try {
@@ -275,6 +276,8 @@ public class HomeUI extends javax.swing.JFrame {
             String customerName = "";
 
             while (line != null) {
+                loopfileline++;
+                
                 //READ DATA EACH LINE
                 StringTokenizer st = new StringTokenizer(line, ",");
 
@@ -362,18 +365,26 @@ public class HomeUI extends javax.swing.JFrame {
             counterSelectorUI = new CounterSelectorUI();
             counterSelectorUI.setVisible(true);
         } catch (EOFException ex) {
+            JOptionPane.showMessageDialog(null, "Error while importing txt file. Error: " + ex.getMessage(), "Error importing txt file", JOptionPane.ERROR_MESSAGE);
             System.out.println("End of file error");
+            System.exit(0);
         } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Error while importing txt file. Error: " + ex.getMessage(), "Error importing txt file", JOptionPane.ERROR_MESSAGE);
             System.out.println("File not found");
+            System.exit(0);
         } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Error while importing txt file. Error: " + ex.getMessage(), "Error importing txt file", JOptionPane.ERROR_MESSAGE);
             System.out.println("Wrong input!!!");
+            System.exit(0);
         } catch (Exception e) {
-            System.out.println("ERROR: " + e.getMessage());
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error while importing txt file. Please check you data in file at line " + loopfileline + ". Correct it, and import it again.", "Error importing txt file", JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
         }
     }
+    
+    
 
-    public void opentxtFile(JFileChooser selectedtxt) {
+    private void opentxtFile(JFileChooser selectedtxt) {
         selectedtxt.setFileFilter(new FileNameExtensionFilter(".txt file", "txt"));
         int result = selectedtxt.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
