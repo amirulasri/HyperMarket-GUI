@@ -191,7 +191,7 @@ public class ExcelCounterCust {
             cell.setCellValue(nextCustomerData.getItemName());
             cell.setCellStyle(stylecellitemlist);
             cell = row.createCell(cellid++);
-            cell.setCellValue("RM " + priceformatter.format(nextCustomerData.getitemPrice()));
+            cell.setCellValue("RM " + priceformatter.format(nextCustomerData.getItemPrice()));
             cell.setCellStyle(stylecellitemlist);
             cell = row.createCell(cellid++);
             cell.setCellValue(nextCustomerData.getDatePurchase());
@@ -279,7 +279,7 @@ public class ExcelCounterCust {
             cell.setCellValue(nextCustomerData.getItemName());
             cell.setCellStyle(stylecellitemlist);
             cell = row.createCell(cellid++);
-            cell.setCellValue("RM " + priceformatter.format(nextCustomerData.getitemPrice()));
+            cell.setCellValue("RM " + priceformatter.format(nextCustomerData.getItemPrice()));
             cell.setCellStyle(stylecellitemlist);
             cell = row.createCell(cellid++);
             cell.setCellValue(nextCustomerData.getDatePurchase());
@@ -367,7 +367,7 @@ public class ExcelCounterCust {
             cell.setCellValue(nextCustomerData.getItemName());
             cell.setCellStyle(stylecellitemlist);
             cell = row.createCell(cellid++);
-            cell.setCellValue("RM " + priceformatter.format(nextCustomerData.getitemPrice()));
+            cell.setCellValue("RM " + priceformatter.format(nextCustomerData.getItemPrice()));
             cell.setCellStyle(stylecellitemlist);
             cell = row.createCell(cellid++);
             cell.setCellValue(nextCustomerData.getDatePurchase());
@@ -408,15 +408,15 @@ public class ExcelCounterCust {
         double totalcounter3 = 0;
         for (Iterator<CustomerInformation> iterator = counter1.iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
-            totalcounter1 = totalcounter1 + nextItem.getitemPrice();
+            totalcounter1 = totalcounter1 + nextItem.getItemPrice();
         }
         for (Iterator<CustomerInformation> iterator = counter2.iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
-            totalcounter2 = totalcounter2 + nextItem.getitemPrice();
+            totalcounter2 = totalcounter2 + nextItem.getItemPrice();
         }
         for (Iterator<CustomerInformation> iterator = counter3.iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
-            totalcounter3 = totalcounter3 + nextItem.getitemPrice();
+            totalcounter3 = totalcounter3 + nextItem.getItemPrice();
         }
         double totalNet = totalcounter1 + totalcounter2 + totalcounter3;
         String totalNetFormat = priceformatter.format(totalNet);

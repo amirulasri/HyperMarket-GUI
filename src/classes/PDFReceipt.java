@@ -222,7 +222,7 @@ public class PDFReceipt {
             cell.setFillColor(itemcolor);
             cell = row1.createCell(58, nextItemData.getItemName());
             cell.setFillColor(itemcolor);
-            cell = row1.createCell(20, "RM " + priceformatter.format(nextItemData.getitemPrice()));
+            cell = row1.createCell(20, "RM " + priceformatter.format(nextItemData.getItemPrice()));
             cell.setFillColor(itemcolor);
             cell = row1.createCell(15, nextItemData.getDatePurchase());
             cell.setFillColor(itemcolor);

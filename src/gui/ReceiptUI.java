@@ -75,7 +75,7 @@ public class ReceiptUI extends javax.swing.JFrame {
         for (Iterator iterator = listItem.iterator(); iterator.hasNext();) {
             countitem++;
             CustomerInformation customeritemdata = (CustomerInformation) iterator.next();
-            receiptTableModel.addRow(new Object[]{customeritemdata.getItemName(), "RM " + customeritemdata.getitemPrice(), customeritemdata.getDatePurchase()});
+            receiptTableModel.addRow(new Object[]{customeritemdata.getItemName(), "RM " + customeritemdata.getItemPrice(), customeritemdata.getDatePurchase()});
         }
         this.countitem = countitem;
     }

@@ -30,7 +30,7 @@ public class ItemInformation {
         this.itemName = itemName;
     }
     
-    public void setitemPrice(double itemPrice){
+    public void setItemPrice(double itemPrice){
         this.itemPrice = itemPrice;
     }
     
@@ -50,7 +50,7 @@ public class ItemInformation {
         return itemName;
     }
     
-    public double getitemPrice(){
+    public double getItemPrice(){
         return itemPrice;
     }
     

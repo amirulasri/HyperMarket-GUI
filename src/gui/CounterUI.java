@@ -250,7 +250,7 @@ public class CounterUI extends javax.swing.JFrame {
                 CustomerInformation nextItemData = (CustomerInformation) iterator.next();
                 countitem++;
                 //CALCULATE TOTAL PAYMENT HERE
-                totalPayment = totalPayment + nextItemData.getitemPrice();
+                totalPayment = totalPayment + nextItemData.getItemPrice();
             }
 
             paymentui = new PaymentUI(custIDPay, totalPayment, counterNumber, countitem);

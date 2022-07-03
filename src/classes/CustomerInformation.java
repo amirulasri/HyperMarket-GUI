@@ -65,8 +65,8 @@ public class CustomerInformation {
         itemInformation.setItemName(itemName);
     }
     
-    public void setitemPrice(double itemPrice){
-        itemInformation.setitemPrice(itemPrice);
+    public void setItemPrice(double itemPrice){
+        itemInformation.setItemPrice(itemPrice);
     }
     
     public void setDatePurchase(String datePurchase){
@@ -82,8 +82,8 @@ public class CustomerInformation {
         return itemInformation.getItemName();
     }
     
-    public double getitemPrice(){
-        return itemInformation.getitemPrice();
+    public double getItemPrice(){
+        return itemInformation.getItemPrice();
     }
     
     public String getDatePurchase(){
@@ -97,6 +97,6 @@ public class CustomerInformation {
     
     @Override
     public String toString(){
-        return "Customer ID: " + custID + "\nCustomer name: " + custName + "\nCustomer IC: " + custIC + "\nCounter Paid: " + counterPaid + "\nItem ID: " + getItemID() + "\nItem name: " + getItemName() + "\nPrice: " + getitemPrice() + "\nDate purchased: " + getDatePurchase() + "\nCustomer item ID: " + itemGetCustID();
+        return "Customer ID: " + custID + "\nCustomer name: " + custName + "\nCustomer IC: " + custIC + "\nCounter Paid: " + counterPaid + "\nItem ID: " + getItemID() + "\nItem name: " + getItemName() + "\nPrice: " + getItemPrice() + "\nDate purchased: " + getDatePurchase() + "\nCustomer item ID: " + itemGetCustID();
     }
 }

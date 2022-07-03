@@ -322,7 +322,7 @@ public class HomeUI extends javax.swing.JFrame {
                             String custName = itemdata.getCustName();
                             String itemID = itemdata.getItemID();
                             String itemName = itemdata.getItemName();
-                            Double itemPrice = itemdata.getitemPrice();
+                            Double itemPrice = itemdata.getItemPrice();
                             String datePurchased = itemdata.getDatePurchase();
 
                             hypermarket.HyperMarket.getCounter1().add(new CustomerInformation(custID, custIC, custName, "counter1", itemID, itemName, itemPrice, datePurchased));
@@ -336,7 +336,7 @@ public class HomeUI extends javax.swing.JFrame {
                             String custName = itemdata.getCustName();
                             String itemID = itemdata.getItemID();
                             String itemName = itemdata.getItemName();
-                            Double itemPrice = itemdata.getitemPrice();
+                            Double itemPrice = itemdata.getItemPrice();
                             String datePurchased = itemdata.getDatePurchase();
 
                             hypermarket.HyperMarket.getCounter2().add(new CustomerInformation(custID, custIC, custName, "counter2", itemID, itemName, itemPrice, datePurchased));
@@ -352,7 +352,7 @@ public class HomeUI extends javax.swing.JFrame {
                         String custName = itemdata.getCustName();
                         String itemID = itemdata.getItemID();
                         String itemName = itemdata.getItemName();
-                        Double itemPrice = itemdata.getitemPrice();
+                        Double itemPrice = itemdata.getItemPrice();
                         String datePurchased = itemdata.getDatePurchase();
 
                         hypermarket.HyperMarket.getCounter3().add(new CustomerInformation(custID, custIC, custName, "counter3", itemID, itemName, itemPrice, datePurchased));

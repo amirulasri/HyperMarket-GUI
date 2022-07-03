@@ -79,8 +79,8 @@ public class ItemUI extends javax.swing.JFrame {
         for (Iterator iterator = filteredItemListCust.iterator(); iterator.hasNext();) {
             CustomerInformation nextItemData = (CustomerInformation) iterator.next();
             //ALSO CALCULATE TOTAL PAYMENT HERE
-            totalPayment = totalPayment + nextItemData.getitemPrice();
-            itemTableModel.addRow(new Object[]{nextItemData.getItemID(), nextItemData.getItemName(), "RM " + nextItemData.getitemPrice(), nextItemData.getDatePurchase()});
+            totalPayment = totalPayment + nextItemData.getItemPrice();
+            itemTableModel.addRow(new Object[]{nextItemData.getItemID(), nextItemData.getItemName(), "RM " + nextItemData.getItemPrice(), nextItemData.getDatePurchase()});
         }
     }
 
@@ -204,7 +204,6 @@ public class ItemUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_additembuttonMouseClicked
 
-    private PaymentUI paymentui;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton additembutton;

@@ -58,17 +58,17 @@ public class CounterSelectorUI extends javax.swing.JFrame {
 
         for (Iterator<CustomerInformation> iterator = hypermarket.HyperMarket.getCounter1().iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
-            totalcounter1 = totalcounter1 + nextItem.getitemPrice();
+            totalcounter1 = totalcounter1 + nextItem.getItemPrice();
         }
 
         for (Iterator<CustomerInformation> iterator = hypermarket.HyperMarket.getCounter2().iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
-            totalcounter2 = totalcounter2 + nextItem.getitemPrice();
+            totalcounter2 = totalcounter2 + nextItem.getItemPrice();
         }
 
         for (Iterator<CustomerInformation> iterator = hypermarket.HyperMarket.getCounter3().iterator(); iterator.hasNext();) {
             CustomerInformation nextItem = iterator.next();
-            totalcounter3 = totalcounter3 + nextItem.getitemPrice();
+            totalcounter3 = totalcounter3 + nextItem.getItemPrice();
         }
 
         double totalNet = totalcounter1 + totalcounter2 + totalcounter3;
