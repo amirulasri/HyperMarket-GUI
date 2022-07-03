@@ -38,7 +38,7 @@ public class ItemInformation {
         this.datePurchase = datePurchase;
     }
     
-    public void getCustID(String custID){
+    public void setCustID(String custID){
         this.custID = custID;
     }
     
