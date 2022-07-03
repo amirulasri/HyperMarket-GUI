@@ -8,6 +8,14 @@ public class CustomerInformation {
     //RELATION WITH ITEMINFORMATION CLASS
     private ItemInformation itemInformation;
     
+    public CustomerInformation(){
+        this.itemInformation = new ItemInformation();
+        this.custID = null;
+        this.custIC = null;
+        this.custName = null;
+        this.counterPaid = null;
+    }
+    
     public CustomerInformation(String custID, String custIC, String custName, String counterPaid, String itemID, String itemName, double itemPrice, String datePurchase){
         this.itemInformation = new ItemInformation(itemID, itemName, itemPrice, datePurchase, custID);
         this.custID = custID;

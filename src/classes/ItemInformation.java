@@ -6,6 +6,14 @@ public class ItemInformation {
     private String datePurchase;
     private String custID;
     
+    public ItemInformation(){
+        this.itemID = null;
+        this.itemName = null;
+        this.datePurchase = null;
+        this.custID = null;
+        this.itemPrice = 0;
+    }
+    
     public ItemInformation(String itemID, String itemName, double itemPrice, String datePurchase, String custID){
         this.itemID = itemID;
         this.itemName = itemName;
