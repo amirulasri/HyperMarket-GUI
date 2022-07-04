@@ -4,7 +4,9 @@ import classes.CustomerInformation;
 import classes.ExcelCounterCust;
 import java.text.DecimalFormat;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Queue;
+import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -433,10 +435,10 @@ public class CounterSelectorUI extends javax.swing.JFrame {
         totalNet();
     }//GEN-LAST:event_refreshButtonMouseClicked
 
-    //THIS QUEUE/LIST ONLY FOR EXCEL REPORTING
-    private Queue excelCounter1 = hypermarket.HyperMarket.getCounter1();
-    private Queue excelCounter2 = hypermarket.HyperMarket.getCounter2();
-    private Queue excelCounter3 = hypermarket.HyperMarket.getCounter3();
+    //THIS QUEUE/LIST ONLY FOR EXCEL REPORTING - ALL CUSTOMERS
+    private final List excelCounter1 = (List)hypermarket.HyperMarket.getCounter1().stream().collect(Collectors.toList());
+    private final List excelCounter2 = (List)hypermarket.HyperMarket.getCounter2().stream().collect(Collectors.toList());
+    private final List excelCounter3 = (List)hypermarket.HyperMarket.getCounter3().stream().collect(Collectors.toList());
     private void createReportButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createReportButtonMouseClicked
         Object[] options = {"Only unpaid customer",
             "Only paid customer",
@@ -449,27 +451,27 @@ public class CounterSelectorUI extends javax.swing.JFrame {
                 null,
                 options,
                 options[2]);
-
+        
         if (buttonChoose == 0) {
             try {
                 //CREATE EXCEL FILE HERE
-                new ExcelCounterCust(hypermarket.HyperMarket.getCounter1(), hypermarket.HyperMarket.getCounter2(), hypermarket.HyperMarket.getCounter3());
+                new ExcelCounterCust((List)hypermarket.HyperMarket.getCounter1(), (List)hypermarket.HyperMarket.getCounter2(), (List)hypermarket.HyperMarket.getCounter3());
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Error to save file: " + ex.getMessage(), "Error create excel", HEIGHT);
+                JOptionPane.showMessageDialog(null, "Error to save file: " + ex.getMessage(), "Error create excel", JOptionPane.ERROR_MESSAGE);
             }
         } else if (buttonChoose == 1) {
             try {
                 //CREATE EXCEL FILE HERE
-                new ExcelCounterCust(hypermarket.HyperMarket.getExcelCounter1(), hypermarket.HyperMarket.getExcelCounter2(), hypermarket.HyperMarket.getExcelCounter3());
+                new ExcelCounterCust((List)hypermarket.HyperMarket.getExcelCounter1(), (List)hypermarket.HyperMarket.getExcelCounter2(), (List)hypermarket.HyperMarket.getExcelCounter3());
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Error to save file: " + ex.getMessage(), "Error create excel", HEIGHT);
+                JOptionPane.showMessageDialog(null, "Error to save file: " + ex.getMessage(), "Error create excel", JOptionPane.ERROR_MESSAGE);
             }
         } else if (buttonChoose == 2) {
             try {
                 //CREATE EXCEL FILE HERE
                 new ExcelCounterCust(excelCounter1, excelCounter2, excelCounter3);
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "Error to save file: " + ex.getMessage(), "Error create excel", HEIGHT);
+                JOptionPane.showMessageDialog(null, "Error to save file: " + ex.getMessage(), "Error create excel", JOptionPane.ERROR_MESSAGE);
             }
         }
     }//GEN-LAST:event_createReportButtonMouseClicked

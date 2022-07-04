@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
-import java.util.Queue;
+import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import static javax.swing.JFileChooser.SAVE_DIALOG;
@@ -36,7 +36,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelCounterCust {
 
-    public ExcelCounterCust(Queue counter1, Queue counter2, Queue counter3) throws FileNotFoundException, Exception {
+    public ExcelCounterCust(List counter1, List counter2, List counter3) throws FileNotFoundException, Exception {
         DecimalFormat priceformatter = new DecimalFormat("#0.00");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy HH-mm-ss");
         LocalDateTime datetimenow = LocalDateTime.now();
@@ -499,7 +499,7 @@ public class ExcelCounterCust {
         }
     }
 
-    private int getCustCount(Queue counter) {
+    private int getCustCount(List counter) {
         String currentCustID = "";
         int countID = 0;
 

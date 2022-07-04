@@ -377,7 +377,7 @@ public class HomeUI extends javax.swing.JFrame {
             System.out.println("Wrong input!!!");
             System.exit(0);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error while importing txt file. Please check you data in file at line " + loopfileline + ". Correct it, and import it again.", "Error importing txt file", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error while importing txt file. Error: " + e.getMessage(), "Error importing txt file", JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
     }
