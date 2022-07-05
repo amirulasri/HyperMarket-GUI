@@ -51,7 +51,7 @@ public class ReceiptUI extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
 
-        //DIPLAYING ALL DATA
+        //DISPLAYING ALL DATA
         custNamelabel.setText(custName);
         custIDlabel.setText(custID);
         custIClabel.setText(custIC);
