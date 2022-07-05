@@ -263,7 +263,6 @@ public class HomeUI extends javax.swing.JFrame {
         return itemsCustomer;
     }
 
-    int loopfileline = 0;
     private void importtxtFile(File selectedFile) {
         importbutton.setEnabled(false);
         //1. READ TEXTFILE AND ADD TO TEMPORARY ARRAY
@@ -276,7 +275,6 @@ public class HomeUI extends javax.swing.JFrame {
             String customerName = "";
 
             while (line != null) {
-                loopfileline++;
                 
                 //READ DATA EACH LINE
                 StringTokenizer st = new StringTokenizer(line, ",");
