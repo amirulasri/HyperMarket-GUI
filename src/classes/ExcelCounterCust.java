@@ -1,6 +1,7 @@
 package classes;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -495,6 +496,7 @@ public class ExcelCounterCust {
                 FileOutputStream excelout = new FileOutputStream(new File(fileToSave.getAbsolutePath()));
                 workbook.write(excelout);
                 excelout.close();
+                Desktop.getDesktop().open(fileToSave);
             }
         }
     }

@@ -22,6 +22,7 @@ import be.quodlibet.boxable.Cell;
 import be.quodlibet.boxable.HorizontalAlignment;
 import be.quodlibet.boxable.Row;
 import be.quodlibet.boxable.VerticalAlignment;
+import java.awt.Desktop;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
@@ -323,6 +324,7 @@ public class PDFReceipt {
                 filename += ".pdf";
                 fileToSave = new File(filename);
                 document.save(new File(fileToSave.getAbsolutePath()));
+                Desktop.getDesktop().open(fileToSave);
             }
 
         }
