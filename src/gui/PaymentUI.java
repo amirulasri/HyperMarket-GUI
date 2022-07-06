@@ -324,7 +324,7 @@ public class PaymentUI extends javax.swing.JFrame {
         try {
             amountpay = Double.parseDouble(amountpayfield.getText());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Please select valid amount", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please enter valid amount", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (amountpay < totalPayment) {
