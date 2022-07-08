@@ -152,7 +152,15 @@ public class ReceiptUI extends javax.swing.JFrame {
             new String [] {
                 "Item Name", "Item Price", "Date Purchased"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(itemReceiptTable);
 
         totalAmountlabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
